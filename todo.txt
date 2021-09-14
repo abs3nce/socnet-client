@@ -1,0 +1,1 @@
+pokial je zadane zle heslo alebo username v logine tak sa user redirectne na homescreen
