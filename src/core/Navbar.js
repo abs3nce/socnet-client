@@ -22,6 +22,15 @@ export const logout = (next) => {
     .catch((err) => console.log(err));
 };
 
+export const isAuthenticated = () => {
+  if (typeof windows !== "undefined") {
+    return false;
+  }
+  if (localStorage.getItem("token")) {
+    return JSON.parse(localStorage.getItem("token"));
+  } else return false;
+};
+
 const Navbar = (props) => (
   <div className="bg-light">
     <ul className="nav nav-tabs">
@@ -30,33 +39,45 @@ const Navbar = (props) => (
           Home
         </Link>
       </li>
-      <li className="nav-item">
-        <Link
-          className="nav-link"
-          style={isActive(props, "/register")}
-          to="/register"
-        >
-          Register
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          className="nav-link"
-          style={isActive(props, "/login")}
-          to="/login"
-        >
-          Login
-        </Link>
-      </li>
-      <li className="nav-item">
-        <a
-          className="nav-link"
-          style={isActive(props, "/logout"), {cursor: "pointer", color: "#444"}}
-          onClick={() => logout(() => props.history.push("/"))}
-        >
-          Logout
-        </a>
-      </li>
+      {!isAuthenticated() && (
+        <>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={isActive(props, "/register")}
+              to="/register"
+            >
+              Register
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={isActive(props, "/login")}
+              to="/login"
+            >
+              Login
+            </Link>
+          </li>
+        </>
+      )}
+
+      {isAuthenticated() && (
+        <>
+          <li className="nav-item">
+            <a
+              className="nav-link"
+              style={
+                (isActive(props, "/logout"),
+                { cursor: "pointer", color: "#444" })
+              }
+              onClick={() => logout(() => props.history.push("/"))}
+            >
+              Logout
+            </a>
+          </li>
+        </>
+      )}
     </ul>
   </div>
 );
