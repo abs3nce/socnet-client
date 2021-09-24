@@ -5,12 +5,14 @@ import Home from "./core/Home";
 import Register from "./user/Register";
 import Login from "./user/Login";
 import Profile from "./user/Profile";
+import Users from "./user/Users"
 
 const MainRouter = () => (
   <div>
     <Navbar />
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/users" component={Users} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/user/:userID" component={Profile} />

@@ -18,6 +18,11 @@ const Navbar = (props) => (
           Home
         </Link>
       </li>
+      <li className="nav-item">
+        <Link className="nav-link" style={isActive(props, "/users")} to="/users">
+          Discover
+        </Link>
+      </li>
       {!isAuthenticated() && (
         <>
           <li className="nav-item">

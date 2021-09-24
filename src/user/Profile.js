@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/";
-import { read } from "./apiController";
+import { getUser } from "./userAPIController";
 
 class Profile extends Component {
   constructor() {
@@ -18,8 +18,7 @@ class Profile extends Component {
   }
 
   init = (userID) => {
-    const token = isAuthenticated().token;
-    read(userID, token).then((data) => {
+    getUser(userID).then((data) => {
       if (data.error) {
         this.setState({ redirectToLogin: true });
       } else {
