@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { loginUser, authUser } from "../auth";
 
 class Login extends Component {
   constructor(props) {
@@ -39,45 +40,17 @@ class Login extends Component {
 
     console.log(`> REGISTER FORM data: `, user);
 
-    this.loginUser(user).then((data) => {
+    loginUser(user).then((data) => {
       //nastavenie erroru v state pokial nejaky existuje, pokial nie tak premazanie registracneho formu
       if (data.error) {
         this.setState({ error: data.error, loading: false });
       }
       //overenie
-      this.authUser(data, () => {
+      authUser(data, () => {
         this.setState({ redirectUser: true }); //ready to redirect
       });
       //redirect
     });
-  }
-
-  loginUser = (user) => {
-    //fetch metody post s potrebnymi parametrami pre API a handling odpovede
-    return fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  authUser(data, redirect) {
-    if (typeof window !== "undefined") {
-      if (data.error) {
-        return;
-      }
-      localStorage.setItem("token", JSON.stringify(data));
-      redirect();
-    }
   }
 
   loadLoginForm = (username, password) => (

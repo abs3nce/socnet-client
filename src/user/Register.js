@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {registerUser} from '../auth'
 
 class Register extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Register extends Component {
 
     console.log(`> REGISTER FORM data: `, user);
 
-    this.registerUser(user).then((data) => {
+    registerUser(user).then((data) => {
       //nastavenie erroru v state pokial nejaky existuje, pokial nie tak premazanie registracneho formu
       if (data.error) this.setState({ error: data.error });
       else {
@@ -52,23 +53,7 @@ class Register extends Component {
     });
   }
 
-  registerUser = (user) => {
-    //fetch metody post s potrebnymi parametrami pre API a handling odpovede
-    return fetch("http://localhost:3000/register", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
 
   loadRegisterForm = (username, email, password) => (
     <form>

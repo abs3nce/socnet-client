@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { logoutUser, isAuthenticated } from "../auth";
 
 const isActive = (props, path) => {
   if (props.history.location.pathname === path) {
@@ -7,28 +8,6 @@ const isActive = (props, path) => {
   } else {
     return { color: "#444" };
   }
-};
-
-export const logout = (next) => {
-  if (typeof window !== "undefined") localStorage.removeItem("token");
-  next();
-  return fetch("http://localhost:3000/logout", {
-    method: "GET",
-  })
-    .then((res) => {
-      console.log("> USER LOGGED OUT: ", res);
-      return res.json();
-    })
-    .catch((err) => console.log(err));
-};
-
-export const isAuthenticated = () => {
-  if (typeof windows !== "undefined") {
-    return false;
-  }
-  if (localStorage.getItem("token")) {
-    return JSON.parse(localStorage.getItem("token"));
-  } else return false;
 };
 
 const Navbar = (props) => (
@@ -44,19 +23,19 @@ const Navbar = (props) => (
           <li className="nav-item">
             <Link
               className="nav-link"
-              style={isActive(props, "/register")}
-              to="/register"
+              style={isActive(props, "/login")}
+              to="/login"
             >
-              Register
+              Login
             </Link>
           </li>
           <li className="nav-item">
             <Link
               className="nav-link"
-              style={isActive(props, "/login")}
-              to="/login"
+              style={isActive(props, "/register")}
+              to="/register"
             >
-              Login
+              Register
             </Link>
           </li>
         </>
@@ -65,13 +44,17 @@ const Navbar = (props) => (
       {isAuthenticated() && (
         <>
           <li className="nav-item">
+            <a className="nav-link">{isAuthenticated().user.username}</a>
+          </li>
+
+          <li className="nav-item">
             <a
               className="nav-link"
               style={
                 (isActive(props, "/logout"),
                 { cursor: "pointer", color: "#444" })
               }
-              onClick={() => logout(() => props.history.push("/"))}
+              onClick={() => logoutUser(() => props.history.push("/"))}
             >
               Logout
             </a>
