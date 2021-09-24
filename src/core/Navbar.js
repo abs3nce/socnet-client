@@ -9,6 +9,19 @@ const isActive = (props, path) => {
   }
 };
 
+export const logout = (next) => {
+  if (typeof window !== "undefined") localStorage.removeItem("token");
+  next();
+  return fetch("http://localhost:3000/logout", {
+    method: "GET",
+  })
+    .then((res) => {
+      console.log("> USER LOGGED OUT: ", res);
+      return res.json();
+    })
+    .catch((err) => console.log(err));
+};
+
 const Navbar = (props) => (
   <div className="bg-light">
     <ul className="nav nav-tabs">
@@ -34,6 +47,15 @@ const Navbar = (props) => (
         >
           Login
         </Link>
+      </li>
+      <li className="nav-item">
+        <a
+          className="nav-link"
+          style={isActive(props, "/logout"), {cursor: "pointer", color: "#444"}}
+          onClick={() => logout(() => props.history.push("/"))}
+        >
+          Logout
+        </a>
       </li>
     </ul>
   </div>
