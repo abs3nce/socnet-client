@@ -38,7 +38,7 @@ class Login extends Component {
       password,
     };
 
-    console.log(`> REGISTER FORM data: `, user);
+    console.log(`> LOGIN FORM data: `, user);
 
     loginUser(user).then((data) => {
       //nastavenie erroru v state pokial nejaky existuje, pokial nie tak premazanie registracneho formu

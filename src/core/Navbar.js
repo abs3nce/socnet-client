@@ -4,9 +4,9 @@ import { logoutUser, isAuthenticated } from "../auth";
 
 const isActive = (props, path) => {
   if (props.history.location.pathname === path) {
-    return { color: "#0943A2" };
+    return { color: "#0943A2" }; //active link color
   } else {
-    return { color: "#444" };
+    return { color: "#444" }; //inactive link color
   }
 };
 
@@ -44,7 +44,13 @@ const Navbar = (props) => (
       {isAuthenticated() && (
         <>
           <li className="nav-item">
-            <a className="nav-link">{isAuthenticated().user.username}</a>
+            <Link
+              className="nav-link"
+              style={isActive(props, `/user/${isAuthenticated().user._id}`)}
+              to={`/user/${isAuthenticated().user._id}`}
+            >
+              {`${isAuthenticated().user.username}'s profile`}
+            </Link>
           </li>
 
           <li className="nav-item">

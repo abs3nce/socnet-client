@@ -1,1 +1,12 @@
-pokial je zadane zle heslo alebo username v logine tak sa user redirectne na homescreen
+HIGH PRIORITY
+
+pri pouzivani .env url sa neda prihlasovat a teda ani registrovat a logoutovat
+>>> treba prerobit
+>>> vsetky urlky zmenit v auth/index.js
+
+
+mozno color palleta?
+222831
+393E46
+FD7014
+EEEEEE

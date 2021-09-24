@@ -1,7 +1,7 @@
 // REGISTER
 export const registerUser = (user) => {
   //fetch metody post s potrebnymi parametrami pre API a handling odpovede
-  return fetch("http://localhost:3000/register", {
+  return fetch(`http://localhost:3000/register`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -20,7 +20,7 @@ export const registerUser = (user) => {
 // LOGIN
 export const loginUser = (user) => {
   //fetch metody post s potrebnymi parametrami pre API a handling odpovede
-  return fetch("http://localhost:3000/login", {
+  return fetch(`http://localhost:3000/login`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -51,7 +51,7 @@ export const authUser = (data, redirect) => {
 export const logoutUser = (next) => {
   if (typeof window !== "undefined") localStorage.removeItem("token");
   next();
-  return fetch("http://localhost:3000/logout", {
+  return fetch(`http://localhost:3000/logout`, {
     method: "GET",
   })
     .then((res) => {
