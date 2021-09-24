@@ -31,7 +31,7 @@ class Login extends Component {
     this.setState({ loading: true });
 
     //vytvorenie usera
-    const { username, password } = this.state;  
+    const { username, password } = this.state;
     const user = {
       username,
       password,
@@ -120,13 +120,11 @@ class Login extends Component {
 
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5">Login Page</h2>
-
         {this.loadLoginForm(username, password)}
 
         {/* alert o neuspesnom logine s errorom*/}
         <div
-          style={{ display: error ? "" : "none" }} 
+          style={{ display: error ? "" : "none" }}
           className="alert alert-danger mt-3"
         >
           {error}
