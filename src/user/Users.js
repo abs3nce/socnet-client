@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getUsers } from "./userAPIController";
-import { Link } from "react-router-dom";
+import DefaultProfilePicture from '../images/icon.png'
 
 class Users extends Component {
   constructor() {
@@ -24,7 +24,7 @@ class Users extends Component {
     <div className="row">
       {users.map((user, index) => (
         <div className="card col-md-3" key={index}>
-          <img src="" className="card-img-top" alt="..." />
+          <img src={DefaultProfilePicture} className="card-img-top p-3" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{user.username}</h5>
             <p className="card-text">{user.email}</p>
