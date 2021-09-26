@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { loginUser, authUser } from "../auth";
+
+import { loginUser, authenticateUser } from "../controllers/auth/auth";
 
 class Login extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class Login extends Component {
         this.setState({ error: data.error, loading: false });
       }
       //overenie
-      authUser(data, () => {
+      authenticateUser(data, () => {
         this.setState({ redirectUser: true }); //ready to redirect
       });
       //redirect

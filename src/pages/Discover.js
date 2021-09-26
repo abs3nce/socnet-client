@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { getUsers } from "./userAPIController";
-import DefaultProfilePicture from '../images/icon.png'
+import { getUsers } from "../controllers/data/users";
+import DefaultProfilePicture from "../images/defaultUserIcon.png";
+import { Link } from "react-router-dom";
 
 class Users extends Component {
   constructor() {
@@ -21,16 +22,24 @@ class Users extends Component {
   }
 
   renderUsers = (users) => (
-    <div className="row">
+    <div className="row text-center d-flex justify-content-center">
       {users.map((user, index) => (
-        <div className="card col-md-3" key={index}>
-          <img src={DefaultProfilePicture} className="card-img-top p-3" alt="..." />
+        <div className="card col-md-3 m-3" key={index}>
+          <img
+            src={DefaultProfilePicture}
+            className="card-img-top"
+            alt={`${user.username}'s avatar`}
+            style={{ width: "100%", height: "15vw", objectFit: "cover" }}
+          />
           <div className="card-body">
             <h5 className="card-title">{user.username}</h5>
             <p className="card-text">{user.email}</p>
-            <a href="#" className="btn btn-raised btn-primary btn-sm">
+            <Link
+              to={`/user/${user._id}`}
+              className="btn btn-raised btn-primary btn-sm"
+            >
               View profile
-            </a>
+            </Link>
           </div>
         </div>
       ))}

@@ -37,7 +37,7 @@ export const loginUser = (user) => {
 };
 
 // AUTHENTICATE
-export const authUser = (data, redirect) => {
+export const authenticateUser = (data, redirect) => {
   if (typeof window !== "undefined") {
     if (data.error) {
       return;
@@ -62,7 +62,7 @@ export const logoutUser = (next) => {
 };
 
 //CHECK IF AUTHENTICATED
-export const isAuthenticated = () => {
+export const isUserAuthenticated = () => {
   if (typeof windows !== "undefined") {
     return false;
   }

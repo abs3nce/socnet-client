@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import {registerUser} from '../auth'
+import { Link } from "react-router-dom";
+
+import { registerUser } from "../controllers/auth/auth";
 
 class Register extends Component {
   constructor(props) {
@@ -52,8 +54,6 @@ class Register extends Component {
       }
     });
   }
-
-
 
   loadRegisterForm = (username, email, password) => (
     <form>
@@ -118,7 +118,7 @@ class Register extends Component {
           style={{ display: success ? "" : "none" }}
           className="alert alert-success mt-3"
         >
-          Account successfully created, please sign in!
+          Account successfully created, please <Link to="/login">sign in!</Link>
         </div>
       </div>
     );
