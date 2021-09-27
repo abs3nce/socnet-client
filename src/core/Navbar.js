@@ -19,7 +19,11 @@ const Navbar = (props) => (
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" style={isActive(props, "/users")} to="/users">
+        <Link
+          className="nav-link"
+          style={isActive(props, "/users")}
+          to="/users"
+        >
           Discover
         </Link>
       </li>
@@ -59,16 +63,17 @@ const Navbar = (props) => (
           </li>
 
           <li className="nav-item">
-            <a
+            <span
               className="nav-link"
-              style={
-                (isActive(props, "/logout"),
-                { cursor: "pointer", color: "#444" })
-              }
+              // style={
+              //   ({ cursor: "pointer", color: "#444" },
+              //   isActive(props, "/logout"))
+              // }
+              style={(isActive(props, "/logout")), {cursor: "pointer", color: "#444"}}
               onClick={() => logoutUser(() => props.history.push("/"))}
             >
               Logout
-            </a>
+            </span>
           </li>
         </>
       )}

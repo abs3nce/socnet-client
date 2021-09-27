@@ -5,7 +5,7 @@ import { isUserAuthenticated } from "../controllers/auth/auth";
 import { getUser } from "../controllers/data/users";
 
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
-import DefaultProfileBanner from "../images/defaultUserBanner.jpeg";
+// import DefaultProfileBanner from "../images/defaultUserBanner.jpeg";
 
 import DeleteUserButton from "../components/DeleteUserButton";
 
@@ -38,61 +38,19 @@ class Profile extends Component {
     const userID = this.props.match.params.userID;
     this.init(userID);
   }
+  
+  componentWillReceiveProps(props) { 
+    const userID = props.match.params.userID;
+    this.init(userID);
+  }
 
   render() {
     const { redirectToLogin, user } = this.state;
     if (redirectToLogin) return <Redirect to="/login" />;
 
     return (
-      // <div className="container">
-      //   <div className="row">
-      //     <div className="col-md-6 text-center">
-      //       <h2 className="mt-5 mb-5">{user.username}'s profile page</h2>
-      //     </div>
-      //     <div className="col-md-6 d-flex align-items-center">
-      //       {isUserAuthenticated().user && isUserAuthenticated().user._id === user._id && (
-      //         <div className="row d-flex justify-content-center">
-      //           <div className="col-md-5">
-      //             <Link
-      //               className="btn btn-raised btn-success"
-      //               to={`/user/edit/${user._id}`}
-      //             >
-      //               EDIT PROFILE
-      //             </Link>
-      //           </div>
-      //           <div className="col-md-5">
-      //             <button className="btn btn-raised btn-danger">
-      //               DELETE PROFILE
-      //             </button>
-      //           </div>
-      //         </div>
-      //       )}
-      //     </div>
-      //   </div>
-      //   <div className="row d-flex justify-content-evenly">
-      //     <div className="col-md-6">
-      //       <img
-      //         src={DefaultProfilePicture}
-      //         className="card-img-top"
-      //         alt={`${user.username}'s avatar`}
-      //         style={{ width: "100%", height: "15vw", objectFit: "cover" }}
-      //       />
-      //     </div>
-      //     <div className="col-md-6 d-flex align-items-center">
-      //       <div className="lead">
-      //         <p>Hello {user.username}</p>
-      //         <p>Email is {user.email}</p>
-
-      //         <p> {`Registered on ${new Date(user.created).toDateString()}`}</p>
-      //         <p>{`Has been a member for ${this.registeredFor(
-      //           user.created
-      //         )} days`}</p>
-      //       </div>
-      //     </div>
-      //   </div>
-      // </div>
       <>
-        <div className="row">
+        {/* <div className="row">
           <div className="col-sm-12 banner">
             <img
               src={DefaultProfileBanner}
@@ -104,16 +62,16 @@ class Profile extends Component {
               }}
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="container">
-          <div className="row">
+          <div className="row mt-3">
             <div className="col-sm-12 text-center">
               <img
                 src={DefaultProfilePicture}
                 className="card-img-top"
                 alt={`${user.username}'s avatar`}
-                style={{ width: "33%", height: "auto", objectFit: "cover" }}
+                style={{ width: "25%", height: "auto", objectFit: "cover" }}
               />
             </div>
           </div>

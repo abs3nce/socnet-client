@@ -1,5 +1,5 @@
 export const getUser = (userID) => {
-  return fetch(`http://localhost:3000/users/${userID}`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/users/${userID}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -15,7 +15,7 @@ export const getUser = (userID) => {
 };
 
 export const getUsers = () => {
-  return fetch(`http://localhost:3000/users/`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/users/`, {
     method: "GET",
   })
     .then((res) => {
