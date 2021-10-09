@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getUsers } from "../controllers/data/users";
+import { getUsers } from "../controllers/users";
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 import { Link } from "react-router-dom";
 

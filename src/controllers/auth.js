@@ -55,7 +55,7 @@ export const logoutUser = (next) => {
     method: "GET",
   })
     .then((res) => {
-      console.log("> USER LOGGED OUT: ", res);
+      console.log("> USER LOGGED OUT");
       return res.json();
     })
     .catch((err) => console.log(err));

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { logoutUser, isUserAuthenticated } from "../controllers/auth/auth";
+import { logoutUser, isUserAuthenticated } from "../controllers/auth";
 
 const isActive = (props, path) => {
   if (props.history.location.pathname === path) {

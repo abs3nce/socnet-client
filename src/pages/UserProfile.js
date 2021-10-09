@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 
-import { isUserAuthenticated } from "../controllers/auth/auth";
-import { getUser } from "../controllers/data/users";
+import { isUserAuthenticated } from "../controllers/auth";
+import { getUser } from "../controllers/users";
 
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 // import DefaultProfileBanner from "../images/defaultUserBanner.jpeg";
@@ -38,8 +38,8 @@ class Profile extends Component {
     const userID = this.props.match.params.userID;
     this.init(userID);
   }
-  
-  componentWillReceiveProps(props) { 
+
+  componentWillReceiveProps(props) {
     const userID = props.match.params.userID;
     this.init(userID);
   }
@@ -111,7 +111,7 @@ class Profile extends Component {
                       </Link>
                     </div>
                     <div className="col-sm-3 text-center">
-                      <DeleteUserButton></DeleteUserButton>
+                      <DeleteUserButton userID={user._id} />
                     </div>
                   </div>
                 )}

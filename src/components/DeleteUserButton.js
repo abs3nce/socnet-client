@@ -1,25 +1,44 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
-import { deleteUserAccount } from "../controllers/data/deletion";
-import { isUserAuthenticated } from "../controllers/auth/auth";
+import { deleteUserAccount } from "../controllers/users";
+import { isUserAuthenticated, logoutUser } from "../controllers/auth";
 
 class DeleteUser extends Component {
+  state = {
+    redirect: false,
+  };
+
   confirmDeletion = () => {
     let userInput = window.confirm(
       "Are you sure you want to delete your account?"
     );
     if (userInput) {
-      this.deleteUserAccount();
+      this.deletionConfirmed();
     }
   };
 
-  deleteUserAccount = () => {
+  deletionConfirmed = () => {
     const token = isUserAuthenticated().token;
+    const userID = this.props.userID;
 
-    // removeUser()
+    deleteUserAccount(userID, token).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        logoutUser(() => {
+          console.log(`> USER PROFILE DELETED`);
+        });
+        this.setState({ redirect: true });
+      }
+    });
   };
 
   render() {
+    if (this.state.redirect === true) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div>
         <button

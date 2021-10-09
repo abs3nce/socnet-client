@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-import { loginUser, authenticateUser } from "../controllers/auth/auth";
+import { loginUser, authenticateUser } from "../controllers/auth";
 
 class Login extends Component {
   constructor(props) {
@@ -97,18 +97,16 @@ class Login extends Component {
         <h2 className="mt-5 mb-5">Login Page</h2>
 
         {this.loadLoginForm(username, password)}
-
-        {/* alert o neuspesnom logine s errorom*/}
+        
         <div
           style={{ display: error ? "" : "none" }}
           className="alert alert-danger mt-3"
         >
           {error}
         </div>
-
         {loading ? (
-          <div>
-            <h2>Loading...</h2>
+          <div className="lead mt-3">
+            <p>Loading...</p>
           </div>
         ) : (
           ""

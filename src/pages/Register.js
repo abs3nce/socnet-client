@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { registerUser } from "../controllers/auth/auth";
+import { registerUser } from "../controllers/auth";
 
 class Register extends Component {
   constructor(props) {
