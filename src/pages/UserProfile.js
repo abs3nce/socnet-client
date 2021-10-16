@@ -4,7 +4,7 @@ import { Redirect, Link } from "react-router-dom";
 import { isUserAuthenticated } from "../controllers/auth";
 import { getUser } from "../controllers/users";
 
-import DefaultProfilePicture from "../images/defaultUserIcon.png";
+import defaultProfilePicture from "../images/defaultUserIcon.png";
 // import DefaultProfileBanner from "../images/defaultUserBanner.jpeg";
 
 import DeleteUserButton from "../components/DeleteUserButton";
@@ -28,7 +28,7 @@ class Profile extends Component {
       if (data.error) {
         this.setState({ redirectToLogin: true });
       } else {
-        console.log(`> USER LOADED (PROFILE): `,data);
+        console.log(`> USER LOADED (PROFILE): `, data);
         this.setState({ user: data });
       }
     });
@@ -48,6 +48,12 @@ class Profile extends Component {
   render() {
     const { redirectToLogin, user } = this.state;
     if (redirectToLogin) return <Redirect to="/login" />;
+
+    const profilePictureURL = user._id
+      ? `${process.env.REACT_APP_API_URL}/users/pfp/${
+          user._id
+        }?${new Date().getTime()}`
+      : defaultProfilePicture;
 
     return (
       <>
@@ -69,10 +75,11 @@ class Profile extends Component {
           <div className="row mt-3">
             <div className="col-sm-12 text-center">
               <img
-                src={DefaultProfilePicture}
-                className="card-img-top"
-                alt={`${user.username}'s avatar`}
-                style={{ width: "25%", height: "auto", objectFit: "cover" }}
+                style={{ height: "200px", width: "auto" }}
+                className="image-thumbnail"
+                src={profilePictureURL}
+                onError={index => (index.target.src = defaultProfilePicture)}
+                alt={user.username}
               />
             </div>
           </div>

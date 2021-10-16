@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 import { isUserAuthenticated } from "../controllers/auth";
 import { getUser, updateUser } from "../controllers/users";
 
+import defaultProfilePicture from "../images/defaultUserIcon.png";
+
 class EditUserProfile extends Component {
   constructor() {
     super();
@@ -175,19 +177,31 @@ class EditUserProfile extends Component {
       return <Redirect to={`/user/${id}`} />;
     }
 
+    const profilePictureURL = id
+      ? `${
+          process.env.REACT_APP_API_URL
+        }/users/pfp/${id}?${new Date().getTime()}`
+      : defaultProfilePicture;
+
     return (
       <div className="container">
         <h2 className="mt-5 mb-5">Edit {username}'s Profile</h2>
-
+        <img
+          style={{ height: "200px", width: "auto" }}
+          className="image-thumbnail"
+          src={profilePictureURL}
+          onError={index => (index.target.src = defaultProfilePicture)}
+          alt={username}
+        />{" "}
+        <br />
+        <br />
         {this.loadEditProfileForm(username, email, password)}
-
         <div
           style={{ display: error ? "" : "none" }}
           className="alert alert-danger mt-3"
         >
           {error}
         </div>
-
         {loading ? (
           <div className="lead mt-3">
             <p>Loading...</p>
