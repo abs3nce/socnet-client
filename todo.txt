@@ -20,6 +20,9 @@ ak sa uzivatel prihlasi ako napr user1 a potom ide na edit url ineho uzivatela u
 po zmene mena v editore s v navbare "someone's profile" nezhoduje s tym menom
 
 
+je mozne po hrani sa s premenami v editore nahrat fotku vacsiu ako 100kB, teda aj nejake 16K fotky
+
+
 mozno color palleta?
 222831
 393E46

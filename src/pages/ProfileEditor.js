@@ -27,6 +27,7 @@ class EditUserProfile extends Component {
   }
 
   handleChange = (name) => (event) => {
+    this.setState({ error: "" });
     //handle formu
     //pokial sa vyplnil aj input obrazku tak hned ako to tato funkcia zisti tak nahra tento obrazok do event.target.file[0],
     //ak nie tak zoberie ostatne udaje a ulozi ich ako value
@@ -36,7 +37,7 @@ class EditUserProfile extends Component {
 
     const fileSize = name === "profilePicture" ? event.target.files[0].size : 0;
     this.userData.set(name, value);
-    this.setState({ [name]: value, fileSize });
+    this.setState({ [name]: value, fileSize: fileSize });
   };
 
   init = (userID) => {
@@ -44,7 +45,7 @@ class EditUserProfile extends Component {
       if (data.error) {
         this.setState({ redirectToProfile: true });
       } else {
-        console.log(`> USER LOADED (EDITOR): `,data);
+        console.log(`> USER LOADED (EDITOR): `, data);
         this.setState({
           id: data._id,
           username: data.username,
@@ -97,7 +98,6 @@ class EditUserProfile extends Component {
     this.setState({ loading: true });
 
     if (this.isInputValid()) {
-      this.setState({ error: "" });
       const userID = this.props.match.params.userID;
       const token = isUserAuthenticated().token;
 
@@ -177,7 +177,7 @@ class EditUserProfile extends Component {
 
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5">Edit User Profile</h2>
+        <h2 className="mt-5 mb-5">Edit {username}'s Profile</h2>
 
         {this.loadEditProfileForm(username, email, password)}
 
