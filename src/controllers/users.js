@@ -27,14 +27,15 @@ export const getUsers = () => {
 };
 
 export const updateUser = (userID, token, user) => {
+  console.log(`> USER DATA FROM UPDATE:`, user);
+  
   return fetch(`${process.env.REACT_APP_API_URL}/users/${userID}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(user),
+    body: user,
   })
     .then((res) => {
       return res.json();

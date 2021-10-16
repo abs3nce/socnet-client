@@ -12,8 +12,10 @@ class EditUserProfile extends Component {
       username: "",
       email: "",
       password: "",
+      fileSize: 0,
       redirectToProfile: false,
       error: "",
+      loading: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this); //zistit ako toto funguje
   }
@@ -25,8 +27,15 @@ class EditUserProfile extends Component {
   }
 
   handleChange = (name) => (event) => {
-    //ukladanie udajov z formu >> ak je to event z username tak this.state.username nadobudne hodnotu username z inputu a podobne
-    this.setState({ [name]: event.target.value });
+    //handle formu
+    //pokial sa vyplnil aj input obrazku tak hned ako to tato funkcia zisti tak nahra tento obrazok do event.target.file[0],
+    //ak nie tak zoberie ostatne udaje a ulozi ich ako value
+    //nasledne zaplnime userData objekt udajmi podla ich mena a hodnoty, cize username a jeho hodnota, email a jeho hodnota....
+    const value = name === "photo" ? event.target.files[0] : event.target.value;
+
+    const fileSize = name === "photo" ? event.target.files[0].size : 0;
+    this.userData.set(name, value);
+    this.setState({ [name]: value, fileSize });
   };
 
   init = (userID) => {
@@ -45,7 +54,12 @@ class EditUserProfile extends Component {
   };
 
   isInputValid = () => {
-    const { username, email, password } = this.state;
+    const { username, email, password, fileSize } = this.state;
+
+    if (fileSize > 100000) {
+      this.setState({ error: "Maximum file size is 100kB" });
+      return false;
+    }
 
     if (username.length === 0) {
       this.setState({ error: "Username must not be empty" });
@@ -79,22 +93,13 @@ class EditUserProfile extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({ loading: true });
 
     if (this.isInputValid()) {
-      //vytvorenie usera
-      const { username, email, password } = this.state;
-      const user = {
-        username,
-        email,
-        password: password || undefined,
-      };
-
-      console.log(`> UPDATE FORM data: `, user);
-
       const userID = this.props.match.params.userID;
       const token = isUserAuthenticated().token;
 
-      updateUser(userID, token, user).then((data) => {
+      updateUser(userID, token, this.userData).then((data) => {
         if (data.error) this.setState({ error: data.error });
         else {
           this.setState({
@@ -108,12 +113,12 @@ class EditUserProfile extends Component {
   loadEditProfileForm = (username, email, password) => (
     <form>
       <div className="form-group">
-        <label className="text-muted">Profile Image</label>
+        <label className="text-muted">Profile Photo</label>
         <input
-          onChange={this.handleChange("profileImage")}
+          onChange={this.handleChange("photo")}
           type="file"
-          className="form-control"
           accept="image/*"
+          className="form-control"
         />
       </div>
       <br />
@@ -161,7 +166,7 @@ class EditUserProfile extends Component {
   );
 
   render() {
-    const { username, id, email, password, redirectToProfile, error } =
+    const { username, id, email, password, redirectToProfile, error, loading } =
       this.state;
 
     if (redirectToProfile) {
@@ -180,6 +185,14 @@ class EditUserProfile extends Component {
         >
           {error}
         </div>
+        
+        {loading ? (
+          <div className="lead mt-3">
+            <p>Loading...</p>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
