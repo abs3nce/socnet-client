@@ -28,7 +28,7 @@ class Profile extends Component {
       if (data.error) {
         this.setState({ redirectToLogin: true });
       } else {
-        console.log(data);
+        console.log(`> USER LOADED (PROFILE): `,data);
         this.setState({ user: data });
       }
     });

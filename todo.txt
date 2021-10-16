@@ -17,6 +17,9 @@ nech su prefilled a heslo treba teda tiez nejako poriesit
 ak sa uzivatel prihlasi ako napr user1 a potom ide na edit url ineho uzivatela user2 tak ho to pusti na jeho edit page
 
 
+po zmene mena v editore s v navbare "someone's profile" nezhoduje s tym menom
+
+
 mozno color palleta?
 222831
 393E46

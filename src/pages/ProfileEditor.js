@@ -31,9 +31,10 @@ class EditUserProfile extends Component {
     //pokial sa vyplnil aj input obrazku tak hned ako to tato funkcia zisti tak nahra tento obrazok do event.target.file[0],
     //ak nie tak zoberie ostatne udaje a ulozi ich ako value
     //nasledne zaplnime userData objekt udajmi podla ich mena a hodnoty, cize username a jeho hodnota, email a jeho hodnota....
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    const value =
+      name === "profilePicture" ? event.target.files[0] : event.target.value;
 
-    const fileSize = name === "photo" ? event.target.files[0].size : 0;
+    const fileSize = name === "profilePicture" ? event.target.files[0].size : 0;
     this.userData.set(name, value);
     this.setState({ [name]: value, fileSize });
   };
@@ -43,7 +44,7 @@ class EditUserProfile extends Component {
       if (data.error) {
         this.setState({ redirectToProfile: true });
       } else {
-        console.log(data);
+        console.log(`> USER LOADED (EDITOR): `,data);
         this.setState({
           id: data._id,
           username: data.username,
@@ -57,7 +58,7 @@ class EditUserProfile extends Component {
     const { username, email, password, fileSize } = this.state;
 
     if (fileSize > 100000) {
-      this.setState({ error: "Maximum file size is 100kB" });
+      this.setState({ error: "Maximum file size is 100kB", loading: false });
       return false;
     }
 
@@ -96,6 +97,7 @@ class EditUserProfile extends Component {
     this.setState({ loading: true });
 
     if (this.isInputValid()) {
+      this.setState({ error: "" });
       const userID = this.props.match.params.userID;
       const token = isUserAuthenticated().token;
 
@@ -115,7 +117,7 @@ class EditUserProfile extends Component {
       <div className="form-group">
         <label className="text-muted">Profile Photo</label>
         <input
-          onChange={this.handleChange("photo")}
+          onChange={this.handleChange("profilePicture")}
           type="file"
           accept="image/*"
           className="form-control"
@@ -185,7 +187,7 @@ class EditUserProfile extends Component {
         >
           {error}
         </div>
-        
+
         {loading ? (
           <div className="lead mt-3">
             <p>Loading...</p>
