@@ -5,6 +5,15 @@ pri pouzivani .env url sa neda prihlasovat a teda ani registrovat a logoutovat
 >>> vsetky urlky zmenit v auth/index.js
 
 
+pri deletnuti user accountu sa musia vymazat aj vsetky jeho prispevky
+
+
+zlepsit edit profilu pretoze validator je pripojeny na edit 
+a teda je vzdy treba zadat vsetky udaje a to moze byt problem, 
+nech su prefilled a heslo treba teda tiez nejako poriesit
+>> vytvorit validator na edit a ten pridat iba na edit
+
+
 mozno color palleta?
 222831
 393E46

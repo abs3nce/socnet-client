@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-import { deleteUserAccount } from "../controllers/users";
+import { deleteUser } from "../controllers/users";
 import { isUserAuthenticated, logoutUser } from "../controllers/auth";
 
 class DeleteUser extends Component {
@@ -22,7 +22,7 @@ class DeleteUser extends Component {
     const token = isUserAuthenticated().token;
     const userID = this.props.userID;
 
-    deleteUserAccount(userID, token).then((data) => {
+    deleteUser(userID, token).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
