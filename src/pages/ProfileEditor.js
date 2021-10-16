@@ -19,41 +19,14 @@ class EditUserProfile extends Component {
   }
 
   componentDidMount() {
+    this.userData = new FormData();
     const userID = this.props.match.params.userID;
     this.init(userID);
   }
 
-  isInputValid = () => {
-    const { username, email, password } = this.state;
-
-    if (username.length == 0) {
-      this.setState({ error: "Username must not be empty" });
-      return false;
-    }
-    if (username.length > 0 && username.length <= 2) {
-      this.setState({ error: "Username must be atlease 3 characters long" });
-      return false;
-    }
-    if (username.length > 25) {
-      this.setState({ error: "Username must be maximum 25 characters long" });
-      return false;
-    }
-
-    if (email.length == 0) {
-      this.setState({ error: "Email must not be empty" });
-      return false;
-    }
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      //https://stackoverflow.com/questions/15017052/understanding-email-validation-using-javascript validacia mailu pomocou regex
-      this.setState({ error: "Email must be valid" });
-      return false;
-    }
-
-    if (password.length > 0 && password.length <= 7) {
-      this.setState({ error: "Password must be at least 8 characters long" });
-      return false;
-    }
-    return true;
+  handleChange = (name) => (event) => {
+    //ukladanie udajov z formu >> ak je to event z username tak this.state.username nadobudne hodnotu username z inputu a podobne
+    this.setState({ [name]: event.target.value });
   };
 
   init = (userID) => {
@@ -71,9 +44,37 @@ class EditUserProfile extends Component {
     });
   };
 
-  handleChange = (name) => (event) => {
-    //ukladanie udajov z formu >> ak je to event z username tak this.state.username nadobudne hodnotu username z inputu a podobne
-    this.setState({ [name]: event.target.value });
+  isInputValid = () => {
+    const { username, email, password } = this.state;
+
+    if (username.length === 0) {
+      this.setState({ error: "Username must not be empty" });
+      return false;
+    }
+    if (username.length > 0 && username.length <= 2) {
+      this.setState({ error: "Username must be atlease 3 characters long" });
+      return false;
+    }
+    if (username.length > 25) {
+      this.setState({ error: "Username must be maximum 25 characters long" });
+      return false;
+    }
+
+    if (email.length === 0) {
+      this.setState({ error: "Email must not be empty" });
+      return false;
+    }
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      //https://stackoverflow.com/questions/15017052/understanding-email-validation-using-javascript validacia mailu pomocou regex
+      this.setState({ error: "Email must be valid" });
+      return false;
+    }
+
+    if (password.length > 0 && password.length <= 7) {
+      this.setState({ error: "Password must be at least 8 characters long" });
+      return false;
+    }
+    return true;
   };
 
   handleSubmit(e) {
@@ -107,6 +108,17 @@ class EditUserProfile extends Component {
   loadEditProfileForm = (username, email, password) => (
     <form>
       <div className="form-group">
+        <label className="text-muted">Profile Image</label>
+        <input
+          onChange={this.handleChange("profileImage")}
+          type="file"
+          className="form-control"
+          accept="image/*"
+        />
+      </div>
+      <br />
+
+      <div className="form-group">
         <label className="text-muted">Username</label>
         <input
           onChange={this.handleChange("username")}
@@ -115,6 +127,7 @@ class EditUserProfile extends Component {
           value={username}
         />
       </div>
+      <br />
 
       <div className="form-group">
         <label className="text-muted">Email</label>
@@ -125,6 +138,7 @@ class EditUserProfile extends Component {
           value={email}
         />
       </div>
+      <br />
 
       <div className="form-group">
         <label className="text-muted">Password</label>
@@ -135,6 +149,7 @@ class EditUserProfile extends Component {
           value={password}
         />
       </div>
+      <br />
 
       <button
         onClick={this.handleSubmit}

@@ -40,6 +40,7 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(props) {
+    //pri prechode na iny profile sa zmeni aj jeho obsah
     const userID = props.match.params.userID;
     this.init(userID);
   }

@@ -14,6 +14,9 @@ nech su prefilled a heslo treba teda tiez nejako poriesit
 >> vytvorit validator na edit a ten pridat iba na edit
 
 
+ak sa uzivatel prihlasi ako napr user1 a potom ide na edit url ineho uzivatela user2 tak ho to pusti na jeho edit page
+
+
 mozno color palleta?
 222831
 393E46
