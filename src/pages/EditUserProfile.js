@@ -23,6 +23,39 @@ class EditUserProfile extends Component {
     this.init(userID);
   }
 
+  isInputValid = () => {
+    const { username, email, password } = this.state;
+
+    if (username.length == 0) {
+      this.setState({ error: "Username must not be empty" });
+      return false;
+    }
+    if (username.length > 0 && username.length <= 2) {
+      this.setState({ error: "Username must be atlease 3 characters long" });
+      return false;
+    }
+    if (username.length > 25) {
+      this.setState({ error: "Username must be maximum 25 characters long" });
+      return false;
+    }
+
+    if (email.length == 0) {
+      this.setState({ error: "Email must not be empty" });
+      return false;
+    }
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      //https://stackoverflow.com/questions/15017052/understanding-email-validation-using-javascript validacia mailu pomocou regex
+      this.setState({ error: "Email must be valid" });
+      return false;
+    }
+
+    if (password.length > 0 && password.length <= 7) {
+      this.setState({ error: "Password must be at least 8 characters long" });
+      return false;
+    }
+    return true;
+  };
+
   init = (userID) => {
     getUser(userID).then((data) => {
       if (data.error) {
@@ -46,27 +79,29 @@ class EditUserProfile extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    //vytvorenie usera
-    const { username, email, password } = this.state;
-    const user = {
-      username,
-      email,
-      password,
-    };
+    if (this.isInputValid()) {
+      //vytvorenie usera
+      const { username, email, password } = this.state;
+      const user = {
+        username,
+        email,
+        password: password || undefined,
+      };
 
-    console.log(`> UPDATE FORM data: `, user);
+      console.log(`> UPDATE FORM data: `, user);
 
-    const userID = this.props.match.params.userID;
-    const token = isUserAuthenticated().token;
+      const userID = this.props.match.params.userID;
+      const token = isUserAuthenticated().token;
 
-    updateUser(userID, token, user).then((data) => {
-      if (data.error) this.setState({ error: data.error });
-      else {
-        this.setState({
-          redirectToProfile: true,
-        });
-      }
-    });
+      updateUser(userID, token, user).then((data) => {
+        if (data.error) this.setState({ error: data.error });
+        else {
+          this.setState({
+            redirectToProfile: true,
+          });
+        }
+      });
+    }
   }
 
   loadEditProfileForm = (username, email, password) => (
@@ -111,7 +146,8 @@ class EditUserProfile extends Component {
   );
 
   render() {
-    const { username, id, email, password, redirectToProfile } = this.state;
+    const { username, id, email, password, redirectToProfile, error } =
+      this.state;
 
     if (redirectToProfile) {
       return <Redirect to={`/user/${id}`} />;
@@ -122,6 +158,13 @@ class EditUserProfile extends Component {
         <h2 className="mt-5 mb-5">Edit User Profile</h2>
 
         {this.loadEditProfileForm(username, email, password)}
+
+        <div
+          style={{ display: error ? "" : "none" }}
+          className="alert alert-danger mt-3"
+        >
+          {error}
+        </div>
       </div>
     );
   }
