@@ -74,30 +74,39 @@ class EditUserProfile extends Component {
     }
 
     if (username.length === 0) {
-      this.setState({ error: "Username must not be empty" });
+      this.setState({ error: "Username must not be empty", loading: false });
       return false;
     }
     if (username.length > 0 && username.length <= 2) {
-      this.setState({ error: "Username must be atlease 3 characters long" });
+      this.setState({
+        error: "Username must be atlease 3 characters long",
+        loading: false,
+      });
       return false;
     }
     if (username.length > 25) {
-      this.setState({ error: "Username must be maximum 25 characters long" });
+      this.setState({
+        error: "Username must be maximum 25 characters long",
+        loading: false,
+      });
       return false;
     }
 
     if (email.length === 0) {
-      this.setState({ error: "Email must not be empty" });
+      this.setState({ error: "Email must not be empty", loading: false });
       return false;
     }
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       //https://stackoverflow.com/questions/15017052/understanding-email-validation-using-javascript validacia mailu pomocou regex
-      this.setState({ error: "Email must be valid" });
+      this.setState({ error: "Email must be valid", loading: false });
       return false;
     }
 
     if (password.length > 0 && password.length <= 7) {
-      this.setState({ error: "Password must be at least 8 characters long" });
+      this.setState({
+        error: "Password must be at least 8 characters long",
+        loading: false,
+      });
       return false;
     }
     return true;

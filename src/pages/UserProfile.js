@@ -8,56 +8,83 @@ import defaultProfilePicture from "../images/defaultUserIcon.png";
 // import DefaultProfileBanner from "../images/defaultUserBanner.jpeg";
 
 import DeleteUserButton from "../components/DeleteUserButton";
+import FollowUserButton from "../components/FollowUserButton";
 
 class Profile extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user: "",
-      redirectToLogin: false,
+    constructor() {
+        super();
+        this.state = {
+            user: { following: [], followers: [] },
+            redirectToLogin: false,
+            following: false,
+            error: "",
+        };
+    }
+
+    registeredFor(registeredDate) {
+        let duration = new Date() - new Date(registeredDate);
+        return Math.floor(duration / (1000 * 60 * 60 * 24));
+    } //for testing
+
+    //overenie followovania
+    checkIfUserFollowing = (user) => {
+        const jwt = isUserAuthenticated();
+        const match = user.followers.find((follower) => {
+            //jedno uzivatelske id ma vela inych id (followerov) a opacne
+            return follower._id === jwt.user._id;
+        });
+        return match;
     };
-  }
 
-  registeredFor(registeredDate) {
-    let duration = new Date() - new Date(registeredDate);
-    return Math.floor(duration / (1000 * 60 * 60 * 24));
-  }
+    init = (userID) => {
+        getUser(userID).then((data) => {
+            if (data.error) {
+                this.setState({ redirectToLogin: true });
+            } else {
+                console.log(`> USER LOADED (PROFILE): `, data);
+                let following = this.checkIfUserFollowing(data);
+                this.setState({ user: data, following: following });
+            }
+        });
+    };
 
-  init = (userID) => {
-    getUser(userID).then((data) => {
-      if (data.error) {
-        this.setState({ redirectToLogin: true });
-      } else {
-        console.log(`> USER LOADED (PROFILE): `, data);
-        this.setState({ user: data });
-      }
-    });
-  };
+    clickedFollowButton = (handleFollow) => {
+        const userID = isUserAuthenticated().user._id;
+        const token = isUserAuthenticated().token;
 
-  componentDidMount() {
-    const userID = this.props.match.params.userID;
-    this.init(userID);
-  }
+        handleFollow(userID, token, this.state.user._id).then((data) => {
+            if (data.error) {
+                this.setState({ error: data.error });
+            } else {
+                this.setState({ user: data, following: !this.state.following });
+            }
+        });
+    };
 
-  componentWillReceiveProps(props) {
-    //pri prechode na iny profile sa zmeni aj jeho obsah
-    const userID = props.match.params.userID;
-    this.init(userID);
-  }
+    componentDidMount() {
+        const userID = this.props.match.params.userID;
+        this.init(userID);
+    }
 
-  render() {
-    const { redirectToLogin, user } = this.state;
-    if (redirectToLogin) return <Redirect to="/login" />;
+    componentWillReceiveProps(props) {
+        //pri prechode na iny profile sa zmeni aj jeho obsah
+        const userID = props.match.params.userID;
+        this.init(userID);
+    }
 
-    const profilePictureURL = user._id
-      ? `${process.env.REACT_APP_API_URL}/users/pfp/${
-          user._id
-        }?${new Date().getTime()}`
-      : defaultProfilePicture;
+    render() {
+        const { redirectToLogin, user } = this.state;
+        if (redirectToLogin) return <Redirect to="/login" />;
 
-    return (
-      <>
-        {/* <div className="row">
+        const profilePictureURL = user._id
+            ? `${process.env.REACT_APP_API_URL}/users/pfp/${
+                  user._id
+              }?${new Date().getTime()}`
+            : defaultProfilePicture;
+
+        return (
+            <>
+                {/* <div className="row">
           <div className="col-sm-12 banner">
             <img
               src={DefaultProfileBanner}
@@ -71,68 +98,86 @@ class Profile extends Component {
           </div>
         </div> */}
 
-        <div className="container">
-          <div className="row mt-3">
-            <div className="col-sm-12 text-center">
-              <img
-                style={{
-                  height: "200px",
-                  width: "auto",
-                  borderRadius: "128px",
-                }}
-                className="image-thumbnail"
-                src={profilePictureURL}
-                onError={(index) => (index.target.src = defaultProfilePicture)}
-                alt={user.username}
-              />
-            </div>
-          </div>
+                <div className="container">
+                    <div className="row mt-3">
+                        <div className="col-sm-12 text-center">
+                            <img
+                                style={{
+                                    height: "200px",
+                                    width: "auto",
+                                    borderRadius: "128px",
+                                }}
+                                className="image-thumbnail"
+                                src={profilePictureURL}
+                                onError={(index) =>
+                                    (index.target.src = defaultProfilePicture)
+                                }
+                                alt={user.username}
+                            />
+                        </div>
+                    </div>
 
-          <div className="row">
-            <div className="col-md-12 text-center mt-3">
-              <h1 className="">{user.username}</h1>
-            </div>
-          </div>
-          <hr />
+                    <div className="row">
+                        <div className="col-md-12 text-center mt-3">
+                            <h1 className="">{user.username}</h1>
+                        </div>
+                    </div>
 
-          <div className="row mt-4">
-            <div className="col-md-12 text-center">
-              <div className="lead">
-                <h3>{user.description}</h3>
-                <p>Email is {user.email}</p>
-                <p>
-                  {" "}
-                  {`Registered on ${new Date(user.created).toDateString()}`}
-                </p>
-                <p>{`Has been a member for ${this.registeredFor(
-                  user.created
-                )} days`}</p>
+                    {/* {isUserAuthenticated().user &&
+          isUserAuthenticated().user._id !== user._id && (
+            <div className="row">
+              <div className="col-md-12 text-center">
+                <FollowUserButton />
               </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-12">
-              {isUserAuthenticated().user &&
-                isUserAuthenticated().user._id === user._id && (
-                  <div className="row justify-content-center">
-                    <div className="col-sm-3 text-center">
-                      <Link
-                        className="btn btn-raised btn-success"
-                        to={`/user/edit/${user._id}`}
-                      >
-                        EDIT PROFILE
-                      </Link>
+          )} */}
+                    <hr />
+
+                    <div className="row mt-4">
+                        <div className="col-md-12 text-center">
+                            <div className="lead">
+                                <h3>{user.description}</h3>
+                                <p>Email is {user.email}</p>
+                                <p>
+                                    {" "}
+                                    {`Registered on ${new Date(
+                                        user.created
+                                    ).toDateString()}`}
+                                </p>
+                                <p>{`Has been a member for ${this.registeredFor(
+                                    user.created
+                                )} days`}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-sm-3 text-center">
-                      <DeleteUserButton userID={user._id} />
+                    <div className="row">
+                        <div className="col-sm-12">
+                            {isUserAuthenticated().user &&
+                            isUserAuthenticated().user._id === user._id ? (
+                                <div className="row justify-content-center">
+                                    <div className="col-sm-2 text-center">
+                                        <Link
+                                            className="btn btn-raised btn-success"
+                                            to={`/user/edit/${user._id}`}
+                                        >
+                                            EDIT PROFILE
+                                        </Link>
+                                    </div>
+                                    <div className="col-sm-2 text-center">
+                                        <DeleteUserButton userID={user._id} />
+                                    </div>
+                                </div>
+                            ) : (
+                                <FollowUserButton
+                                    following={this.state.following}
+                                    onButtonClick={this.clickedFollowButton}
+                                />
+                            )}
+                        </div>
                     </div>
-                  </div>
-                )}
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
+                </div>
+            </>
+        );
+    }
 }
 export default Profile;
