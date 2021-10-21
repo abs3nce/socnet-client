@@ -14,6 +14,8 @@ class EditUserProfile extends Component {
       username: "",
       email: "",
       password: "",
+      description: "",
+
       fileSize: 0,
       redirectToProfile: false,
       error: "",
@@ -52,6 +54,8 @@ class EditUserProfile extends Component {
           id: data._id,
           username: data.username,
           email: data.email,
+          error: "",
+          description: data.description,
         });
       }
     });
@@ -114,7 +118,7 @@ class EditUserProfile extends Component {
     }
   }
 
-  loadEditProfileForm = (username, email, password) => (
+  loadEditProfileForm = (username, email, password, description) => (
     <form>
       <div className="form-group">
         <label className="text-muted">Profile Photo</label>
@@ -150,6 +154,17 @@ class EditUserProfile extends Component {
       <br />
 
       <div className="form-group">
+        <label className="text-muted">Description</label>
+        <textarea
+          onChange={this.handleChange("description")}
+          type="text"
+          className="form-control"
+          value={description}
+        />
+      </div>
+      <br />
+
+      <div className="form-group">
         <label className="text-muted">Password</label>
         <input
           onChange={this.handleChange("password")}
@@ -170,8 +185,16 @@ class EditUserProfile extends Component {
   );
 
   render() {
-    const { username, id, email, password, redirectToProfile, error, loading } =
-      this.state;
+    const {
+      username,
+      id,
+      email,
+      password,
+      description,
+      redirectToProfile,
+      error,
+      loading,
+    } = this.state;
 
     if (redirectToProfile) {
       return <Redirect to={`/user/${id}`} />;
@@ -190,12 +213,12 @@ class EditUserProfile extends Component {
           style={{ height: "200px", width: "auto" }}
           className="image-thumbnail"
           src={profilePictureURL}
-          onError={index => (index.target.src = defaultProfilePicture)}
+          onError={(index) => (index.target.src = defaultProfilePicture)}
           alt={username}
         />{" "}
         <br />
         <br />
-        {this.loadEditProfileForm(username, email, password)}
+        {this.loadEditProfileForm(username, email, password, description)}
         <div
           style={{ display: error ? "" : "none" }}
           className="alert alert-danger mt-3"

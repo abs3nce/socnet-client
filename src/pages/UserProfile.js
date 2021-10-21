@@ -75,10 +75,14 @@ class Profile extends Component {
           <div className="row mt-3">
             <div className="col-sm-12 text-center">
               <img
-                style={{ height: "200px", width: "auto" }}
+                style={{
+                  height: "200px",
+                  width: "auto",
+                  borderRadius: "128px",
+                }}
                 className="image-thumbnail"
                 src={profilePictureURL}
-                onError={index => (index.target.src = defaultProfilePicture)}
+                onError={(index) => (index.target.src = defaultProfilePicture)}
                 alt={user.username}
               />
             </div>
@@ -86,13 +90,15 @@ class Profile extends Component {
 
           <div className="row">
             <div className="col-md-12 text-center mt-3">
-              <h2 className="">{user.username}</h2>
+              <h1 className="">{user.username}</h1>
             </div>
           </div>
+          <hr />
 
-          <div className="row">
+          <div className="row mt-4">
             <div className="col-md-12 text-center">
-              <div className="lead mt-3">
+              <div className="lead">
+                <h3>{user.description}</h3>
                 <p>Email is {user.email}</p>
                 <p>
                   {" "}
@@ -104,7 +110,6 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-
           <div className="row">
             <div className="col-sm-12">
               {isUserAuthenticated().user &&
