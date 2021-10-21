@@ -212,7 +212,7 @@ class EditUserProfile extends Component {
     } = this.state;
 
     if (redirectToProfile) {
-      return <Redirect to={`/user/${id}`} />;
+      return <Redirect to={`/users/${id}`} />;
     }
 
     const profilePictureURL = id

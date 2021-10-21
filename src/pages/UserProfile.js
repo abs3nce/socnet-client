@@ -9,6 +9,7 @@ import defaultProfilePicture from "../images/defaultUserIcon.png";
 
 import DeleteUserButton from "../components/DeleteUserButton";
 import FollowUserButton from "../components/FollowUserButton";
+import ProfileLists from "../components/ProfileLists";
 
 class Profile extends Component {
     constructor() {
@@ -133,7 +134,7 @@ class Profile extends Component {
           )} */}
                     <hr />
 
-                    <div className="row mt-4">
+                    <div className="row">
                         <div className="col-md-12 text-center">
                             <div className="lead">
                                 <h3>{user.description}</h3>
@@ -150,7 +151,7 @@ class Profile extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="row">
+                    <div className="row mb-5">
                         <div className="col-sm-12">
                             {isUserAuthenticated().user &&
                             isUserAuthenticated().user._id === user._id ? (
@@ -158,7 +159,7 @@ class Profile extends Component {
                                     <div className="col-sm-2 text-center">
                                         <Link
                                             className="btn btn-raised btn-success"
-                                            to={`/user/edit/${user._id}`}
+                                            to={`/users/edit/${user._id}`}
                                         >
                                             EDIT PROFILE
                                         </Link>
@@ -175,6 +176,12 @@ class Profile extends Component {
                             )}
                         </div>
                     </div>
+                    
+
+                    <ProfileLists
+                        followers={user.followers}
+                        following={user.following}
+                    />
                 </div>
             </>
         );

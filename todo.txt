@@ -22,6 +22,8 @@ je mozne po hrani sa s premenami v editore nahrat fotku vacsiu ako 100kB, teda a
 
 pokial nie je uzivatel prihlaseny ma stale moznost dat follow >> to je samozrejme problem pretoze po stlaceni follow stranka crashne pretoze nemame ziadne id uzivatela
 
+na profile sa v listoch nenacitavaju udaje 
+
 mozno color palleta?
 222831
 393E46

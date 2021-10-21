@@ -55,8 +55,8 @@ const Navbar = (props) => (
           <li className="nav-item">
             <Link
               className="nav-link"
-              style={isActive(props, `/user/${isUserAuthenticated().user._id}`)}
-              to={`/user/${isUserAuthenticated().user._id}`}
+              style={isActive(props, `/users/${isUserAuthenticated().user._id}`)}
+              to={`/users/${isUserAuthenticated().user._id}`}
             >
               {`${isUserAuthenticated().user.username}'s profile`}
             </Link>
