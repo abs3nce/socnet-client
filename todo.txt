@@ -17,9 +17,6 @@ nech su prefilled a heslo treba teda tiez nejako poriesit
 ak sa uzivatel prihlasi ako napr user1 a potom ide na edit url ineho uzivatela user2 tak ho to pusti na jeho edit page
 
 
-po zmene mena v editore s v navbare "someone's profile" nezhoduje s tym menom
-
-
 je mozne po hrani sa s premenami v editore nahrat fotku vacsiu ako 100kB, teda aj nejake 16K fotky
 
 

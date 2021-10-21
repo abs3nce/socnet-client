@@ -28,7 +28,7 @@ export const getUsers = () => {
 
 export const updateUser = (userID, token, user) => {
   console.log(`> DATA FROM EDIT FORM:`, user);
-  
+
   return fetch(`${process.env.REACT_APP_API_URL}/users/${userID}`, {
     method: "PUT",
     headers: {
@@ -60,4 +60,15 @@ export const deleteUser = (userID, token) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const updateUserCredentials = (user, next) => {
+  if (typeof window !== "undefined") {
+    if (localStorage.getItem("token")) {
+      let auth = JSON.parse(localStorage.getItem("token"));
+      auth.user = user;
+      localStorage.setItem("token", JSON.stringify(auth));
+      next();
+    }
+  }
 };

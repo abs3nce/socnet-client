@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
 import { isUserAuthenticated } from "../controllers/auth";
-import { getUser, updateUser } from "../controllers/users";
+import {
+  getUser,
+  updateUser,
+  updateUserCredentials,
+} from "../controllers/users";
 
 import defaultProfilePicture from "../images/defaultUserIcon.png";
 
@@ -110,8 +114,10 @@ class EditUserProfile extends Component {
       updateUser(userID, token, this.userData).then((data) => {
         if (data.error) this.setState({ error: data.error });
         else {
-          this.setState({
-            redirectToProfile: true,
+          updateUserCredentials(data, () => {
+            this.setState({
+              redirectToProfile: true,
+            });
           });
         }
       });
