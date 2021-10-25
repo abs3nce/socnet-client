@@ -21,8 +21,8 @@ const Navbar = (props) => (
       <li className="nav-item">
         <Link
           className="nav-link"
-          style={isActive(props, "/users")}
-          to="/users"
+          style={isActive(props, "/users/discover")}
+          to="/users/discover"
         >
           Discover
         </Link>
@@ -52,6 +52,17 @@ const Navbar = (props) => (
 
       {isUserAuthenticated() && (
         <>
+          
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={isActive(props, `/users/suggested`)}
+              to={`/users/suggested`}
+            >
+              Suggested
+            </Link>
+          </li>
+
           <li className="nav-item">
             <Link
               className="nav-link"

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { getUsers } from "../controllers/users";
-import DefaultProfilePicture from "../images/defaultUserIcon.png";
 import { Link } from "react-router-dom";
+import { isUserAuthenticated } from "../controllers/auth";
+import { suggestedUsers } from "../controllers/users";
 
-class Discover extends Component {
+import DefaultProfilePicture from "../images/defaultUserIcon.png";
+
+class Suggested extends Component {
     constructor() {
         super();
         this.state = {
@@ -12,7 +14,8 @@ class Discover extends Component {
     }
 
     componentDidMount() {
-        getUsers().then((data) => {
+        let userID = isUserAuthenticated().user._id
+        suggestedUsers(userID).then((data) => {
             if (data.error) {
                 console.log(data.error);
             } else {
@@ -67,4 +70,4 @@ class Discover extends Component {
         );
     }
 }
-export default Discover;
+export default Suggested;

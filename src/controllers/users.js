@@ -108,3 +108,20 @@ export const unfollowUser = (userID, token, unfollowID) => {
             console.log(err);
         });
 };
+
+export const suggestedUsers = (userID) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/suggested/${userID}`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`,
+        },
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};

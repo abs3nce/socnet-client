@@ -107,6 +107,7 @@ class Profile extends Component {
                                     height: "200px",
                                     width: "auto",
                                     borderRadius: "128px",
+                                    border: "0px solid black"
                                 }}
                                 className="image-thumbnail"
                                 src={profilePictureURL}
@@ -176,7 +177,6 @@ class Profile extends Component {
                             )}
                         </div>
                     </div>
-                    
 
                     <ProfileLists
                         followers={user.followers}

@@ -15,26 +15,27 @@ class ProfileLists extends Component {
                         {following.map((person, index) => {
                             return (
                                 <div key={index}>
-                                    <div className="row">
-                                        <Link to={`/users/${person._id}`}>
-                                            <img
-                                                src={`${process.env.REACT_APP_API_URL}/users/pfp/${person._id}`}
-                                                alt={person.username}
-                                                height="30px"
-                                                onError={(index) =>
-                                                    (index.target.src =
-                                                        defaultProfilePicture)
-                                                }
-                                            />
-                                            <div>{person.username}</div>
-                                            <p
-                                                style={{ clear: "both" }}
-                                                className="description"
-                                            >
-                                                {person.description}
-                                            </p>
-                                        </Link>
-                                    </div>
+                                    <Link
+                                        to={`/users/${person._id}`}
+                                        style={{
+                                            textDecoration: "none",
+                                            color: "#212529",
+                                        }}
+                                    >
+                                        <img
+                                            src={`${process.env.REACT_APP_API_URL}/users/pfp/${person._id}`}
+                                            alt={person.username}
+                                            height="50px"
+                                            onError={(index) =>
+                                                (index.target.src =
+                                                    defaultProfilePicture)
+                                            }
+                                            style={{ borderRadius: "50%" }}
+                                        />
+                                        <span className="lead">
+                                            {person.username}
+                                        </span>
+                                    </Link>
                                 </div>
                             );
                         })}
@@ -47,29 +48,27 @@ class ProfileLists extends Component {
                         {followers.map((person, index) => {
                             return (
                                 <div key={index}>
-                                    <div className="row">
-                                        <Link to={`/users/${person._id}`}>
-                                            <div className="row">
-
-                                            </div>
-                                            <img
-                                                src={`${process.env.REACT_APP_API_URL}/users/pfp/${person._id}`}
-                                                alt={person.username}
-                                                height="30px"
-                                                onError={(index) =>
-                                                    (index.target.src =
-                                                        defaultProfilePicture)
-                                                }
-                                            />
-                                            <div>{person.username}</div>
-                                            {/* <p
-                                                style={{ clear: "both" }}
-                                                className="description"
-                                            >
-                                                {person.description}
-                                            </p> */}
-                                        </Link>
-                                    </div>
+                                    <Link
+                                        to={`/users/${person._id}`}
+                                        style={{
+                                            textDecoration: "none",
+                                            color: "#212529",
+                                        }}
+                                    >
+                                        <img
+                                            src={`${process.env.REACT_APP_API_URL}/users/pfp/${person._id}`}
+                                            alt={person.username}
+                                            height="50px"
+                                            onError={(index) =>
+                                                (index.target.src =
+                                                    defaultProfilePicture)
+                                            }
+                                            style={{ borderRadius: "50%" }}
+                                        />
+                                        <span className="lead">
+                                            {person.username}
+                                        </span>
+                                    </Link>
                                 </div>
                             );
                         })}
