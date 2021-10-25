@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { isUserAuthenticated } from "../controllers/auth";
-import { suggestedUsers } from "../controllers/users";
+import { followUser, suggestedUsers } from "../controllers/users";
 
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 
@@ -10,11 +10,14 @@ class Suggested extends Component {
         super();
         this.state = {
             users: [],
+            error: "",
+            open: false,
+            followMessage: "",
         };
     }
 
     componentDidMount() {
-        let userID = isUserAuthenticated().user._id
+        let userID = isUserAuthenticated().user._id;
         suggestedUsers(userID).then((data) => {
             if (data.error) {
                 console.log(data.error);
@@ -23,6 +26,25 @@ class Suggested extends Component {
             }
         });
     }
+
+    clickFollow = (user, index) => {
+        const userID = isUserAuthenticated().user._id;
+        const token = isUserAuthenticated().token;
+
+        followUser(userID, token, user._id).then((data) => {
+            if (data.err) {
+                this.setState({ error: data.err });
+            } else {
+                let toFollow = this.state.users;
+                toFollow.splice(index, 1);
+                this.setState({
+                    users: toFollow,
+                    open: true,
+                    followMessage: `Following ${user.username}`,
+                });
+            }
+        });
+    };
 
     renderUsers = (users) => (
         <div className="row text-center d-flex justify-content-center">
@@ -50,6 +72,14 @@ class Suggested extends Component {
                         >
                             View profile
                         </Link>
+                        <button
+                            onClick={() => {
+                                this.clickFollow(user, index);
+                            }}
+                            className="btn btn-raised btn-success btn-sm float-right"
+                        >
+                            Follow
+                        </button>
                     </div>
                 </div>
             ))}
@@ -57,7 +87,7 @@ class Suggested extends Component {
     );
 
     render() {
-        const { users } = this.state;
+        const { users, open, followMessage } = this.state;
 
         return (
             <>
@@ -65,6 +95,16 @@ class Suggested extends Component {
                     <h2>Discover</h2>
                     <p className="lead">Find people to follow</p>
                 </div>
+                <br />
+
+                {open && (
+                    <div className="container">
+                        <div className="alert alert-success">
+                            <p>{followMessage}</p>
+                        </div>
+                    </div>
+                )}
+
                 <div className="container">{this.renderUsers(users)}</div>
             </>
         );

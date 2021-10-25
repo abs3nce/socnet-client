@@ -1,5 +1,7 @@
 import React from "react";
 
+import PostsHome from "../components/PostsHome";
+
 const Home = () => (
   <>
     <div className="bg-light p-5">
@@ -20,6 +22,8 @@ const Home = () => (
         Commodi in sit at porro, enim sequi consectetur totam cumque omnis
         accusamus aut quia officiis similique delectus voluptate.
       </p>
+
+      <PostsHome />
     </div>
   </>
 );

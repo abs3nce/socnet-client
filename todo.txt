@@ -24,6 +24,8 @@ pokial nie je uzivatel prihlaseny ma stale moznost dat follow >> to je samozrejm
 
 na profile sa v listoch nenacitavaju udaje 
 
+algoritmus na renderovanie followed by friends
+
 mozno color palleta?
 222831
 393E46

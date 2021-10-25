@@ -24,7 +24,7 @@ const Navbar = (props) => (
           style={isActive(props, "/users/discover")}
           to="/users/discover"
         >
-          Discover
+          All users
         </Link>
       </li>
       {!isUserAuthenticated() && (
@@ -60,6 +60,15 @@ const Navbar = (props) => (
               to={`/users/suggested`}
             >
               Suggested
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={isActive(props, `/posts/create`)}
+              to={`/posts/create`}
+            >
+              New Post
             </Link>
           </li>
 
