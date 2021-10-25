@@ -3,6 +3,8 @@ import { getPosts } from "../controllers/posts";
 // import DefaultProfilePicture from "../images/defaultUserIcon.png";
 import { Link } from "react-router-dom";
 
+import defaultPostIcon from "../images/defaultPostIcon.png";
+
 class PostsHome extends Component {
     constructor() {
         super();
@@ -38,6 +40,12 @@ class PostsHome extends Component {
                             key={index}
                         >
                             <div className="card-body">
+                                <img
+                                    src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
+                                    alt={post.title}
+                                    onError={i => i.target.src =`${defaultPostIcon}`}
+                                    className="img-thumbnail mb-3"
+                                />
                                 <h5 className="lead card-title">
                                     {post.title.substring(0, 30)}...
                                 </h5>

@@ -33,12 +33,12 @@ class CreatePost extends Component {
         //ak nie tak zoberie ostatne udaje a ulozi ich ako value
         //nasledne zaplnime userData objekt udajmi podla ich mena a hodnoty, cize username a jeho hodnota, email a jeho hodnota....
         const value =
-            name === "profilePicture"
+            name === "image"
                 ? event.target.files[0]
                 : event.target.value;
 
         const fileSize =
-            name === "profilePicture" ? event.target.files[0].size : 0;
+            name === "image" ? event.target.files[0].size : 0;
         this.postData.set(name, value);
         this.setState({ [name]: value, fileSize: fileSize });
     };
@@ -114,7 +114,7 @@ class CreatePost extends Component {
             <div className="form-group">
                 <label className="text-muted">Profile Photo</label>
                 <input
-                    onChange={this.handleChange("profilePicture")}
+                    onChange={this.handleChange("image")}
                     type="file"
                     accept="image/*"
                     className="form-control"
