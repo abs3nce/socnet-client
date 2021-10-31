@@ -35,11 +35,51 @@ class AllPosts extends Component {
                         : "Unknown";
 
                     return (
-                        <div
-                            className="card col-sm-12 col-md-3 m-2 p-0"
-                            key={index}
-                        >
-                            <div className="card-body">
+                        <div className="col-sm-12 col-md-4 m-0 p-0" key={index}>
+                            <div
+                                className="post"
+                                style={{
+                                    height: "auto",
+                                    aspectRatio: "1/1",
+                                    width: "100%",
+                                }}
+                            >
+                                <Link
+                                    to={`/posts/${post._id}`}
+                                >
+                                    <img
+                                        src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
+                                        alt={post.title}
+                                        onError={(i) =>
+                                            (i.target.src = `${defaultPostIcon}`)
+                                        }
+                                        className="m-0 p-0"
+                                        style={{
+                                            width: "100%",
+                                            height: "100%",
+                                            objectFit: "cover",
+                                        }}
+                                    />
+                                </Link>
+                                {/* <h5 className="lead">
+                                    {post.title.substring(0, 30)}...
+                                </h5>
+                                <p className="lead">
+                                    Posted by:{" "}
+                                    <Link to={`${postedByID}`}>
+                                        {postedByUsername}
+                                    </Link>{" "}
+                                    on {new Date(post.created).toDateString()}
+                                </p>
+
+                                <Link
+                                    to={`/posts/${post._id}`}
+                                    className="btn btn-raised btn-primary btn-sm"
+                                >
+                                    View more
+                                </Link> */}
+                            </div>
+                            {/* <div className="card-body">
                                 <img
                                     src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
                                     alt={post.title}
@@ -47,13 +87,11 @@ class AllPosts extends Component {
                                         (i.target.src = `${defaultPostIcon}`)
                                     }
                                     className="img-thumbnail mb-3"
+                                    style = {{width:"100%", height:"50%", objectFit:"cover"}}
                                 />
                                 <h5 className="lead card-title">
                                     {post.title.substring(0, 30)}...
                                 </h5>
-                                <p className="lead card-text">
-                                    {post.body.substring(0, 20)}
-                                </p>
                                 <p className="lead card-text">
                                     Posted by:{" "}
                                     <Link to={`${postedByID}`}>
@@ -68,7 +106,7 @@ class AllPosts extends Component {
                                 >
                                     View more
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     );
                 })}

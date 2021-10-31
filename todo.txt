@@ -24,3 +24,6 @@ pri vytvarani postu >> error ak sa nezadaju vsetky udaje
 pri prezerani uzivatelov bez prihlasenia a pri pokuse o nacitanie uzivatelskeho profilu stranka padne
 >> Unhandled Rejection (TypeError): Cannot read properties of undefined (reading '_id')
 >> problem s neprihlasenym uzivatelom a neda sa teda rezolvnut ci je follower alebo nie
+
+zle sortovanie fotiek v gride
+>> treba opravit, najnovsie nech su navrchu

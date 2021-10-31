@@ -49,6 +49,19 @@ export const getPost = (postID) => {
         });
 };
 
-export const getPostsByUser = () =>{
-    
-}
+export const getPostsByUser = (userID) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/by/${userID}`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`,
+        },
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};

@@ -41,7 +41,11 @@ class SinglePost extends Component {
                         <img
                             src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
                             alt=""
-                            style={{ width: "100%" }}
+                            style={{
+                                height: "80vh",
+                                width: "100%",
+                                objectFit: "contain",
+                            }}
                             onError={(index) =>
                                 (index.target.src = defaultPostIcon)
                             }
@@ -52,7 +56,7 @@ class SinglePost extends Component {
                 <div className="row">
                     <div className="col-sm-12 col-md-6">
                         <div className="row p-3">
-                            <div className="col-sm-1">
+                            <div className="col-sm-2">
                                 <img
                                     style={{
                                         height: "50px",
@@ -69,7 +73,7 @@ class SinglePost extends Component {
                                 />
                             </div>
 
-                            <div className="col-sm-11">
+                            <div className="col-sm-10">
                                 <h4>
                                     <Link to={postedByID}>
                                         {postedByUsername}
@@ -113,6 +117,22 @@ class SinglePost extends Component {
                             {new Date(post.created).toDateString()}
                         </h6>
                     </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col-sm-1 text-center">
+                        <Link
+                            to={`/`}
+                            className="btn btn-raised btn-warning btn-sm"
+                        >
+                            UPDATE
+                        </Link>
+                    </div>
+                    <div className="col-sm-1 text-center"><Link
+                            to={`/`}
+                            className="btn btn-raised btn-danger btn-sm"
+                        >
+                            DELETE
+                        </Link></div>
                 </div>
             </>
 

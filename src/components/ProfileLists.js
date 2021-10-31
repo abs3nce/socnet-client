@@ -25,12 +25,18 @@ class ProfileLists extends Component {
                                         <img
                                             src={`${process.env.REACT_APP_API_URL}/users/pfp/${person._id}`}
                                             alt={person.username}
-                                            height="50px"
                                             onError={(index) =>
                                                 (index.target.src =
                                                     defaultProfilePicture)
                                             }
-                                            style={{ borderRadius: "50%" }}
+                                            style={{
+                                                height: "50px",
+                                                width: "auto",
+                                                aspectRatio: "1/1",
+                                                objectFit: "cover",
+                                                borderRadius: "128px",
+                                                border: "0px solid black",
+                                            }}
                                         />
                                         <span className="lead">
                                             {person.username}
@@ -58,12 +64,18 @@ class ProfileLists extends Component {
                                         <img
                                             src={`${process.env.REACT_APP_API_URL}/users/pfp/${person._id}`}
                                             alt={person.username}
-                                            height="50px"
                                             onError={(index) =>
                                                 (index.target.src =
                                                     defaultProfilePicture)
                                             }
-                                            style={{ borderRadius: "50%" }}
+                                            style={{
+                                                height: "50px",
+                                                width: "auto",
+                                                aspectRatio: "1/1",
+                                                objectFit: "cover",
+                                                borderRadius: "128px",
+                                                border: "0px solid black",
+                                            }}
                                         />
                                         <span className="lead">
                                             {person.username}

@@ -58,10 +58,6 @@ class Discover extends Component {
 
         return (
             <>
-                <div className="bg-light p-5">
-                    <h2>Discover</h2>
-                    <p className="lead">Find people to follow</p>
-                </div>
                 <div className="container">{this.renderUsers(users)}</div>
             </>
         );

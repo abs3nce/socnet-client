@@ -3,8 +3,10 @@ import { Redirect, Link } from "react-router-dom";
 
 import { isUserAuthenticated } from "../controllers/auth";
 import { getUser } from "../controllers/users";
+import { getPostsByUser } from "../controllers/posts";
 
 import defaultProfilePicture from "../images/defaultUserIcon.png";
+import defaultPostIcon from "../images/defaultPostIcon.png";
 // import DefaultProfileBanner from "../images/defaultUserBanner.jpeg";
 
 import DeleteUserButton from "../components/DeleteUserButton";
@@ -19,6 +21,7 @@ class Profile extends Component {
             redirectToLogin: false,
             following: false,
             error: "",
+            posts: [],
         };
     }
 
@@ -45,6 +48,17 @@ class Profile extends Component {
                 console.log(`> USER LOADED (PROFILE): `, data);
                 let following = this.checkIfUserFollowing(data);
                 this.setState({ user: data, following: following });
+                this.loadUserPosts(data._id);
+            }
+        });
+    };
+
+    loadUserPosts = (userID) => {
+        getPostsByUser(userID).then((data) => {
+            if (data.error) {
+                console.log(data.error);
+            } else {
+                this.setState({ posts: data });
             }
         });
     };
@@ -74,7 +88,7 @@ class Profile extends Component {
     }
 
     render() {
-        const { redirectToLogin, user } = this.state;
+        const { redirectToLogin, user, posts } = this.state;
         if (redirectToLogin) return <Redirect to="/login" />;
 
         const profilePictureURL = user._id
@@ -85,31 +99,19 @@ class Profile extends Component {
 
         return (
             <>
-                {/* <div className="row">
-          <div className="col-sm-12 banner">
-            <img
-              src={DefaultProfileBanner}
-              className=""
-              alt=""
-              style={{
-                width: "100%",
-                position: "relative",
-              }}
-            />
-          </div>
-        </div> */}
-
                 <div className="container">
                     <div className="row mt-3">
                         <div className="col-sm-12 text-center">
                             <img
                                 style={{
-                                    height: "200px",
+                                    height: "150px",
                                     width: "auto",
+                                    aspectRatio: "1/1",
+                                    objectFit: "cover",
                                     borderRadius: "128px",
-                                    border: "0px solid black"
+                                    border: "0px solid black",
                                 }}
-                                className="image-thumbnail"
+                                className=""
                                 src={profilePictureURL}
                                 onError={(index) =>
                                     (index.target.src = defaultProfilePicture)
@@ -121,18 +123,10 @@ class Profile extends Component {
 
                     <div className="row">
                         <div className="col-md-12 text-center mt-3">
-                            <h1 className="">{user.username}</h1>
+                            <h2 className="">{user.username}</h2>
                         </div>
                     </div>
 
-                    {/* {isUserAuthenticated().user &&
-          isUserAuthenticated().user._id !== user._id && (
-            <div className="row">
-              <div className="col-md-12 text-center">
-                <FollowUserButton />
-              </div>
-            </div>
-          )} */}
                     <hr />
 
                     <div className="row">
@@ -168,6 +162,14 @@ class Profile extends Component {
                                     <div className="col-sm-2 text-center">
                                         <DeleteUserButton userID={user._id} />
                                     </div>
+                                    <div className="col-sm-2 text-center">
+                                        <Link
+                                            className="btn btn-raised btn-info"
+                                            to={`/posts/create`}
+                                        >
+                                            CREATE POST
+                                        </Link>
+                                    </div>
                                 </div>
                             ) : (
                                 <FollowUserButton
@@ -178,10 +180,49 @@ class Profile extends Component {
                         </div>
                     </div>
 
-                    <ProfileLists
-                        followers={user.followers}
-                        following={user.following}
-                    />
+                    <div className="row">
+                        <ProfileLists
+                            followers={user.followers}
+                            following={user.following}
+                        />
+                    </div>
+
+                    {!posts.length ? (
+                        <p>Loading...</p>
+                    ) : (
+                        <div className="row mt-5">
+                            {posts.map((post, index) => {
+                                return (
+                                    <div className="col-sm-12 col-md-4 m-0 p-0">
+                                        <div
+                                            className="post"
+                                            style={{
+                                                height: "auto",
+                                                aspectRatio: "1/1",
+                                                width: "100%",
+                                            }}
+                                        >
+                                            <Link to={`/posts/${post._id}`}>
+                                                <img
+                                                    src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
+                                                    alt={post.title}
+                                                    onError={(i) =>
+                                                        (i.target.src = `${defaultPostIcon}`)
+                                                    }
+                                                    className="p-0 m-0"
+                                                    style={{
+                                                        height: "100%",
+                                                        width: "100%",
+                                                        objectFit: "cover",
+                                                    }}
+                                                />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
                 </div>
             </>
         );
