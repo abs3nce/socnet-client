@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import defaultPostIcon from "../images/defaultPostIcon.png";
 
-class PostsHome extends Component {
+class AllPosts extends Component {
     constructor() {
         super();
         this.state = {
@@ -43,7 +43,9 @@ class PostsHome extends Component {
                                 <img
                                     src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
                                     alt={post.title}
-                                    onError={i => i.target.src =`${defaultPostIcon}`}
+                                    onError={(i) =>
+                                        (i.target.src = `${defaultPostIcon}`)
+                                    }
                                     className="img-thumbnail mb-3"
                                 />
                                 <h5 className="lead card-title">
@@ -79,9 +81,17 @@ class PostsHome extends Component {
 
         return (
             <>
-                <div className="container">{this.renderPosts(posts)}</div>
+                <div className="container">
+                    {!posts.length ? (
+                        <div className="lead mt-3">
+                            <p>Loading...</p>
+                        </div>
+                    ) : (
+                        this.renderPosts(posts)
+                    )}
+                </div>
             </>
         );
     }
 }
-export default PostsHome;
+export default AllPosts;

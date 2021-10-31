@@ -1,24 +1,17 @@
-HIGH PRIORITY
-
 pri pouzivani .env url sa neda prihlasovat a teda ani registrovat a logoutovat
 >>> treba prerobit
 >>> vsetky urlky zmenit v auth/index.js
 
-
 pri deletnuti user accountu sa musia vymazat aj vsetky jeho prispevky
-
 
 zlepsit edit profilu pretoze validator je pripojeny na edit 
 a teda je vzdy treba zadat vsetky udaje a to moze byt problem, 
 nech su prefilled a heslo treba teda tiez nejako poriesit
 >> vytvorit validator na edit a ten pridat iba na edit
 
-
 ak sa uzivatel prihlasi ako napr user1 a potom ide na edit url ineho uzivatela user2 tak ho to pusti na jeho edit page
 
-
 je mozne po hrani sa s premenami v editore nahrat fotku vacsiu ako 100kB, teda aj nejake 16K fotky
-
 
 pokial nie je uzivatel prihlaseny ma stale moznost dat follow >> to je samozrejme problem pretoze po stlaceni follow stranka crashne pretoze nemame ziadne id uzivatela
 
@@ -26,8 +19,8 @@ na profile sa v listoch nenacitavaju udaje
 
 algoritmus na renderovanie followed by friends
 
-mozno color palleta?
-222831
-393E46
-FD7014
-EEEEEE
+pri vytvarani postu >> error ak sa nezadaju vsetky udaje
+
+pri prezerani uzivatelov bez prihlasenia a pri pokuse o nacitanie uzivatelskeho profilu stranka padne
+>> Unhandled Rejection (TypeError): Cannot read properties of undefined (reading '_id')
+>> problem s neprihlasenym uzivatelom a neda sa teda rezolvnut ci je follower alebo nie
