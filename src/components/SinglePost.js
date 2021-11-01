@@ -33,16 +33,14 @@ class SinglePost extends Component {
         );
         if (userInput) {
             deletePost(postID, token).then((data) => {
-            if (data.error) {
-                console.log(data.err);
-            } else {
-                this.setState({ redirectToProfile: true });
-                console.log(`> POST (${postID}) SUCCESSFULLY DELETED`);
-            }
-        });
+                if (data.error) {
+                    console.log(data.err);
+                } else {
+                    this.setState({ redirectToProfile: true });
+                    console.log(`> POST (${postID}) SUCCESSFULLY DELETED`);
+                }
+            });
         }
-
-        
     };
 
     renderPost = (post) => {
@@ -128,6 +126,30 @@ class SinglePost extends Component {
                                     inventore cumque.
                                 </p>
                             </div>
+                            <div className="buttons">
+                                {isUserAuthenticated().user &&
+                                    isUserAuthenticated().user._id ===
+                                        post.postedBy._id && (
+                                        <div className="row justify-content-center">
+                                            <div className="col-sm-2 text-center">
+                                                <Link
+                                                    className="btn btn-raised btn-warning btn-sm"
+                                                    to={`/posts/edit/${post._id}`}
+                                                >
+                                                    UPDATE POST
+                                                </Link>
+                                            </div>
+                                            <div className="col-sm-2 text-center">
+                                                <button
+                                                    onClick={this.handleDelete}
+                                                    className="btn btn-raised btn-danger btn-sm"
+                                                >
+                                                    DELETE POST
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                            </div>
                         </div>
                     </div>
 
@@ -143,25 +165,6 @@ class SinglePost extends Component {
                         </h6>
                     </div>
                 </div>
-
-                {isUserAuthenticated().user &&
-                    isUserAuthenticated().user._id === post.postedBy._id && (
-                        <div className="row justify-content-center">
-                            <div className="col-sm-1 text-center">
-                                <button className="btn btn-raised btn-warning btn-sm">
-                                    UPDATE POST
-                                </button>
-                            </div>
-                            <div className="col-sm-1 text-center">
-                                <button
-                                    onClick={this.handleDelete}
-                                    className="btn btn-raised btn-danger btn-sm"
-                                >
-                                    DELETE POST
-                                </button>
-                            </div>
-                        </div>
-                    )}
             </>
         );
     };

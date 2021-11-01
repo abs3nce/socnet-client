@@ -27,7 +27,7 @@ export const getUsers = () => {
 };
 
 export const updateUser = (userID, token, user) => {
-    console.log(`> DATA FROM EDIT FORM:`, user);
+    console.log(`> DATA FROM USER EDIT FORM:`, user);
 
     return fetch(`${process.env.REACT_APP_API_URL}/users/${userID}`, {
         method: "PUT",

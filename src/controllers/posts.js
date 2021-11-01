@@ -82,3 +82,22 @@ export const deletePost = (postID, token) => {
             console.log(err);
         });
 };
+
+export const updatePost = (postID, token, post) => {
+    console.log(`> DATA FROM POST EDIT FORM:`, post);
+
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/${postID}`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: post,
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
