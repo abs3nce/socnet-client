@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-import { getPost } from "../controllers/posts";
+import { getPost, deletePost } from "../controllers/posts";
+import { isUserAuthenticated } from "../controllers/auth";
 
 import defaultPostIcon from "../images/defaultPostIcon.png";
 import defaultUserIcon from "../images/defaultUserIcon.png";
@@ -9,6 +10,7 @@ import defaultUserIcon from "../images/defaultUserIcon.png";
 class SinglePost extends Component {
     state = {
         post: "",
+        redirectToProfile: false,
     };
 
     componentDidMount = () => {
@@ -20,6 +22,27 @@ class SinglePost extends Component {
                 this.setState({ post: data });
             }
         });
+    };
+
+    handleDelete = () => {
+        const postID = this.props.match.params.postID;
+        const token = isUserAuthenticated().token;
+
+        let userInput = window.confirm(
+            "Are you sure you want to delete your account?"
+        );
+        if (userInput) {
+            deletePost(postID, token).then((data) => {
+            if (data.error) {
+                console.log(data.err);
+            } else {
+                this.setState({ redirectToProfile: true });
+                console.log(`> POST (${postID}) SUCCESSFULLY DELETED`);
+            }
+        });
+        }
+
+        
     };
 
     renderPost = (post) => {
@@ -61,6 +84,8 @@ class SinglePost extends Component {
                                     style={{
                                         height: "50px",
                                         width: "auto",
+                                        aspectRatio: "1/1",
+                                        objectFit: "cover",
                                         borderRadius: "128px",
                                         border: "0px solid black",
                                     }}
@@ -118,111 +143,34 @@ class SinglePost extends Component {
                         </h6>
                     </div>
                 </div>
-                <div className="row justify-content-center">
-                    <div className="col-sm-1 text-center">
-                        <Link
-                            to={`/`}
-                            className="btn btn-raised btn-warning btn-sm"
-                        >
-                            UPDATE
-                        </Link>
-                    </div>
-                    <div className="col-sm-1 text-center"><Link
-                            to={`/`}
-                            className="btn btn-raised btn-danger btn-sm"
-                        >
-                            DELETE
-                        </Link></div>
-                </div>
+
+                {isUserAuthenticated().user &&
+                    isUserAuthenticated().user._id === post.postedBy._id && (
+                        <div className="row justify-content-center">
+                            <div className="col-sm-1 text-center">
+                                <button className="btn btn-raised btn-warning btn-sm">
+                                    UPDATE POST
+                                </button>
+                            </div>
+                            <div className="col-sm-1 text-center">
+                                <button
+                                    onClick={this.handleDelete}
+                                    className="btn btn-raised btn-danger btn-sm"
+                                >
+                                    DELETE POST
+                                </button>
+                            </div>
+                        </div>
+                    )}
             </>
-
-            // <>
-            //     <div className="row p-4">
-            //         <div className="col-lg-9 m-0 p-0">
-            //             <img
-            //                 src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
-            //                 alt=""
-            //                 style={{
-            //                     objectFit: "contain",
-            //                     height: "50vh",
-            //                     width: "100%",
-            //                 }}
-            //                 onError={(index) =>
-            //                     (index.target.src = defaultPostIcon)
-            //                 }
-            //             />
-            //         </div>
-
-            //         <div
-            //             className="col-lg-3 p-4"
-            //             style={{ borderLeft: "1px solid #212529" }}
-            //         >
-            //             <div className="row">
-            //                 <div className="col-md-2 lead">
-            //                     <img
-            //                         style={{
-            //                             height: "50px",
-            //                             width: "auto",
-            //                             borderRadius: "128px",
-            //                             border: "0px solid black",
-            //                         }}
-            //                         className="image-thumbnail"
-            //                         src={profilePictureURL}
-            //                         onError={(index) =>
-            //                             (index.target.src = defaultUserIcon)
-            //                         }
-            //                         alt={postedByUsername}
-            //                     />
-            //                 </div>
-
-            //                 <div className="col-md-10">
-            //                     <h4>
-            //                         <Link to={postedByID}>
-            //                             {postedByUsername}
-            //                         </Link>
-            //                     </h4>
-            //                 </div>
-            //                 <hr />
-            //             </div>
-            //             <div className="row">
-            //                 <div className="col-md-12 lead">
-            //                     <h4>{post.title}</h4>
-            //                     {post.body}
-            //                     <br />
-            //                     <br />
-            //                     <h6>{new Date(post.created).toDateString()}</h6>
-            //                 </div>
-            //                 <hr />
-            //             </div>
-            //             <div className="row">
-            //                 <div className="col-md-12 lead">EXIF INFO?</div>
-            //                 <hr />
-            //             </div>
-            //             <div className="row">
-            //                 <div className="col-md-12 lead">
-            //                     👍 👎 💬
-            //                     <br />
-            //                     Liked by....
-            //                 </div>
-            //                 <hr />
-            //             </div>
-            //         </div>
-            //     </div>
-            //     <div className="row">
-            //         <div className="col-md-12">
-            //             Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            //             Iste quod quaerat perferendis, ex cum fugiat velit
-            //             officia molestias. Dolores inventore iusto fuga odit
-            //             veritatis aperiam cupiditate ducimus consectetur
-            //             molestiae illo.
-            //         </div>
-            //     </div>
-            // </>
         );
     };
 
     render() {
-        const { post } = this.state;
+        const { post, redirectToProfile } = this.state;
+        if (redirectToProfile) {
+            return <Redirect to={`/users/${post.postedBy._id}`} />;
+        }
         return (
             <div className="container-fluid lead">
                 {!post ? (

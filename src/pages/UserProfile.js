@@ -193,7 +193,7 @@ class Profile extends Component {
                         <div className="row mt-5">
                             {posts.map((post, index) => {
                                 return (
-                                    <div className="col-sm-12 col-md-4 m-0 p-0">
+                                    <div className="col-sm-12 col-md-4 m-0 p-0" key={index}>
                                         <div
                                             className="post"
                                             style={{

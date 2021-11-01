@@ -13,6 +13,7 @@ import ProfileEditor from "./pages/ProfileEditor";
 import Suggested from "./pages/Suggested";
 import CreatePost from "./pages/CreatePost";
 import SinglePost from "./components/SinglePost";
+import PostEditor from "./components/PostEditor";
 
 const MainRouter = () => (
     <div>
@@ -21,6 +22,11 @@ const MainRouter = () => (
             <Route exact path="/" component={Home} />
 
             <PrivateRoute exact path="/posts/create" component={CreatePost} />
+            <PrivateRoute
+                exact
+                path="/posts/edit/:postID"
+                component={PostEditor}
+            />
             <Route exact path="/posts/:postID" component={SinglePost} />
 
             <Route exact path="/register" component={Register} />

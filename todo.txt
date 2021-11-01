@@ -27,3 +27,5 @@ pri prezerani uzivatelov bez prihlasenia a pri pokuse o nacitanie uzivatelskeho 
 
 zle sortovanie fotiek v gride
 >> treba opravit, najnovsie nech su navrchu
+
+pokial je pri vytvarani postu vynechane nejake pole tak stranka crashne

@@ -33,12 +33,9 @@ class CreatePost extends Component {
         //ak nie tak zoberie ostatne udaje a ulozi ich ako value
         //nasledne zaplnime userData objekt udajmi podla ich mena a hodnoty, cize username a jeho hodnota, email a jeho hodnota....
         const value =
-            name === "image"
-                ? event.target.files[0]
-                : event.target.value;
+            name === "image" ? event.target.files[0] : event.target.value;
 
-        const fileSize =
-            name === "image" ? event.target.files[0].size : 0;
+        const fileSize = name === "image" ? event.target.files[0].size : 0;
         this.postData.set(name, value);
         this.setState({ [name]: value, fileSize: fileSize });
     };
@@ -71,6 +68,14 @@ class CreatePost extends Component {
         if (title.length > 150) {
             this.setState({
                 error: "Title must be maximum 150 characters long",
+                loading: false,
+            });
+            return false;
+        }
+
+        if (body.length < 8) {
+            this.setState({
+                error: "The minimum length of body is 8 characters",
                 loading: false,
             });
             return false;
@@ -129,6 +134,7 @@ class CreatePost extends Component {
                     type="text"
                     className="form-control"
                     value={title}
+                    placeholder="What is the name of the image?"
                 />
             </div>
             <br />
@@ -140,6 +146,7 @@ class CreatePost extends Component {
                     type="text"
                     className="form-control"
                     value={body}
+                    placeholder="Say something about the image"
                 />
             </div>
             <br />
@@ -154,7 +161,7 @@ class CreatePost extends Component {
     );
 
     render() {
-        const { title, body, image, user, error, loading, redirectToProfile } =
+        const { title, body, user, error, loading, redirectToProfile } =
             this.state;
 
         if (redirectToProfile) {

@@ -44,9 +44,7 @@ class AllPosts extends Component {
                                     width: "100%",
                                 }}
                             >
-                                <Link
-                                    to={`/posts/${post._id}`}
-                                >
+                                <Link to={`/posts/${post._id}`}>
                                     <img
                                         src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
                                         alt={post.title}

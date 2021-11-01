@@ -65,3 +65,20 @@ export const getPostsByUser = (userID) => {
             console.log(err);
         });
 };
+
+export const deletePost = (postID, token) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/${postID}`, {
+        method: "DELETE",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
