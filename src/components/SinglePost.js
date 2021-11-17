@@ -20,7 +20,7 @@ class SinglePost extends Component {
                 console.log(data.error);
             } else {
                 this.setState({ post: data });
-                console.log(`POST LOADED: `,data);
+                console.log(`POST LOADED: `, data);
             }
         });
     };
@@ -56,6 +56,7 @@ class SinglePost extends Component {
               }?${new Date().getTime()}`
             : defaultUserIcon;
 
+        const exifData = post.exifData;
         return (
             <>
                 <div className="row">
@@ -125,6 +126,14 @@ class SinglePost extends Component {
                                     alias molestias quae doloribus suscipit rem
                                     tenetur similique voluptatum officia id,
                                     inventore cumque.
+                                    <br />
+                                    {exifData ? exifData.image.Model : "Not known"}
+                                    <br />
+                                    {exifData ? exifData.exif.LensModel : "Not Known"}
+                                    <br />
+                                    {exifData ? `1/${1 / exifData.exif.ExposureTime},  ${
+                                        exifData.exif.FNumber
+                                    } ,${exifData.exif.ISO}` : "Not Known"}
                                 </p>
                             </div>
                             <div className="buttons">
