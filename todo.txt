@@ -29,3 +29,6 @@ zle sortovanie fotiek v gride
 >> treba opravit, najnovsie nech su navrchu
 
 pokial je pri vytvarani postu vynechane nejake pole tak stranka crashne
+
+pri updatovani postu sa vzdy po zmeneni znaku robi novy request na backend o post image
+> actually toto iste sa deje aj pri updatovani profilu

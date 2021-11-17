@@ -20,6 +20,7 @@ class SinglePost extends Component {
                 console.log(data.error);
             } else {
                 this.setState({ post: data });
+                console.log(`POST LOADED: `,data);
             }
         });
     };

@@ -100,7 +100,7 @@ class CreatePost extends Component {
             const token = isUserAuthenticated().token;
 
             createPost(userID, token, this.postData).then((data) => {
-                if (data.error) {
+                if (data?.error) {
                     this.setState({ error: data.error });
                 } else {
                     this.setState({
