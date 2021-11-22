@@ -6,6 +6,9 @@ import { isUserAuthenticated } from "../controllers/auth";
 
 import defaultPostIcon from "../images/defaultPostIcon.png";
 import defaultUserIcon from "../images/defaultUserIcon.png";
+import cameraIcon from "../images/camera.svg";
+import lensIcon from "../images/lens2.svg";
+import settingsIcon from "../images/settings.svg";
 
 import "../styles/single-post.scss";
 
@@ -81,7 +84,7 @@ class SinglePost extends Component {
                         />
                     </div>
 
-                    <div className="col-sm-12 col-lg-4 m-0 p-0 p-3">
+                    <div className="col-sm-12 col-lg-4 m-0 p-0 p-3 post-info">
                         <div className="row justify-content-center align-items-center w100">
                             <div className="col-12 text-center">
                                 <img
@@ -115,12 +118,42 @@ class SinglePost extends Component {
                             ) : (
                                 <>
                                     <div className="exif-camera">
-                                        {exifData.image.Model}
+                                        <span>
+                                            <img
+                                                src={cameraIcon}
+                                                alt=""
+                                                style={{
+                                                    height: "40px",
+                                                    width: "auto",
+                                                }}
+                                            />
+                                        </span>
+                                        <span>{exifData.image.Model}</span>
                                     </div>
                                     <div className="exif-lens">
-                                        {exifData.exif.LensModel}
+                                        <span>
+                                            <img
+                                                src={lensIcon}
+                                                alt=""
+                                                style={{
+                                                    height: "40px",
+                                                    width: "auto",
+                                                }}
+                                            />
+                                        </span>
+                                        <span>{exifData.exif.LensModel}</span>
                                     </div>
                                     <div className="exif-settings">
+                                        <span>
+                                            <img
+                                                src={settingsIcon}
+                                                alt=""
+                                                style={{
+                                                    height: "40px",
+                                                    width: "auto",
+                                                }}
+                                            />
+                                        </span>
                                         <span>
                                             {exifData.exif.FocalLength}mm
                                         </span>
@@ -137,7 +170,7 @@ class SinglePost extends Component {
                             )}
                         </div>
                         <hr />
-                        <div className="row post-info">
+                        <div className="row">
                             <h1 className="post-title">{post.title}</h1>
                             <p className="post-body">{post.body}</p>
                             <h6 className="post-created">

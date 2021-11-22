@@ -1,15 +1,31 @@
 .exif {
-    .exif-settings {
+    .exif-camera {
         span {
-            padding: 0 16px;
+            padding: 0 8px;
         }
         span:nth-child(1) {
-            padding: 0 16px 0 0;
+            padding: 0 8px 0 0;
+        }
+    }
+    .exif-lens {
+        span {
+            padding: 0 8px;
+        }
+        span:nth-child(1) {
+            padding: 0 8px 0 0;
+        }
+    }
+    .exif-settings {
+        span {
+            padding: 0 8px;
+        }
+        span:nth-child(1) {
+            padding: 0 8px 0 0;
         }
     }
 }
 
 .post-info {
-    height: 50vh;
+    height: 90vh;
     overflow-y: scroll;
 }
