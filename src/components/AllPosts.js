@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 
 import defaultPostIcon from "../images/defaultPostIcon.png";
 
+import Spinner from "react-bootstrap/Spinner";
+
 class AllPosts extends Component {
     constructor() {
         super();
@@ -117,11 +119,16 @@ class AllPosts extends Component {
 
         return (
             <>
-                <div className="container">
+                <div className="container d-flex justify-content-center">
                     {!posts.length ? (
-                        <div className="lead mt-3">
-                            <p>Loading...</p>
-                        </div>
+                        <Spinner
+                        className="mt-3"
+                            animation="border"
+                            role="status"
+                            variant="primary"
+                        >
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
                     ) : (
                         this.renderPosts(posts)
                     )}

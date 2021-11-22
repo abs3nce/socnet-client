@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 import { isUserAuthenticated } from "../controllers/auth";
 import { createPost } from "../controllers/posts";
 
+import Spinner from "react-bootstrap/Spinner";
+
 class CreatePost extends Component {
     constructor() {
         super();
@@ -181,9 +183,14 @@ class CreatePost extends Component {
                     {error}
                 </div>
                 {loading ? (
-                    <div className="lead mt-3">
-                        <p>Loading...</p>
-                    </div>
+                    <Spinner
+                        className="mt-3"
+                        animation="border"
+                        role="status"
+                        variant="primary"
+                    >
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
                 ) : (
                     ""
                 )}

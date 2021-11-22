@@ -13,6 +13,8 @@ import DeleteUserButton from "../components/DeleteUserButton";
 import FollowUserButton from "../components/FollowUserButton";
 import ProfileLists from "../components/ProfileLists";
 
+import Spinner from "react-bootstrap/Spinner";
+
 class Profile extends Component {
     constructor() {
         super();
@@ -22,6 +24,7 @@ class Profile extends Component {
             following: false,
             error: "",
             posts: [],
+            noPosts: false,
         };
     }
 
@@ -59,6 +62,9 @@ class Profile extends Component {
                 console.log(data.error);
             } else {
                 this.setState({ posts: data });
+                if (!data.length) {
+                    this.setState({ noPosts: true });
+                }
             }
         });
     };
@@ -88,7 +94,7 @@ class Profile extends Component {
     }
 
     render() {
-        const { redirectToLogin, user, posts } = this.state;
+        const { redirectToLogin, user, posts, noPosts } = this.state;
         if (redirectToLogin) return <Redirect to="/login" />;
 
         const profilePictureURL = user._id
@@ -187,41 +193,59 @@ class Profile extends Component {
                         />
                     </div>
 
-                    {!posts.length ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <div className="row mt-5">
-                            {posts.map((post, index) => {
-                                return (
-                                    <div className="col-sm-12 col-md-4 m-0 p-0" key={index}>
+                    {!noPosts ? (
+                        !posts.length ? (
+                            <div className="row justify-content-center">
+                                <Spinner
+                                    className="mt-3"
+                                    animation="border"
+                                    role="status"
+                                    variant="primary"
+                                >
+                                    <span className="visually-hidden">
+                                        Loading...
+                                    </span>
+                                </Spinner>
+                            </div>
+                        ) : (
+                            <div className="row mt-5">
+                                {posts.map((post, index) => {
+                                    return (
                                         <div
-                                            className="post"
-                                            style={{
-                                                height: "auto",
-                                                aspectRatio: "1/1",
-                                                width: "100%",
-                                            }}
+                                            className="col-sm-12 col-md-4 m-0 p-0"
+                                            key={index}
                                         >
-                                            <Link to={`/posts/${post._id}`}>
-                                                <img
-                                                    src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
-                                                    alt={post.title}
-                                                    onError={(i) =>
-                                                        (i.target.src = `${defaultPostIcon}`)
-                                                    }
-                                                    className="p-0 m-0"
-                                                    style={{
-                                                        height: "100%",
-                                                        width: "100%",
-                                                        objectFit: "cover",
-                                                    }}
-                                                />
-                                            </Link>
+                                            <div
+                                                className="post"
+                                                style={{
+                                                    height: "auto",
+                                                    aspectRatio: "1/1",
+                                                    width: "100%",
+                                                }}
+                                            >
+                                                <Link to={`/posts/${post._id}`}>
+                                                    <img
+                                                        src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
+                                                        alt={post.title}
+                                                        onError={(i) =>
+                                                            (i.target.src = `${defaultPostIcon}`)
+                                                        }
+                                                        className="p-0 m-0"
+                                                        style={{
+                                                            height: "100%",
+                                                            width: "100%",
+                                                            objectFit: "cover",
+                                                        }}
+                                                    />
+                                                </Link>
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                    );
+                                })}
+                            </div>
+                        )
+                    ) : (
+                        "No posts yet"
                     )}
                 </div>
             </>

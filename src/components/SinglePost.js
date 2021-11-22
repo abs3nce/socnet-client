@@ -7,6 +7,11 @@ import { isUserAuthenticated } from "../controllers/auth";
 import defaultPostIcon from "../images/defaultPostIcon.png";
 import defaultUserIcon from "../images/defaultUserIcon.png";
 
+import "../styles/single-post.scss";
+
+import Spinner from "react-bootstrap/Spinner";
+import Image from "react-bootstrap/Image";
+
 class SinglePost extends Component {
     state = {
         post: "",
@@ -58,28 +63,27 @@ class SinglePost extends Component {
 
         const exifData = post.exifData;
         return (
-            <>
+            <div className="container-fluid">
                 <div className="row">
-                    <div className="col-sm-12 m-0 p-0">
-                        <img
+                    <div className="col-sm-12 col-lg-8 m-0 p-0 w100">
+                        <Image
                             src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
                             alt=""
                             style={{
-                                height: "80vh",
+                                maxHeight: "90vh",
                                 width: "100%",
                                 objectFit: "contain",
                             }}
                             onError={(index) =>
                                 (index.target.src = defaultPostIcon)
                             }
+                            fluid
                         />
                     </div>
-                </div>
 
-                <div className="row">
-                    <div className="col-sm-12 col-md-6">
-                        <div className="row p-3">
-                            <div className="col-sm-2">
+                    <div className="col-sm-12 col-lg-4 m-0 p-0 p-3">
+                        <div className="row justify-content-center align-items-center w100">
+                            <div className="col-12 text-center">
                                 <img
                                     style={{
                                         height: "50px",
@@ -98,84 +102,169 @@ class SinglePost extends Component {
                                 />
                             </div>
 
-                            <div className="col-sm-10">
-                                <h4>
-                                    <Link to={postedByID}>
-                                        {postedByUsername}
-                                    </Link>
-                                </h4>
+                            <div className="col-12 text-center">
+                                <Link to={postedByID}>{postedByUsername}</Link>
                             </div>
+                        </div>
+                        <hr />
+                        <div className="row justify-content-left align-items-center exif">
+                            {!exifData ? (
+                                <div className="exif-error">
+                                    No EXIF data available
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="exif-camera">
+                                        {exifData.image.Model}
+                                    </div>
+                                    <div className="exif-lens">
+                                        {exifData.exif.LensModel}
+                                    </div>
+                                    <div className="exif-settings">
+                                        <span>
+                                            {exifData.exif.FocalLength}mm
+                                        </span>
+                                        <span>
+                                            f/
+                                            {exifData.exif.FNumber}
+                                        </span>
+                                        <span>
+                                            1/{1 / exifData.exif.ExposureTime}s
+                                        </span>
+                                        <span>ISO {exifData.exif.ISO}</span>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                        <hr />
+                        <div className="row post-info">
+                            <h1 className="post-title">{post.title}</h1>
+                            <p className="post-body">{post.body}</p>
+                            <h6 className="post-created">
+                                {new Date(post.created).toDateString()}
+                            </h6>
+                        </div>
 
-                            <div className="exif">
-                                <h4>EXIF</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Ipsa quidem laudantium,
-                                    eaque vel ratione, odio commodi sint
-                                    praesentium perferendis quam fugit est nam
-                                    dolorem veritatis iste, natus officia optio
-                                    blanditiis accusamus impedit quos tenetur.
-                                    Unde, soluta amet numquam perferendis sed
-                                    est quas illum voluptatibus eum, impedit
-                                    quibusdam animi ad dolorem fugit. Id rerum
-                                    nam velit dicta labore dolor atque illum
-                                    necessitatibus et! Nam ea laborum cum
-                                    dolores officiis vel, odio, nisi mollitia
-                                    eos illo quam alias ab soluta velit fuga et
-                                    aut minima! Molestiae quas repudiandae illo
-                                    alias molestias quae doloribus suscipit rem
-                                    tenetur similique voluptatum officia id,
-                                    inventore cumque.
-                                    <br />
-                                    {exifData ? exifData.image.Model : "Not known"}
-                                    <br />
-                                    {exifData ? exifData.exif.LensModel : "Not Known"}
-                                    <br />
-                                    {exifData ? `1/${1 / exifData.exif.ExposureTime},  ${
-                                        exifData.exif.FNumber
-                                    } ,${exifData.exif.ISO}` : "Not Known"}
-                                </p>
-                            </div>
-                            <div className="buttons">
-                                {isUserAuthenticated().user &&
-                                    isUserAuthenticated().user._id ===
-                                        post.postedBy._id && (
-                                        <div className="row justify-content-center">
-                                            <div className="col-sm-2 text-center">
-                                                <Link
-                                                    className="btn btn-raised btn-warning btn-sm"
-                                                    to={`/posts/edit/${post._id}`}
-                                                >
-                                                    UPDATE POST
-                                                </Link>
-                                            </div>
-                                            <div className="col-sm-2 text-center">
-                                                <button
-                                                    onClick={this.handleDelete}
-                                                    className="btn btn-raised btn-danger btn-sm"
-                                                >
-                                                    DELETE POST
-                                                </button>
-                                            </div>
+                        {isUserAuthenticated().user &&
+                            isUserAuthenticated().user._id ===
+                                post.postedBy._id && (
+                                <>
+                                    <hr />
+                                    <div className="row justify-content-center">
+                                        <div className="col-6 text-end">
+                                            <Link
+                                                className="btn btn-raised btn-warning btn-sm"
+                                                to={`/posts/edit/${post._id}`}
+                                            >
+                                                UPDATE POST
+                                            </Link>
                                         </div>
-                                    )}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-sm-12 col-md-6">
-                        <div className="row">
-                            <h1 className="">{post.title}</h1>
-                        </div>
-                        <div className="row">
-                            <p className="">{post.body}</p>
-                        </div>
-                        <h6 className="">
-                            {new Date(post.created).toDateString()}
-                        </h6>
+                                        <div className="col-6 text-start">
+                                            <button
+                                                onClick={this.handleDelete}
+                                                className="btn btn-raised btn-danger btn-sm"
+                                            >
+                                                DELETE POST
+                                            </button>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                     </div>
                 </div>
-            </>
+            </div>
+            // <div className="container-fluid">
+            //     <div className="row">
+            //         <div className="col-sm-12 m-0 p-0">
+            //             <img
+            //                 src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
+            //                 alt=""
+            //                 style={{
+            //                     height: "80vh",
+            //                     width: "100%",
+            //                     objectFit: "contain",
+            //                 }}
+            //                 onError={(index) =>
+            //                     (index.target.src = defaultPostIcon)
+            //                 }
+            //             />
+            //         </div>
+            //     </div>
+
+            //     <div className="row">
+            //         <div className="col-sm-12 col-md-6">
+            //             <div className="row p-3">
+            //                 <div className="col-sm-2">
+            //                     <img
+            //                         style={{
+            //                             height: "50px",
+            //                             width: "auto",
+            //                             aspectRatio: "1/1",
+            //                             objectFit: "cover",
+            //                             borderRadius: "128px",
+            //                             border: "0px solid black",
+            //                         }}
+            //                         className="image-thumbnail"
+            //                         src={profilePictureURL}
+            //                         onError={(index) =>
+            //                             (index.target.src = defaultUserIcon)
+            //                         }
+            //                         alt={postedByUsername}
+            //                     />
+            //                 </div>
+
+            //                 <div className="col-sm-10">
+            //                     <h4>
+            //                         <Link to={postedByID}>
+            //                             {postedByUsername}
+            //                         </Link>
+            //                     </h4>
+            //                 </div>
+
+            //                 <div className="exif">
+            //                     <h4>EXIF</h4>
+
+            //                 </div>
+            //                 <div className="buttons">
+            //                     {isUserAuthenticated().user &&
+            //                         isUserAuthenticated().user._id ===
+            //                             post.postedBy._id && (
+            //                             <div className="row justify-content-center">
+            //                                 <div className="col-sm-2 text-center">
+            //                                     <Link
+            //                                         className="btn btn-raised btn-warning btn-sm"
+            //                                         to={`/posts/edit/${post._id}`}
+            //                                     >
+            //                                         UPDATE POST
+            //                                     </Link>
+            //                                 </div>
+            //                                 <div className="col-sm-2 text-center">
+            //                                     <button
+            //                                         onClick={this.handleDelete}
+            //                                         className="btn btn-raised btn-danger btn-sm"
+            //                                     >
+            //                                         DELETE POST
+            //                                     </button>
+            //                                 </div>
+            //                             </div>
+            //                         )}
+            //                 </div>
+            //             </div>
+            //         </div>
+
+            //         <div className="col-sm-12 col-md-6">
+            //             <div className="row">
+            //                 <h1 className="">{post.title}</h1>
+            //             </div>
+            //             <div className="row">
+            //                 <p className="">{post.body}</p>
+            //             </div>
+            //             <h6 className="">
+            //                 {new Date(post.created).toDateString()}
+            //             </h6>
+            //         </div>
+            //     </div>
+            // </div>
         );
     };
 
@@ -185,11 +274,16 @@ class SinglePost extends Component {
             return <Redirect to={`/users/${post.postedBy._id}`} />;
         }
         return (
-            <div className="container-fluid lead">
+            <div className="container-fluid d-flex justify-content-center">
                 {!post ? (
-                    <div className="lead mt-3">
-                        <p>Loading...</p>
-                    </div>
+                    <Spinner
+                        className="mt-3"
+                        animation="border"
+                        role="status"
+                        variant="primary"
+                    >
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
                 ) : (
                     this.renderPost(post)
                 )}

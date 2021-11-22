@@ -3,11 +3,14 @@ import { getUsers } from "../controllers/users";
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 import { Link } from "react-router-dom";
 
+import Spinner from "react-bootstrap/Spinner";
+
 class Discover extends Component {
     constructor() {
         super();
         this.state = {
             users: [],
+            noUsers: false,
         };
     }
 
@@ -17,6 +20,9 @@ class Discover extends Component {
                 console.log(data.error);
             } else {
                 this.setState({ users: data });
+                if (!data.length) {
+                    this.setState({ noUsers: true });
+                }
             }
         });
     }
@@ -54,11 +60,26 @@ class Discover extends Component {
     );
 
     render() {
-        const { users } = this.state;
+        const { users, noUsers } = this.state;
 
         return (
             <>
-                <div className="container">{this.renderUsers(users)}</div>
+                <div className="container d-flex justify-content-center">
+                    {!noUsers ? "" : ""}
+                    //dokoncit ukoncenie nacitavania ak neexistuju uzivatelia
+                    {!users.length ? (
+                        <Spinner
+                            className="mt-3"
+                            animation="border"
+                            role="status"
+                            variant="primary"
+                        >
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    ) : (
+                        this.renderUsers(users)
+                    )}
+                </div>
             </>
         );
     }

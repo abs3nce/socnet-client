@@ -5,6 +5,8 @@ import { followUser, suggestedUsers } from "../controllers/users";
 
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 
+import Spinner from "react-bootstrap/Spinner";
+
 class Suggested extends Component {
     constructor() {
         super();
@@ -91,12 +93,6 @@ class Suggested extends Component {
 
         return (
             <>
-                <div className="bg-light p-5">
-                    <h2>Discover</h2>
-                    <p className="lead">Find people to follow</p>
-                </div>
-                <br />
-
                 {open && (
                     <div className="container">
                         <div className="alert alert-success">
@@ -104,8 +100,20 @@ class Suggested extends Component {
                         </div>
                     </div>
                 )}
-
-                <div className="container">{this.renderUsers(users)}</div>
+                <div className="container d-flex justify-content-center">
+                    {!users.length ? (
+                        <Spinner
+                            className="mt-3"
+                            animation="border"
+                            role="status"
+                            variant="primary"
+                        >
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    ) : (
+                        this.renderUsers(users)
+                    )}
+                </div>
             </>
         );
     }
