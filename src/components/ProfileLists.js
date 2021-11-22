@@ -9,7 +9,7 @@ class ProfileLists extends Component {
         return (
             <div className="row">
                 <div className="col-md-6">
-                    Following:
+                    Following: {following.length}
                     <hr />
                     <div>
                         {following.map((person, index) => {
@@ -48,7 +48,7 @@ class ProfileLists extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    Followers:
+                    Followers: {followers.length}
                     <hr />
                     <div>
                         {followers.map((person, index) => {

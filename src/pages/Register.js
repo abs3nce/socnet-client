@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import { Link } from "react-router-dom";
 
 import { registerUser } from "../controllers/auth";

@@ -101,3 +101,39 @@ export const updatePost = (postID, token, post) => {
             console.log(err);
         });
 };
+
+export const likePost = (userID, token, postID) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/like`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userID, postID }),
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
+export const unlikePost = (userID, token, postID) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/unlike`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userID, postID }),
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};

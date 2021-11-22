@@ -32,3 +32,6 @@ pokial je pri vytvarani postu vynechane nejake pole tak stranka crashne
 
 pri updatovani postu sa vzdy po zmeneni znaku robi novy request na backend o post image
 > actually toto iste sa deje aj pri updatovani profilu
+
+profile list following a follower je unstacked, treba spravit scrollable
+>> tak isto aj uzivatelia v nom maju divne zaalignovanie pfp a mena
