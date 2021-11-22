@@ -35,3 +35,5 @@ pri updatovani postu sa vzdy po zmeneni znaku robi novy request na backend o pos
 
 profile list following a follower je unstacked, treba spravit scrollable
 >> tak isto aj uzivatelia v nom maju divne zaalignovanie pfp a mena
+
+neprihlaseny sa neda prezerat post pretoze nemame ziadne userID, treba vytvorit nejaky if

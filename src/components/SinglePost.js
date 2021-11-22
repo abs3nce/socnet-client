@@ -23,9 +23,7 @@ import "../styles/single-post.scss";
 import Spinner from "react-bootstrap/Spinner";
 import Image from "react-bootstrap/Image";
 
-//fontawesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FaHeart } from "react-icons/fa";
 
 class SinglePost extends Component {
     state = {
@@ -33,6 +31,7 @@ class SinglePost extends Component {
         redirectToProfile: false,
         likes: 0,
         likedByUser: false,
+        redirectToLogin: false,
     };
 
     componentDidMount = () => {
@@ -52,7 +51,7 @@ class SinglePost extends Component {
     };
 
     isLikedByUser = (userIDs) => {
-        const userID = isUserAuthenticated().user._id;
+        const userID = isUserAuthenticated() && isUserAuthenticated().user._id;
         let isIDMatching = userIDs.indexOf(userID) !== -1;
         return isIDMatching;
     };
@@ -77,6 +76,10 @@ class SinglePost extends Component {
     };
 
     likeToggle = () => {
+        if (!isUserAuthenticated()) {
+            this.setState({ redirectToLogin: true });
+            return false;
+        }
         let likeAPICall = this.state.likedByUser ? unlikePost : likePost;
 
         const userID = isUserAuthenticated().user._id;
@@ -108,7 +111,12 @@ class SinglePost extends Component {
             : defaultUserIcon;
 
         const exifData = post.exifData;
-        const { likedByUser, likes } = this.state;
+        const { likedByUser, likes, redirectToLogin } = this.state;
+        {
+            if (redirectToLogin) {
+                return <Redirect to="/login"></Redirect>;
+            }
+        }
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -254,12 +262,34 @@ class SinglePost extends Component {
                                     </div>
                                 </>
                             )}
-                        <div onClick={this.likeToggle}>
-                            <span style={{ color: "grey" }}>{likes}</span>
-                            <FontAwesomeIcon
-                                icon={faHeart}
-                                style={{ color: "grey" }}
-                            />
+                        <div className="likes mt-3">
+                            {likedByUser ? (
+                                <h4
+                                    onClick={this.likeToggle}
+                                    style={{
+                                        color: "pink",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "start",
+                                    }}
+                                >
+                                    <FaHeart style={{ marginRight: "8px" }} />
+                                    {likes}
+                                </h4>
+                            ) : (
+                                <h4
+                                    onClick={this.likeToggle}
+                                    style={{
+                                        color: "grey",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "start",
+                                    }}
+                                >
+                                    <FaHeart style={{ marginRight: "8px" }} />
+                                    {likes}
+                                </h4>
+                            )}
                         </div>
                     </div>
                 </div>

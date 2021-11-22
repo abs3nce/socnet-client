@@ -137,8 +137,8 @@ class Profile extends Component {
 
                     <div className="row">
                         <div className="col-md-12 text-center">
-                            <div className="lead">
-                                <h3>{user.description}</h3>
+                            <div className="">
+                                <p>{user.description}</p>
                                 <p>Email is {user.email}</p>
                                 <p>
                                     {" "}
