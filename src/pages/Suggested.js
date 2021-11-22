@@ -49,7 +49,7 @@ class Suggested extends Component {
     };
 
     renderUsers = (users) => (
-        <div className="row text-center d-flex justify-content-center">
+        <div className="row text-center justify-content-center">
             {users.map((user, index) => (
                 <div className="card col-sm-12 col-md-3 m-3 p-0" key={index}>
                     <img

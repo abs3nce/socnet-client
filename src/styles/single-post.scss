@@ -30,3 +30,13 @@
     overflow-y: scroll;
     padding-right: 20px;
 }
+
+.likes {
+    h4 {
+        transition: 0.4s;
+        color: grey
+    }
+    h4:hover {
+        color: pink;
+    }
+}

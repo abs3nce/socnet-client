@@ -280,7 +280,6 @@ class SinglePost extends Component {
                                 <h4
                                     onClick={this.likeToggle}
                                     style={{
-                                        color: "grey",
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "start",
