@@ -45,3 +45,10 @@ upravit default profilovky v user overview
 dorobit vsetky spinnery nacitavania 
 
 like sa ma nahradit spinnerom pokial sa tam ruzove srdiecko neukaze
+
+urobit custom scrollbars
+
+navbar uz konecne prerobit
+
+popout design maybe? 
+>> vyuzivanie tienov
