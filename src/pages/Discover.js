@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 
 import Spinner from "react-bootstrap/Spinner";
 
+import { FaImages } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa";
+
+import "../styles/discover.scss";
+
 class Discover extends Component {
     constructor() {
         super();
@@ -30,30 +36,40 @@ class Discover extends Component {
     renderUsers = (users) => (
         <div className="row text-center d-flex justify-content-center w-100">
             {users.map((user, index) => (
-                <div className="card col-sm-12 col-md-3 m-3 p-0" key={index}>
-                    <img
-                        style={{
-                            height: "250px",
-                            width: "auto",
-                            objectFit: "cover",
-                        }}
-                        className="image-thumbnail"
-                        src={`${process.env.REACT_APP_API_URL}/users/pfp/${user._id}`}
-                        onError={(index) =>
-                            (index.target.src = DefaultProfilePicture)
-                        }
-                        alt={user.username}
-                    />
-                    <div className="card-body">
-                        <h5 className="card-title">{user.username}</h5>
-                        <p className="card-text">{user.email}</p>
-                        <Link
-                            to={`/users/${user._id}`}
-                            className="btn btn-raised btn-primary btn-sm"
-                        >
-                            View profile
-                        </Link>
-                    </div>
+                <div className="card col-sm-12 col-md-3 m-3 p-0 shadow-lg p-3 mb-5 bg-body rounded" key={index}>
+                    <Link className="link-to-profile" to={`/users/${user._id}`}>
+                        <img
+                            style={{
+                                height: "auto",
+                                aspectRatio: "1/1",
+                                width: "100%",
+                                objectFit: "cover",
+                            }}
+                            className="image-thumbnail"
+                            src={`${process.env.REACT_APP_API_URL}/users/pfp/${user._id}`}
+                            onError={(index) =>
+                                (index.target.src = DefaultProfilePicture)
+                            }
+                            alt={user.username}
+                        />
+                        <div className="card-body ">
+                            <p className="card-title">{user.username}</p>
+                            <div className="row justify-content-center">
+                                <div className="col-3 d-flex align-items-center text-center justify-content-center">
+                                    {[user.posts].length}
+                                    <FaImages className="user-icon" />
+                                </div>
+                                <div className="col-3 d-flex align-items-center text-center justify-content-center">
+                                    {[user.followers].length}
+                                    <FaUsers className="user-icon" />
+                                </div>
+                                <div className="col-3 d-flex align-items-center text-center justify-content-center">
+                                    {[user.following].length}
+                                    <FaUserPlus className="user-icon" />
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             ))}
         </div>
