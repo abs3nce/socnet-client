@@ -43,3 +43,5 @@ na profile je pri tabletovom rozliseni follow button na lavo
 upravit default profilovky v user overview
 
 dorobit vsetky spinnery nacitavania 
+
+like sa ma nahradit spinnerom pokial sa tam ruzove srdiecko neukaze

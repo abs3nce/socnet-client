@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { isUserAuthenticated } from "../controllers/auth";
 import { followUser, suggestedUsers } from "../controllers/users";
 
+import '../styles/suggested.scss'
+
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 
 import Spinner from "react-bootstrap/Spinner";
@@ -49,7 +51,7 @@ class Suggested extends Component {
     };
 
     renderUsers = (users) => (
-        <div className="row text-center justify-content-center">
+        <div className="row text-center justify-content-center w-100">
             {users.map((user, index) => (
                 <div className="card col-sm-12 col-md-3 m-3 p-0" key={index}>
                     <img
@@ -68,20 +70,24 @@ class Suggested extends Component {
                     <div className="card-body">
                         <h5 className="card-title">{user.username}</h5>
                         <p className="card-text">{user.email}</p>
-                        <Link
-                            to={`/users/${user._id}`}
-                            className="btn btn-raised btn-primary btn-sm"
-                        >
-                            View profile
-                        </Link>
-                        <button
-                            onClick={() => {
-                                this.clickFollow(user, index);
-                            }}
-                            className="btn btn-raised btn-success btn-sm float-right"
-                        >
-                            Follow
-                        </button>
+                        <span className="card-body-buttons">
+                            <Link
+                                to={`/users/${user._id}`}
+                                className="btn btn-raised btn-primary btn-sm"
+                            >
+                                View profile
+                            </Link>
+                        </span>
+                        <span className="card-body-buttons">
+                            <button
+                                onClick={() => {
+                                    this.clickFollow(user, index);
+                                }}
+                                className="btn btn-raised btn-success btn-sm float-right"
+                            >
+                                Follow
+                            </button>
+                        </span>
                     </div>
                 </div>
             ))}

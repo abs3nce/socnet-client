@@ -12,8 +12,8 @@ import { isUserAuthenticated } from "../controllers/auth";
 //images
 import defaultPostIcon from "../images/defaultPostIcon.png";
 import defaultUserIcon from "../images/defaultUserIcon.png";
-import cameraIcon from "../images/camera.svg";
-import lensIcon from "../images/lens2.svg";
+import cameraIcon from "../images/camera2.svg";
+import lensIcon from "../images/lens3.svg";
 import settingsIcon from "../images/settings.svg";
 
 //css
@@ -32,6 +32,7 @@ class SinglePost extends Component {
         likes: 0,
         likedByUser: false,
         redirectToLogin: false,
+        likeLoading: false,
     };
 
     componentDidMount = () => {
@@ -80,6 +81,9 @@ class SinglePost extends Component {
             this.setState({ redirectToLogin: true });
             return false;
         }
+
+        this.setState({ likeLoading: true });
+
         let likeAPICall = this.state.likedByUser ? unlikePost : likePost;
 
         const userID = isUserAuthenticated().user._id;
@@ -93,6 +97,7 @@ class SinglePost extends Component {
                 this.setState({
                     likedByUser: !this.state.likedByUser,
                     likes: data.likes.length,
+                    likeLoading: false,
                 });
             }
         });
@@ -111,7 +116,7 @@ class SinglePost extends Component {
             : defaultUserIcon;
 
         const exifData = post.exifData;
-        const { likedByUser, likes, redirectToLogin } = this.state;
+        const { likedByUser, likes, redirectToLogin, likeLoading } = this.state;
         {
             if (redirectToLogin) {
                 return <Redirect to="/login"></Redirect>;
@@ -273,8 +278,26 @@ class SinglePost extends Component {
                                         justifyContent: "start",
                                     }}
                                 >
-                                    <FaHeart style={{ marginRight: "8px" }} />
-                                    {likes}
+                                    {likeLoading ? (
+                                        <>
+                                            <Spinner
+                                                className="mt-3"
+                                                animation="border"
+                                                role="status"
+                                            >
+                                                <span className="visually-hidden">
+                                                    Loading...
+                                                </span>
+                                            </Spinner>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FaHeart
+                                                style={{ marginRight: "8px" }}
+                                            />
+                                            {likes}
+                                        </>
+                                    )}
                                 </h4>
                             ) : (
                                 <h4
@@ -285,106 +308,35 @@ class SinglePost extends Component {
                                         justifyContent: "start",
                                     }}
                                 >
-                                    <FaHeart style={{ marginRight: "8px" }} />
-                                    {likes}
+                                    {likeLoading ? (
+                                        <>
+                                            <Spinner
+                                                className="mt-3"
+                                                animation="border"
+                                                role="status"
+                                                style={{ color: "pink" }}
+                                            >
+                                                <span className="visually-hidden">
+                                                    Loading...
+                                                </span>
+                                            </Spinner>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FaHeart
+                                                style={{
+                                                    marginRight: "8px",
+                                                }}
+                                            />
+                                            {likes}
+                                        </>
+                                    )}
                                 </h4>
                             )}
                         </div>
                     </div>
                 </div>
             </div>
-            // <div className="container-fluid">
-            //     <div className="row">
-            //         <div className="col-sm-12 m-0 p-0">
-            //             <img
-            //                 src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
-            //                 alt=""
-            //                 style={{
-            //                     height: "80vh",
-            //                     width: "100%",
-            //                     objectFit: "contain",
-            //                 }}
-            //                 onError={(index) =>
-            //                     (index.target.src = defaultPostIcon)
-            //                 }
-            //             />
-            //         </div>
-            //     </div>
-
-            //     <div className="row">
-            //         <div className="col-sm-12 col-md-6">
-            //             <div className="row p-3">
-            //                 <div className="col-sm-2">
-            //                     <img
-            //                         style={{
-            //                             height: "50px",
-            //                             width: "auto",
-            //                             aspectRatio: "1/1",
-            //                             objectFit: "cover",
-            //                             borderRadius: "128px",
-            //                             border: "0px solid black",
-            //                         }}
-            //                         className="image-thumbnail"
-            //                         src={profilePictureURL}
-            //                         onError={(index) =>
-            //                             (index.target.src = defaultUserIcon)
-            //                         }
-            //                         alt={postedByUsername}
-            //                     />
-            //                 </div>
-
-            //                 <div className="col-sm-10">
-            //                     <h4>
-            //                         <Link to={postedByID}>
-            //                             {postedByUsername}
-            //                         </Link>
-            //                     </h4>
-            //                 </div>
-
-            //                 <div className="exif">
-            //                     <h4>EXIF</h4>
-
-            //                 </div>
-            //                 <div className="buttons">
-            //                     {isUserAuthenticated().user &&
-            //                         isUserAuthenticated().user._id ===
-            //                             post.postedBy._id && (
-            //                             <div className="row justify-content-center">
-            //                                 <div className="col-sm-2 text-center">
-            //                                     <Link
-            //                                         className="btn btn-raised btn-warning btn-sm"
-            //                                         to={`/posts/edit/${post._id}`}
-            //                                     >
-            //                                         UPDATE POST
-            //                                     </Link>
-            //                                 </div>
-            //                                 <div className="col-sm-2 text-center">
-            //                                     <button
-            //                                         onClick={this.handleDelete}
-            //                                         className="btn btn-raised btn-danger btn-sm"
-            //                                     >
-            //                                         DELETE POST
-            //                                     </button>
-            //                                 </div>
-            //                             </div>
-            //                         )}
-            //                 </div>
-            //             </div>
-            //         </div>
-
-            //         <div className="col-sm-12 col-md-6">
-            //             <div className="row">
-            //                 <h1 className="">{post.title}</h1>
-            //             </div>
-            //             <div className="row">
-            //                 <p className="">{post.body}</p>
-            //             </div>
-            //             <h6 className="">
-            //                 {new Date(post.created).toDateString()}
-            //             </h6>
-            //         </div>
-            //     </div>
-            // </div>
         );
     };
 

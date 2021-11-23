@@ -12,6 +12,7 @@ class AllPosts extends Component {
         super();
         this.state = {
             posts: [],
+            noPosts: false,
         };
     }
 
@@ -21,6 +22,9 @@ class AllPosts extends Component {
                 console.log(data.error);
             } else {
                 this.setState({ posts: data });
+                if (!data.length) {
+                    this.setState({ noPosts: true });
+                }
             }
         });
     }
@@ -115,22 +119,28 @@ class AllPosts extends Component {
     };
 
     render() {
-        const { posts } = this.state;
+        const { posts, noPosts } = this.state;
 
         return (
             <>
                 <div className="container d-flex justify-content-center">
-                    {!posts.length ? (
-                        <Spinner
-                        className="mt-3"
-                            animation="border"
-                            role="status"
-                            variant="primary"
-                        >
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
+                    {!noPosts ? (
+                        !posts.length ? (
+                            <Spinner
+                                className="mt-3"
+                                animation="border"
+                                role="status"
+                                variant="primary"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </Spinner>
+                        ) : (
+                            this.renderPosts(posts)
+                        )
                     ) : (
-                        this.renderPosts(posts)
+                        "No posts yet"
                     )}
                 </div>
             </>

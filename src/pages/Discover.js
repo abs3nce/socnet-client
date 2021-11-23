@@ -28,7 +28,7 @@ class Discover extends Component {
     }
 
     renderUsers = (users) => (
-        <div className="row text-center d-flex justify-content-center">
+        <div className="row text-center d-flex justify-content-center w-100">
             {users.map((user, index) => (
                 <div className="card col-sm-12 col-md-3 m-3 p-0" key={index}>
                     <img
@@ -65,8 +65,25 @@ class Discover extends Component {
         return (
             <>
                 <div className="container d-flex justify-content-center">
-                    {!noUsers ? "" : ""}
-                    //dokoncit ukoncenie nacitavania ak neexistuju uzivatelia
+                    {!noUsers ? (
+                        !users.length ? (
+                            <Spinner
+                                className="mt-3"
+                                animation="border"
+                                role="status"
+                                variant="primary"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </Spinner>
+                        ) : (
+                            this.renderUsers(users)
+                        )
+                    ) : (
+                        "No users yet"
+                    )}
+                    {/* //dokoncit ukoncenie nacitavania ak neexistuju uzivatelia
                     {!users.length ? (
                         <Spinner
                             className="mt-3"
@@ -78,7 +95,7 @@ class Discover extends Component {
                         </Spinner>
                     ) : (
                         this.renderUsers(users)
-                    )}
+                    )} */}
                 </div>
             </>
         );
