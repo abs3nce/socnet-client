@@ -73,7 +73,11 @@ class AllPosts extends Component {
                                     <div className="post-card-info-one">
                                         <p className="post-card-info-title mt-3">
                                             {/* {post.title.substring(0, 30)}... */}
-                                            {post.title}
+                                            <strong>
+                                                <Link to={`/posts/${post._id}`}>
+                                                    {post.title.toUpperCase()}
+                                                </Link>
+                                            </strong>
                                         </p>
                                         <p>{post.body.substring(0, 150)}...</p>
                                     </div>
@@ -166,7 +170,7 @@ class AllPosts extends Component {
                                         </p>
                                         <Link
                                             to={`/posts/${post._id}`}
-                                            className="btn btn-raised btn-primary btn-sm"
+                                            className="btn btn-raised btn-primary btn-sm w-100"
                                         >
                                             View more
                                         </Link>
@@ -178,91 +182,6 @@ class AllPosts extends Component {
                 </>
             );
         });
-
-        // <div className="row text-center d-flex justify-content-center">
-        //     {posts.map((post, index) => {
-        //         const postedByID = post.postedBy
-        //             ? `/users/${post.postedBy._id}`
-        //             : "";
-        //         const postedByUsername = post.postedBy
-        //             ? post.postedBy.username
-        //             : "Unknown";
-
-        //         return (
-        //             <div className="col-sm-12 col-md-4 m-0 p-0" key={index}>
-        //                 <div
-        //                     className="post"
-        //                     style={{
-        //                         height: "auto",
-        //                         aspectRatio: "1/1",
-        //                         width: "100%",
-        //                     }}
-        //                 >
-        //                     <Link to={`/posts/${post._id}`}>
-        //                         <img
-        //                             src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
-        //                             alt={post.title}
-        //                             onError={(i) =>
-        //                                 (i.target.src = `${defaultPostIcon}`)
-        //                             }
-        //                             className="m-0 p-0"
-        //                             style={{
-        //                                 width: "100%",
-        //                                 height: "100%",
-        //                                 objectFit: "cover",
-        //                             }}
-        //                         />
-        //                     </Link>
-        //                     {/* <h5 className="lead">
-        //                         {post.title.substring(0, 30)}...
-        //                     </h5>
-        //                     <p className="lead">
-        //                         Posted by:{" "}
-        //                         <Link to={`${postedByID}`}>
-        //                             {postedByUsername}
-        //                         </Link>{" "}
-        //                         on {new Date(post.created).toDateString()}
-        //                     </p>
-
-        //                     <Link
-        //                         to={`/posts/${post._id}`}
-        //                         className="btn btn-raised btn-primary btn-sm"
-        //                     >
-        //                         View more
-        //                     </Link> */}
-        //                 </div>
-        //                 {/* <div className="card-body">
-        //                     <img
-        //                         src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
-        //                         alt={post.title}
-        //                         onError={(i) =>
-        //                             (i.target.src = `${defaultPostIcon}`)
-        //                         }
-        //                         className="img-thumbnail mb-3"
-        //                         style = {{width:"100%", height:"50%", objectFit:"cover"}}
-        //                     />
-        //                     <h5 className="lead card-title">
-        //                         {post.title.substring(0, 30)}...
-        //                     </h5>
-        //                     <p className="lead card-text">
-        //                         Posted by:{" "}
-        //                         <Link to={`${postedByID}`}>
-        //                             {postedByUsername}
-        //                         </Link>{" "}
-        //                         on {new Date(post.created).toDateString()}
-        //                     </p>
-
-        //                     <Link
-        //                         to={`/posts/${post._id}`}
-        //                         className="btn btn-raised btn-primary btn-sm"
-        //                     >
-        //                         View more
-        //                     </Link>
-        //                 </div> */}
-        //             </div>
-        //         );
-        //     })}
-        // </div>
     };
 
     render() {
@@ -270,9 +189,9 @@ class AllPosts extends Component {
 
         return (
             <>
-                <div className="container-fluid">
-                    {!noPosts ? (
-                        !posts.length ? (
+                {!noPosts ? (
+                    !posts.length ? (
+                        <div className="container-fluid d-flex justify-content-center">
                             <Spinner
                                 className="mt-3"
                                 animation="border"
@@ -283,13 +202,15 @@ class AllPosts extends Component {
                                     Loading...
                                 </span>
                             </Spinner>
-                        ) : (
-                            this.renderPosts(posts)
-                        )
+                        </div>
                     ) : (
-                        "No posts yet"
-                    )}
-                </div>
+                        <div className="container-fluid">
+                            {this.renderPosts(posts)}
+                        </div>
+                    )
+                ) : (
+                    "No posts yet"
+                )}
             </>
         );
     }
