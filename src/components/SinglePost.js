@@ -17,7 +17,7 @@ import lensIcon from "../images/lens3.svg";
 import settingsIcon from "../images/settings.svg";
 
 //css
-import "../styles/single-post.scss";
+import "../styles/single-post.scoped.scss";
 
 //bootstrap
 import Spinner from "react-bootstrap/Spinner";

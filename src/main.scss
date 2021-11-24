@@ -4,45 +4,6 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
-// html ::-webkit-scrollbar {
-//     width: 7px;
-//     height: 13px;
-// }
-// ::-webkit-scrollbar-thumb {
-//     background: #c2c2c2;
-//     border-radius: 10px;
-// }
-// ::-webkit-scrollbar-thumb:hover {
-//     background: #b1b2b5;
-// }
-// ::-webkit-scrollbar-track {
-//     background: #ffffff;
-//     border-radius: 10px;
-//     box-shadow: inset 7px 10px 12px 0px #f0f0f0;
-// }
-
-html ::-webkit-scrollbar {
-    width: 7px;
-    height: 13px;
-    transition: 0.4s;
-}
-::-webkit-scrollbar-thumb {
-    // background: linear-gradient(0deg, #c2c2c2, #fff);
-    background: linear-gradient(0deg, #a5c9ff, #fff);
-    border-radius: 10px;
-    transition: 0.4s;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(0deg, #82b1f8, #fff);
-    transition: 0.4s;
-}
-::-webkit-scrollbar-track {
-    background: #fafafa;
-    border-radius: 10px;
-    box-shadow: inset 0px 0px 0px 0px #f0f0f0;
-    transition: 0.4s;
-}
-
 html::-webkit-scrollbar {
     width: 13px;
     height: 13px;

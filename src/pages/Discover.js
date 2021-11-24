@@ -9,7 +9,7 @@ import { FaImages } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa";
 
-import "../styles/discover.scss";
+import "../styles/discover.scoped.scss";
 
 class Discover extends Component {
     constructor() {

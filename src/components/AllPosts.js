@@ -10,7 +10,7 @@ import settingsIcon from "../images/settings.svg";
 
 import Spinner from "react-bootstrap/Spinner";
 
-import "../styles/allposts.scss";
+import "../styles/allposts.scoped.scss";
 
 class AllPosts extends Component {
     constructor() {

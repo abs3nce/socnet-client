@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { isUserAuthenticated } from "../controllers/auth";
 import { followUser, suggestedUsers } from "../controllers/users";
 
-import "../styles/suggested.scss";
+import "../styles/suggested.scoped.scss";
 
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 
