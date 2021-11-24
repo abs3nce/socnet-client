@@ -10,7 +10,7 @@ import settingsIcon from "../images/settings.svg";
 
 import Spinner from "react-bootstrap/Spinner";
 
-import "../styles/allposts.scoped.scss";
+import "../styles/allposts.scss";
 
 class AllPosts extends Component {
     constructor() {
@@ -46,13 +46,15 @@ class AllPosts extends Component {
             return (
                 <>
                     <div
-                        id="card-row"
-                        className="row shadow-lg pt-3 mb-5 bg-body rounded"
+                        id="card"
+                        className="ALLPOSTS row shadow-lg pt-3 mb-5 bg-body rounded"
                     >
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
                             <Link to={`/posts/${post._id}`}>
                                 <img
-                                    src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
+                                    src={`${
+                                        process.env.REACT_APP_API_URL
+                                    }/posts/pfp/${post._id}`}
                                     alt={post.title}
                                     onError={(i) =>
                                         (i.target.src = `${defaultPostIcon}`)
@@ -64,7 +66,7 @@ class AllPosts extends Component {
                         </div>
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 ">
                             <div className="d-flex flex-column justify-content-between">
-                                <div className="post-card-info-one">
+                                <div className="">
                                     <p className="post-card-info-title mt-3">
                                         {/* {post.title.substring(0, 30)}... */}
                                         <strong>
@@ -75,10 +77,11 @@ class AllPosts extends Component {
                                     </p>
                                     <p>{post.body.substring(0, 150)}...</p>
                                 </div>
-                                <div className="post-card-info-two exif">
+                                <div className="exif">
                                     {!exifData ? (
                                         <div className="exif-error">
                                             No EXIF data available
+                                            <br />
                                         </div>
                                     ) : (
                                         <>
@@ -145,7 +148,7 @@ class AllPosts extends Component {
                                         </>
                                     )}
                                 </div>
-                                <div className="post-card-info-three">
+                                <div className="">
                                     <p className="post-card-info-created">
                                         Posted by:{" "}
                                         <Link to={`${postedByID}`}>

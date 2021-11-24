@@ -1,0 +1,25 @@
+.SUGGESTED {
+    &#card-row:nth-child(1) {
+        margin-top: 1rem * 2;
+    }
+
+    .card {
+        span {
+            margin: 0 8px;
+        }
+        span:nth-child(1) {
+            margin: 0 8px 0 0;
+        }
+    }
+
+    .card-body-buttons {
+        margin: 0 8px;
+    }
+    .card-body-buttons:nth-child(1) {
+        margin: 0 8 0 0px;
+    }
+
+    .social-status-icon {
+        margin-left: 8px;
+    }
+}

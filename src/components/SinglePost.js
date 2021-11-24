@@ -17,7 +17,7 @@ import lensIcon from "../images/lens3.svg";
 import settingsIcon from "../images/settings.svg";
 
 //css
-import "../styles/single-post.scoped.scss";
+import "../styles/single-post.scss";
 
 //bootstrap
 import Spinner from "react-bootstrap/Spinner";
@@ -123,7 +123,7 @@ class SinglePost extends Component {
             }
         }
         return (
-            <div className="container-fluid">
+            <div className="SINGLEPOST container-fluid">
                 <div className="row">
                     <div className="col-sm-12 col-lg-8 m-0 p-0 w100">
                         <Image

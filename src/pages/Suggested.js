@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { isUserAuthenticated } from "../controllers/auth";
 import { followUser, suggestedUsers } from "../controllers/users";
 
-import "../styles/suggested.scoped.scss";
+import "../styles/suggested.scss";
 
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 
@@ -58,43 +58,47 @@ class Suggested extends Component {
         });
     };
 
-    renderUsers = (users) => (
-        <div className="row text-center d-flex justify-content-center w-100">
-            {users.map((user, index) => (
-                <div
-                    className="card col-12 col-lg-4 m-3 p-0 shadow-lg p-3 mb-5 bg-body rounded"
-                    key={index}
-                >
-                    <img
-                        style={{
-                            height: "auto",
-                            aspectRatio: "1/1",
-                            width: "100%",
-                            objectFit: "cover",
-                        }}
-                        className="image-thumbnail"
-                        src={`${process.env.REACT_APP_API_URL}/users/pfp/${user._id}`}
-                        onError={(index) =>
-                            (index.target.src = DefaultProfilePicture)
-                        }
-                        alt={user.username}
-                    />
-                    <div className="card-body">
-                        <p className="card-title">{user.username}</p>
-                        <div className="row justify-content-center mb-3">
-                            <div className="col-3 d-flex align-items-center text-center justify-content-center">
-                                {[user.posts].length}
-                                <FaImages className="user-icon" />
-                            </div>
-                            <div className="col-3 d-flex align-items-center text-center justify-content-center">
-                                {[user.followers].length}
-                                <FaUsers className="user-icon" />
-                            </div>
-                            <div className="col-3 d-flex align-items-center text-center justify-content-center">
-                                {[user.following].length}
-                                <FaUserPlus className="user-icon" />
-                            </div>
+    renderUsers = (users) =>
+        users.map((user, index) => (
+            <div
+                id="card-row"
+                className="SUGGESTED row shadow-lg p-2 mb-3 bg-body rounded"
+            >
+                <div className="d-md-flex">
+                    <div className="col-12 col-md-1 text-center">
+                        <img
+                            style={{
+                                height: "auto",
+                                aspectRatio: "1/1",
+                                width: "50%",
+                                objectFit: "cover",
+                                borderRadius: "128px",
+                            }}
+                            className="image-thumbnail"
+                            src={`${process.env.REACT_APP_API_URL}/users/pfp/${user._id}`}
+                            onError={(index) =>
+                                (index.target.src = DefaultProfilePicture)
+                            }
+                            alt={user.username}
+                        />
+                    </div>
+
+                    <div className="col-12 col-md-4 d-flex align-items-center justify-content-center">
+                        {user.username}
+                    </div>
+
+                    <div className="col-12 col-md-4 d-flex justify-content-center">
+                        <div className="col-3 d-flex align-items-center text-center justify-content-center">
+                            {user.followers.length}
+                            <FaUsers className="user-icon social-status-icon" />
                         </div>
+                        <div className="col-3 d-flex align-items-center text-center justify-content-center">
+                            {user.following.length}
+                            <FaUserPlus className="user-icon social-status-icon" />
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-3 d-flex align-items-center justify-content-center">
                         <span className="card-body-buttons">
                             <Link
                                 to={`/users/${user._id}`}
@@ -103,6 +107,7 @@ class Suggested extends Component {
                                 View profile
                             </Link>
                         </span>
+
                         <span className="card-body-buttons">
                             <button
                                 onClick={() => {
@@ -115,19 +120,17 @@ class Suggested extends Component {
                         </span>
                     </div>
                 </div>
-            ))}
-        </div>
-    );
+            </div>
+        ));
 
     render() {
         const { users, open, followMessage, noUsers } = this.state;
-
         return (
             <>
                 {!noUsers ? (
                     <>
                         {open && (
-                            <div className="container">
+                            <div className="container mt-3">
                                 <div className="alert alert-success">
                                     <p>{followMessage}</p>
                                 </div>
@@ -147,8 +150,8 @@ class Suggested extends Component {
                                 </Spinner>
                             </div>
                         ) : (
-                            <div className="container d-flex flex-column align-items-center">
-                                <div className="col-12 col-lg-6">
+                            <div className="container d-flex flex-column">
+                                <div className="col-12 text-cente">
                                     {this.renderUsers(users)}
                                 </div>
                             </div>
