@@ -3,6 +3,13 @@
         margin-top: 1rem * 2;
     }
 
+    &#card-row {
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+
     .card {
         span {
             margin: 0 8px;
@@ -15,6 +22,7 @@
     .card-body-buttons {
         margin: 0 8px;
     }
+    
     .card-body-buttons:nth-child(1) {
         margin: 0 8 0 0px;
     }

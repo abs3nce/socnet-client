@@ -62,29 +62,33 @@ class Suggested extends Component {
         users.map((user, index) => (
             <div
                 id="card-row"
-                className="SUGGESTED row shadow-lg p-2 mb-3 bg-body rounded"
+                className="SUGGESTED row shadow-lg p-2 mx-3 mb-4 bg-body rounded mx-lg-0 mb-lg-3 py-3 py-lg-2"
             >
                 <div className="d-md-flex">
                     <div className="col-12 col-md-1 text-center">
-                        <img
-                            style={{
-                                height: "auto",
-                                aspectRatio: "1/1",
-                                width: "50%",
-                                objectFit: "cover",
-                                borderRadius: "128px",
-                            }}
-                            className="image-thumbnail"
-                            src={`${process.env.REACT_APP_API_URL}/users/pfp/${user._id}`}
-                            onError={(index) =>
-                                (index.target.src = DefaultProfilePicture)
-                            }
-                            alt={user.username}
-                        />
+                        <Link className="d-inherit" to={`/users/${user._id}`}>
+                            <img
+                                style={{
+                                    height: "auto",
+                                    aspectRatio: "1/1",
+                                    width: "50%",
+                                    objectFit: "cover",
+                                    borderRadius: "128px",
+                                }}
+                                className="image-thumbnail"
+                                src={`${process.env.REACT_APP_API_URL}/users/pfp/${user._id}`}
+                                onError={(index) =>
+                                    (index.target.src = DefaultProfilePicture)
+                                }
+                                alt={user.username}
+                            />
+                        </Link>
                     </div>
 
                     <div className="col-12 col-md-4 d-flex align-items-center justify-content-center">
-                        {user.username}
+                        <Link className="d-md-flex" to={`/users/${user._id}`}>
+                            {user.username}
+                        </Link>
                     </div>
 
                     <div className="col-12 col-md-4 d-flex justify-content-center">
@@ -108,7 +112,7 @@ class Suggested extends Component {
                             </Link>
                         </span>
 
-                        <span className="card-body-buttons">
+                        <span className="card-body-buttons ">
                             <button
                                 onClick={() => {
                                     this.clickFollow(user, index);
