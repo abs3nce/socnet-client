@@ -1,16 +1,7 @@
-#post-card:nth-child(1) {
+#card-row:nth-child(1) {
     margin-top: 1rem * 2;
 }
 
-@media (min-width: 768px) {
-    #post-card {
-        min-height: calc(100vh / 3);
-    }
-    #post-card-image {
-        max-height: calc(100vh / 3);
-        min-height: calc(100vh / 3);
-    }
-}
 
 .exif {
     .exif-camera {
@@ -46,3 +37,27 @@
         font-size: 1.5rem;
     }
 }
+
+// @media (min-width: 768px) {
+//     #post-card {
+//         min-height: 100%;
+//         max-height: calc(100vh/3);
+//     }
+//     #post-card-image {
+//         // max-height: calc(100vh / 3);
+//         // min-height: calc(100vh / 3);
+//         width: 100%;
+//         height: 100%;
+//         object-fit: cover;
+//     }
+// }
+
+// @media (max-width: 768px) {
+//     #post-card {
+//         min-height: 100%;
+//     }
+//     #post-card-image {
+//         width: 100%;
+//         object-fit: cover;
+//     }
+// }

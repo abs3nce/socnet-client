@@ -52,3 +52,7 @@ navbar uz konecne prerobit
 
 popout design maybe? 
 >> vyuzivanie tienov
+
+pri rozliseni tohoto notebooku sa vo feede fotky nescaluju spravne
+
+pridat aj tab ze followed feed kde budu posty iba od uzivatelov ktorych uzivatel followuje
