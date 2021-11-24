@@ -43,19 +43,19 @@ html ::-webkit-scrollbar {
     transition: 0.4s;
 }
 
-html::-webkit-scrollbar{
+html::-webkit-scrollbar {
     width: 13px;
     height: 13px;
-    }
-    ::-webkit-scrollbar-thumb{
-    background: #C2C2C2;
+}
+::-webkit-scrollbar-thumb {
+    background: #c2c2c2;
     border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover{
-    background: #B1B2B5;
-    }
-    ::-webkit-scrollbar-track{
-    background: #FFFFFF;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #b1b2b5;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
     border-radius: 10px;
-    box-shadow: inset 7px 10px 12px 0px #F0F0F0;
-    }
+    box-shadow: inset 7px 10px 12px 0px #f0f0f0;
+}

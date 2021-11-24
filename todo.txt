@@ -56,3 +56,10 @@ popout design maybe?
 pri rozliseni tohoto notebooku sa vo feede fotky nescaluju spravne
 
 pridat aj tab ze followed feed kde budu posty iba od uzivatelov ktorych uzivatel followuje
+
+na registed page pokial sa niekto zaregistruje chyba linku style (prepisuje ho asi .card-body, a v discover.scss )
+
+mozno ak budem raz naozaj potrebovat scoped scss tak setupnut tuto chujovinu
+>> https://github.com/gsoft-inc/craco/blob/master/packages/craco/README.md#configuration
+
+urobit funkciu na ziskanie poctu postov uzivatela bez getovania vsetkych fotiek

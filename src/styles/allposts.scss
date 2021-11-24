@@ -2,7 +2,6 @@
     margin-top: 1rem * 2;
 }
 
-
 .exif {
     .exif-camera {
         span {
@@ -20,14 +19,14 @@
             padding: 0 8px 0 0;
         }
     }
-    .exif-settings {
-        span {
-            padding: 0 8px;
-        }
-        span:nth-child(1) {
-            padding: 0 8px 0 0;
-        }
-    }
+    // .exif-settings {
+    //     span {
+    //         padding: 0 8px;
+    //     }
+    //     span:nth-child(1) {
+    //         padding: 0 8px 0 0;
+    //     }
+    // }
 }
 
 .post-card-info-title {

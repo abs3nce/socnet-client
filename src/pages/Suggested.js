@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { isUserAuthenticated } from "../controllers/auth";
 import { followUser, suggestedUsers } from "../controllers/users";
 
-import '../styles/suggested.scss'
+import "../styles/suggested.scss";
 
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
+
+import { FaImages } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa";
 
 import Spinner from "react-bootstrap/Spinner";
 
@@ -14,6 +18,7 @@ class Suggested extends Component {
         super();
         this.state = {
             users: [],
+            noUsers: false,
             error: "",
             open: false,
             followMessage: "",
@@ -27,6 +32,9 @@ class Suggested extends Component {
                 console.log(data.error);
             } else {
                 this.setState({ users: data });
+                if (!data.length) {
+                    this.setState({ noUsers: true });
+                }
             }
         });
     }
@@ -51,13 +59,17 @@ class Suggested extends Component {
     };
 
     renderUsers = (users) => (
-        <div className="row text-center justify-content-center w-100">
+        <div className="row text-center d-flex justify-content-center w-100">
             {users.map((user, index) => (
-                <div className="card col-sm-12 col-md-3 m-3 p-0" key={index}>
+                <div
+                    className="card col-12 col-lg-4 m-3 p-0 shadow-lg p-3 mb-5 bg-body rounded"
+                    key={index}
+                >
                     <img
                         style={{
-                            height: "250px",
-                            width: "auto",
+                            height: "auto",
+                            aspectRatio: "1/1",
+                            width: "100%",
                             objectFit: "cover",
                         }}
                         className="image-thumbnail"
@@ -68,8 +80,21 @@ class Suggested extends Component {
                         alt={user.username}
                     />
                     <div className="card-body">
-                        <h5 className="card-title">{user.username}</h5>
-                        <p className="card-text">{user.email}</p>
+                        <p className="card-title">{user.username}</p>
+                        <div className="row justify-content-center mb-3">
+                            <div className="col-3 d-flex align-items-center text-center justify-content-center">
+                                {[user.posts].length}
+                                <FaImages className="user-icon" />
+                            </div>
+                            <div className="col-3 d-flex align-items-center text-center justify-content-center">
+                                {[user.followers].length}
+                                <FaUsers className="user-icon" />
+                            </div>
+                            <div className="col-3 d-flex align-items-center text-center justify-content-center">
+                                {[user.following].length}
+                                <FaUserPlus className="user-icon" />
+                            </div>
+                        </div>
                         <span className="card-body-buttons">
                             <Link
                                 to={`/users/${user._id}`}
@@ -95,31 +120,43 @@ class Suggested extends Component {
     );
 
     render() {
-        const { users, open, followMessage } = this.state;
+        const { users, open, followMessage, noUsers } = this.state;
 
         return (
             <>
-                {open && (
-                    <div className="container">
-                        <div className="alert alert-success">
-                            <p>{followMessage}</p>
-                        </div>
-                    </div>
+                {!noUsers ? (
+                    <>
+                        {open && (
+                            <div className="container">
+                                <div className="alert alert-success">
+                                    <p>{followMessage}</p>
+                                </div>
+                            </div>
+                        )}
+                        {!users.length ? (
+                            <div className="container d-flex justify-content-center">
+                                <Spinner
+                                    className="mt-3"
+                                    animation="border"
+                                    role="status"
+                                    variant="primary"
+                                >
+                                    <span className="visually-hidden">
+                                        Loading...
+                                    </span>
+                                </Spinner>
+                            </div>
+                        ) : (
+                            <div className="container d-flex flex-column align-items-center">
+                                <div className="col-12 col-lg-6">
+                                    {this.renderUsers(users)}
+                                </div>
+                            </div>
+                        )}
+                    </>
+                ) : (
+                    "No suggested users"
                 )}
-                <div className="container d-flex justify-content-center">
-                    {!users.length ? (
-                        <Spinner
-                            className="mt-3"
-                            animation="border"
-                            role="status"
-                            variant="primary"
-                        >
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
-                    ) : (
-                        this.renderUsers(users)
-                    )}
-                </div>
             </>
         );
     }

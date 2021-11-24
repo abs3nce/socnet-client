@@ -45,8 +45,11 @@ class AllPosts extends Component {
             const exifData = post.exifData;
             return (
                 <>
-                    <div id="card-row" className="row shadow-lg pt-3 mb-5 bg-body rounded">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div
+                        id="card-row"
+                        className="row shadow-lg pt-3 mb-5 bg-body rounded"
+                    >
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
                             <Link to={`/posts/${post._id}`}>
                                 <img
                                     src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
@@ -325,7 +328,11 @@ class AllPosts extends Component {
                         </div>
                     )
                 ) : (
-                    "No posts yet"
+                    <div className="container d-flex justify-content-center">
+                        <div className="col-12 text-center">
+                            <p className="pt-3">No posts yet</p>
+                        </div>
+                    </div>
                 )}
             </>
         );
