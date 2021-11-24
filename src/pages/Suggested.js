@@ -162,7 +162,11 @@ class Suggested extends Component {
                         )}
                     </>
                 ) : (
-                    "No suggested users"
+                    <div className="container d-flex flex-column">
+                        <div className="col-12 text-center">
+                            <p className="pt-3">No users yet</p>
+                        </div>
+                    </div>
                 )}
             </>
         );
