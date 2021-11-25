@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
+import Comments from "./Comments";
 
 import {
     getPost,
@@ -33,6 +34,7 @@ class SinglePost extends Component {
         likedByUser: false,
         redirectToLogin: false,
         likeLoading: false,
+        comments: [],
     };
 
     componentDidMount = () => {
@@ -45,6 +47,7 @@ class SinglePost extends Component {
                     post: data,
                     likes: data.likes.length,
                     likedByUser: this.isLikedByUser(data.likes),
+                    comments: data.comments,
                 });
                 console.log(`POST LOADED: `, data);
             }
@@ -103,6 +106,10 @@ class SinglePost extends Component {
         });
     };
 
+    updateCommentList = (comments) => {
+        this.setState({ comments });
+    };
+
     renderPost = (post) => {
         const postedByID = post.postedBy ? `/users/${post.postedBy._id}` : "";
         const postedByUsername = post.postedBy
@@ -116,7 +123,8 @@ class SinglePost extends Component {
             : defaultUserIcon;
 
         const exifData = post.exifData;
-        const { likedByUser, likes, redirectToLogin, likeLoading } = this.state;
+        const { likedByUser, likes, redirectToLogin, likeLoading, comments } =
+            this.state;
         {
             if (redirectToLogin) {
                 return <Redirect to="/login"></Redirect>;
@@ -334,6 +342,11 @@ class SinglePost extends Component {
                                 </h4>
                             )}
                         </div>
+                        <Comments
+                            postID={post._id}
+                            comments={comments}
+                            updatedList={this.updateCommentList}
+                        />
                     </div>
                 </div>
             </div>

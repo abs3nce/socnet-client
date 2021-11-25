@@ -137,3 +137,39 @@ export const unlikePost = (userID, token, postID) => {
             console.log(err);
         });
 };
+
+export const commentPost = (userID, token, postID, comment) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/comment`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userID, postID, comment }),
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
+export const uncommentPost = (userID, token, postID, comment) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/uncomment`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userID, postID, comment }),
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
