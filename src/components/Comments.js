@@ -16,7 +16,7 @@ class CommentBox extends Component {
     };
 
     handleChange = (event) => {
-        this.setState({ error: "" });
+        this.setState({ error: "", message: "" });
         this.setState({ text: event.target.value });
     };
 
@@ -91,7 +91,7 @@ class CommentBox extends Component {
         const { comments } = this.props;
         const { error, message } = this.state;
         return (
-            <div>
+            <div className="mt-3">
                 <div className="row">
                     <form onSubmit={this.createComment}>
                         <div className="form-group">
@@ -102,18 +102,69 @@ class CommentBox extends Component {
                                 value={this.state.text}
                                 placeholder="Leave a comment"
                             />
-                            <button className="btn btn-raised btn-sm btn-primary">
-                                Submit
-                            </button>
                         </div>
+                        <button className="btn btn-raised btn-sm btn-primary w-100 mt-2">
+                            Submit
+                        </button>
                     </form>
                 </div>
-                {error ? error : ""}
-                {message ? message : ""}
+                {error ? (
+                    <div
+                        class="alert alert-warning d-flex align-items-center mt-2"
+                        role="alert"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="currentColor"
+                            class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
+                            viewBox="0 0 16 16"
+                            role="img"
+                            aria-label="Warning:"
+                        >
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg>
+                        <div className="m-2">{error}</div>
+                    </div>
+                ) : (
+                    ""
+                )}
+                {message ? (
+                    <div
+                        class="alert alert-success d-flex align-items-center mt-2"
+                        role="alert"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-check-circle-fill"
+                            viewBox="0 0 16 16"
+                        >
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </svg>
+                        <div className="m-2">{message}</div>
+                    </div>
+                ) : (
+                    ""
+                )}
                 <hr />
-                {/* {JSON.stringify(comments)} */}
-                {/* <p>{comments.length}</p> */}
                 <div>
+                    {!comments.length ? (
+                        <div className="d-flex justify-content-center">
+                            <p>No comments yet</p>
+                        </div>
+                    ) : (
+                        <div className="d-flex justify-content-center">
+                            {comments.length == 1 ? (
+                                <p>{comments.length} comment</p>
+                            ) : (
+                                <p>{comments.length} comments</p>
+                            )}
+                        </div>
+                    )}
                     {comments.map((comment, index) => {
                         return (
                             <div className="row" key={index}>
@@ -141,16 +192,16 @@ class CommentBox extends Component {
                                                 border: "0px solid black",
                                             }}
                                         />
-                                        <span className="">
+                                        <span className="m-2">
                                             {comment.postedBy.username}
                                         </span>
                                     </Link>
                                 </div>
-                                <div className="row">
+                                <div className="row mt-2">
                                     <p className="text-break">{comment.text}</p>
                                 </div>
-                                <div className="row">
-                                    <div className="col-6">
+                                <div className="row justify-content-between">
+                                    <div className="col-10 text-start d-flex align-items-center">
                                         <span>
                                             {new Date(
                                                 comment.created
@@ -162,13 +213,14 @@ class CommentBox extends Component {
                                             ).toLocaleTimeString()}
                                         </span>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-2 text-end ">
                                         {isUserAuthenticated().user &&
                                             isUserAuthenticated().user._id ===
                                                 comment.postedBy._id && (
                                                 <>
                                                     <button
-                                                        className="btn btn-raised btn-sm btn-danger"
+                                                        className="btn btn-raised btn-sm btn-danger d-flex align-items-center"
+                                                        style={{height:"80%", aspectRatio:"1/1", width:"auto"}}
                                                         onClick={() => {
                                                             this.commentDelConfirmation(
                                                                 comment

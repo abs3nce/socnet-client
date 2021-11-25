@@ -133,7 +133,7 @@ class SinglePost extends Component {
         return (
             <div className="SINGLEPOST container-fluid">
                 <div className="row">
-                    <div className="col-sm-12 col-lg-8 m-0 p-0 w100">
+                    <div className="col-sm-12 col-xl-8 m-0 p-0 w100">
                         <Image
                             src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
                             alt=""
@@ -149,34 +149,142 @@ class SinglePost extends Component {
                         />
                     </div>
 
-                    <div className="col-sm-12 col-lg-4 m-0 p-0 p-3">
-                        <div className="row justify-content-center align-items-center w100 ">
-                            <div className="col-12 text-center">
-                                <img
-                                    style={{
-                                        height: "50px",
-                                        width: "auto",
-                                        aspectRatio: "1/1",
-                                        objectFit: "cover",
-                                        borderRadius: "128px",
-                                        border: "0px solid black",
-                                    }}
-                                    className="image-thumbnail "
-                                    src={profilePictureURL}
-                                    onError={(index) =>
-                                        (index.target.src = defaultUserIcon)
-                                    }
-                                    alt={postedByUsername}
-                                />
+                    <div className="col-sm-12 col-xl-4 p3 p-xl-5">
+                        {isUserAuthenticated().user &&
+                        isUserAuthenticated().user._id === post.postedBy._id ? (
+                            <div className="row">
+                                <div className="col-12 col-lg-4 d-flex justify-content-center">
+                                    <div className="row">
+                                        <div className="col-12 text-center mt-3 mt-xl-0">
+                                            <img
+                                                style={{
+                                                    height: "50px",
+                                                    width: "auto",
+                                                    aspectRatio: "1/1",
+                                                    objectFit: "cover",
+                                                    borderRadius: "128px",
+                                                    border: "0px solid black",
+                                                }}
+                                                className="image-thumbnail "
+                                                src={profilePictureURL}
+                                                onError={(index) =>
+                                                    (index.target.src =
+                                                        defaultUserIcon)
+                                                }
+                                                alt={postedByUsername}
+                                            />
+                                        </div>
+                                        <div className="col-12 text-center mb-3 mb-md-0">
+                                            <Link to={postedByID}>
+                                                {postedByUsername}
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-12 col-lg-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 mt-md-3 mt-xl-0">
+                                    <Link
+                                        className="btn btn-raised btn-warning btn-sm"
+                                        to={`/posts/edit/${post._id}`}
+                                    >
+                                        UPDATE POST
+                                    </Link>
+                                </div>
+                                <div className="col-12 col-lg-4 d-flex align-items-center justify-content-center mt-md-3 mt-xl-0">
+                                    <button
+                                        onClick={this.handleDelete}
+                                        className="btn btn-raised btn-danger btn-sm"
+                                    >
+                                        DELETE POST
+                                    </button>
+                                </div>
                             </div>
+                        ) : (
+                            <>
+                                <div className="col-12 text-center">
+                                    <img
+                                        style={{
+                                            height: "50px",
+                                            width: "auto",
+                                            aspectRatio: "1/1",
+                                            objectFit: "cover",
+                                            borderRadius: "128px",
+                                            border: "0px solid black",
+                                        }}
+                                        className="image-thumbnail "
+                                        src={profilePictureURL}
+                                        onError={(index) =>
+                                            (index.target.src = defaultUserIcon)
+                                        }
+                                        alt={postedByUsername}
+                                    />
+                                </div>
 
-                            <div className="col-12 text-center">
-                                <Link to={postedByID}>{postedByUsername}</Link>
-                            </div>
+                                <div className="col-12 text-center">
+                                    <Link to={postedByID}>
+                                        {postedByUsername}
+                                    </Link>
+                                </div>
+                            </>
+                        )}
+
+                        <hr />
+                        <div className="likes mt-3">
+                            {likedByUser ? (
+                                <button
+                                    className="btn btn-raised btn-sm btn-dark like-button"
+                                    onClick={this.likeToggle}
+                                >
+                                    {likeLoading ? (
+                                        <div>
+                                            <Spinner
+                                                className="mt-3"
+                                                animation="border"
+                                                role="status"
+                                                size="sm"
+                                            >
+                                                <span className="visually-hidden">
+                                                    Loading...
+                                                </span>
+                                            </Spinner>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <FaHeart />
+                                            <span>{likes}</span>
+                                        </div>
+                                    )}
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn btn-raised btn-sm btn-dark like-button"
+                                    onClick={this.likeToggle}
+                                >
+                                    {likeLoading ? (
+                                        <div>
+                                            <Spinner
+                                                className="mt-3"
+                                                animation="border"
+                                                role="status"
+                                                size="sm"
+                                            >
+                                                <span className="visually-hidden">
+                                                    Loading...
+                                                </span>
+                                            </Spinner>
+                                        </div>
+                                    ) : (
+                                        <div className="status-wrapper">
+                                            <span>
+                                                <FaHeart />
+                                            </span>
+                                            <span>{likes}</span>
+                                        </div>
+                                    )}
+                                </button>
+                            )}
                         </div>
                         <hr />
-
-                        <div className="post-info-scroll">
+                        <div className="post-info-scroll mt-3">
                             <div className="row justify-content-left align-items-center exif">
                                 {!exifData ? (
                                     <div className="exif-error">
@@ -248,112 +356,14 @@ class SinglePost extends Component {
                                     {new Date(post.created).toDateString()}
                                 </h6>
                             </div>
-                        </div>
 
-                        {isUserAuthenticated().user &&
-                            isUserAuthenticated().user._id ===
-                                post.postedBy._id && (
-                                <>
-                                    <hr />
-                                    <div className="row justify-content-center">
-                                        <div className="col-6 text-end">
-                                            <Link
-                                                className="btn btn-raised btn-warning btn-sm"
-                                                to={`/posts/edit/${post._id}`}
-                                            >
-                                                UPDATE POST
-                                            </Link>
-                                        </div>
-                                        <div className="col-6 text-start">
-                                            <button
-                                                onClick={this.handleDelete}
-                                                className="btn btn-raised btn-danger btn-sm"
-                                            >
-                                                DELETE POST
-                                            </button>
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-
-                        <div className="likes mt-3">
-                            {likedByUser ? (
-                                <button className="btn btn-raised btn-sm btn-danger">
-                                    <p
-                                        onClick={this.likeToggle}
-                                        style={{
-                                            color: "pink",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "start",
-                                        }}
-                                    >
-                                        {likeLoading ? (
-                                            <>
-                                                <Spinner
-                                                    className="mt-3"
-                                                    animation="border"
-                                                    role="status"
-                                                >
-                                                    <span className="visually-hidden">
-                                                        Loading...
-                                                    </span>
-                                                </Spinner>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <FaHeart
-                                                    style={{
-                                                        marginRight: "8px",
-                                                    }}
-                                                />
-                                                {likes}
-                                            </>
-                                        )}
-                                    </p>
-                                </button>
-                            ) : (
-                                <button className="btn btn-raised btn-sm btn-light">
-                                    <p
-                                        onClick={this.likeToggle}
-                                        style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "start",
-                                        }}
-                                    >
-                                        {likeLoading ? (
-                                            <>
-                                                <Spinner
-                                                    className="mt-3"
-                                                    animation="border"
-                                                    role="status"
-                                                    style={{ color: "pink" }}
-                                                >
-                                                    <span className="visually-hidden">
-                                                        Loading...
-                                                    </span>
-                                                </Spinner>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <FaHeart
-                                                    style={{
-                                                        marginRight: "8px",
-                                                    }}
-                                                />
-                                                {likes}
-                                            </>
-                                        )}
-                                    </p>
-                                </button>
-                            )}
+                            <Comments
+                                className=""
+                                postID={post._id}
+                                comments={comments.reverse()}
+                                updatedList={this.updateCommentList}
+                            />
                         </div>
-                        {/* <Comments
-                            postID={post._id}
-                            comments={comments.reverse()}
-                            updatedList={this.updateCommentList}
-                        /> */}
                     </div>
                 </div>
             </div>
