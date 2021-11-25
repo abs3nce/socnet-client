@@ -275,78 +275,85 @@ class SinglePost extends Component {
                                     </div>
                                 </>
                             )}
+
                         <div className="likes mt-3">
                             {likedByUser ? (
-                                <h4
-                                    onClick={this.likeToggle}
-                                    style={{
-                                        color: "pink",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "start",
-                                    }}
-                                >
-                                    {likeLoading ? (
-                                        <>
-                                            <Spinner
-                                                className="mt-3"
-                                                animation="border"
-                                                role="status"
-                                            >
-                                                <span className="visually-hidden">
-                                                    Loading...
-                                                </span>
-                                            </Spinner>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <FaHeart
-                                                style={{ marginRight: "8px" }}
-                                            />
-                                            {likes}
-                                        </>
-                                    )}
-                                </h4>
+                                <button className="btn btn-raised btn-sm btn-danger">
+                                    <p
+                                        onClick={this.likeToggle}
+                                        style={{
+                                            color: "pink",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "start",
+                                        }}
+                                    >
+                                        {likeLoading ? (
+                                            <>
+                                                <Spinner
+                                                    className="mt-3"
+                                                    animation="border"
+                                                    role="status"
+                                                >
+                                                    <span className="visually-hidden">
+                                                        Loading...
+                                                    </span>
+                                                </Spinner>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaHeart
+                                                    style={{
+                                                        marginRight: "8px",
+                                                    }}
+                                                />
+                                                {likes}
+                                            </>
+                                        )}
+                                    </p>
+                                </button>
                             ) : (
-                                <h4
-                                    onClick={this.likeToggle}
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "start",
-                                    }}
-                                >
-                                    {likeLoading ? (
-                                        <>
-                                            <Spinner
-                                                className="mt-3"
-                                                animation="border"
-                                                role="status"
-                                                style={{ color: "pink" }}
-                                            >
-                                                <span className="visually-hidden">
-                                                    Loading...
-                                                </span>
-                                            </Spinner>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <FaHeart
-                                                style={{
-                                                    marginRight: "8px",
-                                                }}
-                                            />
-                                            {likes}
-                                        </>
-                                    )}
-                                </h4>
+                                <button className="btn btn-raised btn-sm btn-light">
+                                    <p
+                                        onClick={this.likeToggle}
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "start",
+                                        }}
+                                    >
+                                        {likeLoading ? (
+                                            <>
+                                                <Spinner
+                                                    className="mt-3"
+                                                    animation="border"
+                                                    role="status"
+                                                    style={{ color: "pink" }}
+                                                >
+                                                    <span className="visually-hidden">
+                                                        Loading...
+                                                    </span>
+                                                </Spinner>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaHeart
+                                                    style={{
+                                                        marginRight: "8px",
+                                                    }}
+                                                />
+                                                {likes}
+                                            </>
+                                        )}
+                                    </p>
+                                </button>
                             )}
                         </div>
-                        <Comments
+                        {/* <Comments
                             postID={post._id}
-                            comments={comments}
+                            comments={comments.reverse()}
                             updatedList={this.updateCommentList}
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>
