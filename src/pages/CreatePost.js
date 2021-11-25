@@ -156,7 +156,7 @@ class CreatePost extends Component {
 
             <button
                 onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary mt-3"
+                className="btn btn-raised btn-primary"
             >
                 Upload Image
             </button>
@@ -182,7 +182,7 @@ class CreatePost extends Component {
                 >
                     {error}
                 </div>
-                {loading ? (
+                {loading && !error ? (
                     <Spinner
                         className="mt-3"
                         animation="border"

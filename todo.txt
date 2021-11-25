@@ -67,3 +67,5 @@ urobit funkciu na ziskanie poctu postov uzivatela bez getovania vsetkych fotiek
 pridat kompenzaciu expozicie do postov
 
 like dat do buttonu
+
+read more na komentare

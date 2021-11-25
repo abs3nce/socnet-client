@@ -28,7 +28,7 @@ class CommentBox extends Component {
             });
             return false;
         }
-        if (text.length > 150) {
+        if (text.length > 300) {
             this.setState({
                 error: "Comment can not be longer than 150 characters",
             });

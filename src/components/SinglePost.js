@@ -132,7 +132,7 @@ class SinglePost extends Component {
         }
         return (
             <div className="SINGLEPOST container-fluid">
-                <div className="row">
+                <div className="row d-flex justify-content-between align-content-center align-items-center">
                     <div className="col-sm-12 col-xl-8 m-0 p-0 w100">
                         <Image
                             src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
@@ -149,7 +149,7 @@ class SinglePost extends Component {
                         />
                     </div>
 
-                    <div className="col-sm-12 col-xl-4 p3 p-xl-5">
+                    <div className="col-sm-12 col-xl-4 p-3 p-xl-5">
                         {isUserAuthenticated().user &&
                         isUserAuthenticated().user._id === post.postedBy._id ? (
                             <div className="row">
