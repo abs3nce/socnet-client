@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { loginUser, authenticateUser } from "../controllers/auth";
 
@@ -78,12 +78,23 @@ class Login extends Component {
                 />
             </div>
 
-            <button
-                onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary mt-3"
-            >
-                Login
-            </button>
+            <div className="row justify-content-between">
+                <div className="col-6 text-start">
+                    <button
+                        onClick={this.handleSubmit}
+                        className="btn btn-raised btn-primary mt-3"
+                    >
+                        Login
+                    </button>
+                </div>
+                <div className="col-6 text-end">
+                    <Link to="/forgot-password">
+                        <div className="btn btn-raised btn-info mt-3">
+                            Forgot password
+                        </div>
+                    </Link>
+                </div>
+            </div>
         </form>
     );
 

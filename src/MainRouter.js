@@ -14,6 +14,7 @@ import Suggested from "./pages/Suggested";
 import CreatePost from "./pages/CreatePost";
 import SinglePost from "./components/SinglePost";
 import PostEditor from "./components/PostEditor";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const MainRouter = () => (
     <div>
@@ -31,6 +32,8 @@ const MainRouter = () => (
 
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+
 
             <Route exact path="/users/discover" component={Discover} />
             <PrivateRoute exact path="/users/suggested" component={Suggested} />
