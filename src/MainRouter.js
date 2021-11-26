@@ -15,6 +15,7 @@ import CreatePost from "./pages/CreatePost";
 import SinglePost from "./components/SinglePost";
 import PostEditor from "./components/PostEditor";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 const MainRouter = () => (
     <div>
@@ -33,7 +34,11 @@ const MainRouter = () => (
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
-
+            <Route
+                exact
+                path="/reset-password/:resetPasswordToken"
+                component={ResetPassword}
+            />
 
             <Route exact path="/users/discover" component={Discover} />
             <PrivateRoute exact path="/users/suggested" component={Suggested} />
