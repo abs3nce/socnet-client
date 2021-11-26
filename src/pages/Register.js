@@ -24,7 +24,7 @@ class Register extends Component {
 
     handleChange = (name) => (event) => {
         //pri hociakej zmene udajov predchadzajuci error zmizne
-        this.setState({ error: null, success: false });
+        this.setState({ error: null, success: false, loading: false });
 
         //ukladanie udajov z formu >> ak je to event z username tak this.state.username nadobudne hodnotu username z inputu a podobne
         this.setState({ [name]: event.target.value });
@@ -102,7 +102,8 @@ class Register extends Component {
     );
 
     render() {
-        const { username, email, password, error, success, loading } = this.state;
+        const { username, email, password, error, success, loading } =
+            this.state;
 
         return (
             <div className="container">
@@ -126,7 +127,7 @@ class Register extends Component {
                     Account successfully created, please{" "}
                     <Link to="/login">sign in!</Link>
                 </div>
-                {loading && (
+                {loading && !error ? (
                     <Spinner
                         className="mt-3"
                         animation="border"
@@ -135,6 +136,8 @@ class Register extends Component {
                     >
                         <span className="visually-hidden">Loading...</span>
                     </Spinner>
+                ) : (
+                    ""
                 )}
             </div>
         );

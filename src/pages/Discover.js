@@ -86,26 +86,36 @@ class Discover extends Component {
     render() {
         const { users, noUsers } = this.state;
         return (
-            <div className="container d-flex flex-column">
+            <>
                 {!noUsers ? (
                     !users.length ? (
-                        <Spinner
-                            className="mt-3"
-                            animation="border"
-                            role="status"
-                            variant="primary"
-                        >
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
+                        <div className="container">
+                            <div className="row justify-content-center">
+                                <Spinner
+                                    className="mt-3"
+                                    animation="border"
+                                    role="status"
+                                    variant="primary"
+                                >
+                                    <span className="visually-hidden">
+                                        Loading...
+                                    </span>
+                                </Spinner>
+                            </div>
+                        </div>
                     ) : (
-                        this.renderUsers(users)
+                        <div className="container d-flex flex-column">
+                            {this.renderUsers(users)}
+                        </div>
                     )
                 ) : (
-                    <div className="col-12 text-center">
-                        <p className="pt-3">No users yet</p>
+                    <div className="container d-flex flex-column">
+                        <div className="col-12 text-center">
+                            <p className="pt-3">No users yet</p>
+                        </div>
                     </div>
                 )}
-            </div>
+            </>
         );
     }
 }

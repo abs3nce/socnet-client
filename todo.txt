@@ -69,3 +69,6 @@ pridat kompenzaciu expozicie do postov
 like dat do buttonu
 
 read more na komentare
+
+
+stranka pada pri navstiveni profilu uzivatela (pokial uzivatel nie je prihlaseny teda isUserAuth ani neprebehne)

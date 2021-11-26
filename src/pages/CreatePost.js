@@ -118,7 +118,7 @@ class CreatePost extends Component {
     }
 
     loadCreatePostForm = (title, body) => (
-        <form>
+        <form className="mt-3">
             <div className="form-group">
                 <label className="text-muted">Profile Photo</label>
                 <input
@@ -173,8 +173,6 @@ class CreatePost extends Component {
 
         return (
             <div className="container">
-                <h2 className="mt-5 mb-5">Create new post</h2>
-                <br /> <br />
                 {this.loadCreatePostForm(title, body)}
                 <div
                     style={{ display: error ? "" : "none" }}
