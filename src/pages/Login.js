@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 
 import { loginUser, authenticateUser } from "../controllers/auth";
+// import SocialLogin from "../components/SocialLogin";
 
 import Spinner from "react-bootstrap/Spinner";
+
+// https://www.npmjs.com/package/react-google-login
 
 class Login extends Component {
     constructor(props) {
@@ -111,6 +114,7 @@ class Login extends Component {
 
                 {this.loadLoginForm(username, password)}
 
+                {/* <SocialLogin /> */}
                 <div
                     style={{ display: error ? "" : "none" }}
                     className="alert alert-danger mt-3"

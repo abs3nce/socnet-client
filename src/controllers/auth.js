@@ -104,3 +104,22 @@ export const resetPassword = (resetPasswordInfo) => {
             console.log(err);
         });
 };
+
+// export const socialLogin = (user) => {
+//     return fetch(`${process.env.REACT_APP_API_URL}/social-login`, {
+//         method: "POST",
+//         headers: {
+//             Accept: "application/json",
+//             "Content-Type": "application/json",
+//         },
+//         //credentials: "include" //funguje iba na jednom a tom istom origine
+//         body: JSON.stringify(user),
+//     })
+//         .then((res) => {
+//             console.log(`login response: `, res);
+//             return res.json();
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// };
