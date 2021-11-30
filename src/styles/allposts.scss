@@ -2,11 +2,8 @@
     &#card:nth-child(1) {
         margin-top: 1rem * 2;
     }
-
     .exif {
-
-        .exif-error{
-
+        .exif-error {
         }
         .exif-camera {
             span {
@@ -32,6 +29,11 @@
                 padding: 0 8px 0 0;
             }
         }
+    }
+
+    .post-image {
+        object-fit: cover;
+        width: 100%;
     }
 
     .post-card-info-title {

@@ -229,7 +229,7 @@ class Profile extends Component {
                                             >
                                                 <Link to={`/posts/${post._id}`}>
                                                     <img
-                                                        src={`${process.env.REACT_APP_API_URL}/posts/pfp/${post._id}`}
+                                                        src={`${process.env.REACT_APP_API_URL}/posts/pfp/thumb/${post._id}`}
                                                         alt={post.title}
                                                         onError={(i) =>
                                                             (i.target.src = `${defaultPostIcon}`)

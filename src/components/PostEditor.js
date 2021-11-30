@@ -185,7 +185,7 @@ class PostEditor extends Component {
         }
 
         const postPictureURL = id
-            ? `${process.env.REACT_APP_API_URL}/posts/pfp/${id}?${new Date().getTime()}`
+            ? `${process.env.REACT_APP_API_URL}/posts/pfp/thumb/${id}?${new Date().getTime()}`
             : defaultPostIcon;
 
         return (

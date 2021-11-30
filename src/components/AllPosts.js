@@ -44,26 +44,24 @@ class AllPosts extends Component {
                 : "Unknown";
             const exifData = post.exifData;
             return (
-                <>
+                <div key={post._id}>
                     <div
                         id="card"
                         className="ALLPOSTS row shadow-lg pt-3 mb-5 bg-body rounded"
                     >
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
-                            <Link to={`/posts/${post._id}`}>
+                        <Link to={`/posts/${post._id}`} className="m-0 p-0">
+                            <div className="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
                                 <img
-                                    src={`${
-                                        process.env.REACT_APP_API_URL
-                                    }/posts/pfp/${post._id}`}
+                                    src={`${process.env.REACT_APP_API_URL}/posts/pfp/thumb/${post._id}`}
                                     alt={post.title}
                                     onError={(i) =>
                                         (i.target.src = `${defaultPostIcon}`)
                                     }
-                                    className="img-fluid"
+                                    className="post-image"
                                     style={{}}
                                 />
-                            </Link>
-                        </div>
+                            </div>
+                        </Link>
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 ">
                             <div className="d-flex flex-column justify-content-between">
                                 <div className="">
@@ -167,7 +165,7 @@ class AllPosts extends Component {
                             </div>
                         </div>
                     </div>
-                </>
+                </div>
             );
         });
     };
