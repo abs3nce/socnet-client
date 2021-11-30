@@ -158,7 +158,7 @@ class CommentBox extends Component {
                         </div>
                     ) : (
                         <div className="d-flex justify-content-center">
-                            {comments.length == 1 ? (
+                            {comments.length === 1 ? (
                                 <p>{comments.length} comment</p>
                             ) : (
                                 <p>{comments.length} comments</p>

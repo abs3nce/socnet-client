@@ -125,11 +125,11 @@ class SinglePost extends Component {
         const exifData = post.exifData;
         const { likedByUser, likes, redirectToLogin, likeLoading, comments } =
             this.state;
-        {
-            if (redirectToLogin) {
-                return <Redirect to="/login"></Redirect>;
-            }
+
+        if (redirectToLogin) {
+            return <Redirect to="/login"></Redirect>;
         }
+
         return (
             <div className="SINGLEPOST container-fluid">
                 <div className="row d-flex justify-content-between align-content-center align-items-center">

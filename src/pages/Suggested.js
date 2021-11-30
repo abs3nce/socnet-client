@@ -7,7 +7,7 @@ import "../styles/suggested.scss";
 
 import DefaultProfilePicture from "../images/defaultUserIcon.png";
 
-import { FaImages } from "react-icons/fa";
+// import { FaImages } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa";
 
@@ -164,7 +164,10 @@ class Suggested extends Component {
                 ) : (
                     <div className="container d-flex flex-column">
                         <div className="col-12 text-center">
-                            <p className="pt-3">No users yet</p>
+                            <p className="pt-3">
+                                No suggested users. Try following someone from{" "}
+                                <Link to="/users/discover">here</Link>
+                            </p>
                         </div>
                     </div>
                 )}

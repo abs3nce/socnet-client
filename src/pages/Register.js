@@ -171,12 +171,7 @@ class Register extends Component {
             <div className="container">
                 <h2 className="mt-5 mb-5">Register Page</h2>
 
-                {this.loadRegisterForm(
-                    username,
-                    email,
-                    password,
-                    recaptcha,
-                )}
+                {this.loadRegisterForm(username, email, password, recaptcha)}
 
                 {/* alert o nesplnenej registracii s errorom*/}
                 <div
