@@ -35,6 +35,10 @@ class Profile extends Component {
 
     //overenie followovania
     checkIfUserFollowing = (user) => {
+        if (!isUserAuthenticated()) {
+            return false;
+        }
+
         const jwt = isUserAuthenticated();
         const match = user.followers.find((follower) => {
             //jedno uzivatelske id ma vela inych id (followerov) a opacne

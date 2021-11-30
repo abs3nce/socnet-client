@@ -72,3 +72,5 @@ read more na komentare
 
 
 stranka pada pri navstiveni profilu uzivatela (pokial uzivatel nie je prihlaseny teda isUserAuth ani neprebehne)
+
+pri accesse /suggested bez prihlasenia presmerovat na /login
