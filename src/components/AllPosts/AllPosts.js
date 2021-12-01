@@ -66,7 +66,7 @@ class AllPosts extends Component {
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 ">
                             <div className="d-flex flex-column justify-content-between">
                                 <div className="">
-                                    <p className="post-card-info-title mt-3">
+                                    <p className="post-card-info-title mt-3 text-break">
                                         {/* {post.title.substring(0, 30)}... */}
                                         <strong>
                                             <Link to={`/posts/${post._id}`}>

@@ -1,12 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import "./styles/variables.scss";
 
-body {
-    font-family: "Montserrat", sans-serif;
+* {
+    box-sizing: border-box;
+    margin: 0;
 }
 
-// button, link {
-//     transition: 0.4s
-// }
+body {
+    width: 100%;
+    color: $dark;
+    font-family: $Montserrat;
+}
+
+#root {
+    height: 100%;
+}
 
 html::-webkit-scrollbar {
     width: 13px;
