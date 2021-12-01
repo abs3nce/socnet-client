@@ -86,7 +86,10 @@
                         }
                         &:active {
                             border-radius: calc(#{$borderRadius} + 6px);
-                            background: linear-gradient(rgba($light, 0.1), rgba($light, 0.2));
+                            background: linear-gradient(
+                                rgba($light, 0.1),
+                                rgba($light, 0.2)
+                            );
                         }
                     }
                 }
@@ -110,7 +113,10 @@
                 }
                 &:active {
                     border-color: $primary;
-                    background: linear-gradient(rgba($primary, 0.2), rgba($primary, 0.3));
+                    background: linear-gradient(
+                        rgba($primary, 0.2),
+                        rgba($primary, 0.3)
+                    );
                     color: $primary;
                 }
             }

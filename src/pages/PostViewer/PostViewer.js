@@ -350,8 +350,8 @@ class SinglePost extends Component {
                             </div>
                             <hr />
                             <div className="row">
-                                <h1 className="post-title">{post.title}</h1>
-                                <p className="post-body">{post.body}</p>
+                                <h1 className="post-title text-break">{post.title}</h1>
+                                <p className="post-body text-break">{post.body}</p>
                                 <h6 className="post-created">
                                     {new Date(post.created).toDateString()}
                                 </h6>
