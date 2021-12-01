@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { commentPost, uncommentPost } from "../controllers/posts";
-import { isUserAuthenticated } from "../controllers/auth";
+import { commentPost, uncommentPost } from "../../controllers/posts";
+import { isUserAuthenticated } from "../../controllers/auth";
 
-import defaultProfilePicture from "../images/defaultUserIcon.png";
+import defaultProfilePicture from "../../images/defaultUserIcon.png";
 
 import { FaTrashAlt } from "react-icons/fa";
 

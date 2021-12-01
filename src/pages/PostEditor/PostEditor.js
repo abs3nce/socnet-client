@@ -1,31 +1,31 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-import { isUserAuthenticated } from "../controllers/auth";
-import { createPost } from "../controllers/posts";
+import { getPost, updatePost } from "../../controllers/posts";
+import { isUserAuthenticated } from "../../controllers/auth";
 
-import Spinner from "react-bootstrap/Spinner";
+import defaultPostIcon from "../../images/defaultPostIcon.png";
 
-class CreatePost extends Component {
+class PostEditor extends Component {
     constructor() {
         super();
         this.state = {
+            id: "",
             title: "",
             body: "",
-            image: "",
-            error: "",
-            user: {},
 
-            loading: false,
             redirectToProfile: false,
+            error: "",
             fileSize: 0,
+            loading: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this); //zistit ako toto funguje
     }
 
     componentDidMount() {
         this.postData = new FormData();
-        this.setState({ user: isUserAuthenticated().user });
+        const postID = this.props.match.params.postID;
+        this.init(postID);
     }
 
     handleChange = (name) => (event) => {
@@ -40,6 +40,23 @@ class CreatePost extends Component {
         const fileSize = name === "image" ? event.target.files[0].size : 0;
         this.postData.set(name, value);
         this.setState({ [name]: value, fileSize: fileSize });
+    };
+
+    init = (postID) => {
+        getPost(postID).then((data) => {
+            if (data.error) {
+                this.setState({ redirectToProfile: true });
+                console.log(data.error);
+            } else {
+                console.log(`> POST LOADED (EDITOR): `, data);
+                this.setState({
+                    id: data._id,
+                    title: data.title,
+                    body: data.body,
+                    error: "",
+                });
+            }
+        });
     };
 
     isInputValid = () => {
@@ -98,18 +115,14 @@ class CreatePost extends Component {
         this.setState({ loading: true });
 
         if (this.isInputValid()) {
-            const userID = isUserAuthenticated().user._id;
+            const postID = this.state.id;
             const token = isUserAuthenticated().token;
 
-            createPost(userID, token, this.postData).then((data) => {
-                if (data?.error) {
+            updatePost(postID, token, this.postData).then((data) => {
+                if (data.error) {
                     this.setState({ error: data.error });
                 } else {
                     this.setState({
-                        loading: false,
-                        title: "",
-                        body: "",
-                        image: "",
                         redirectToProfile: true,
                     });
                 }
@@ -117,10 +130,10 @@ class CreatePost extends Component {
         }
     }
 
-    loadCreatePostForm = (title, body) => (
-        <form className="mt-3">
+    loadEditPostForm = (title, body) => (
+        <form>
             <div className="form-group">
-                <label className="text-muted">Profile Photo</label>
+                <label className="text-muted">Post Photo</label>
                 <input
                     onChange={this.handleChange("image")}
                     type="file"
@@ -156,39 +169,47 @@ class CreatePost extends Component {
 
             <button
                 onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary"
+                className="btn btn-raised btn-primary mt-3"
             >
-                Upload Image
+                Update Post
             </button>
         </form>
     );
 
     render() {
-        const { title, body, user, error, loading, redirectToProfile } =
+        const { title, body, id, redirectToProfile, loading, error } =
             this.state;
 
         if (redirectToProfile) {
-            return <Redirect to={`/users/${user._id}`} />;
+            return <Redirect to={`/posts/${id}`} />;
         }
+
+        const postPictureURL = id
+            ? `${process.env.REACT_APP_API_URL}/posts/pfp/thumb/${id}?${new Date().getTime()}`
+            : defaultPostIcon;
 
         return (
             <div className="container">
-                {this.loadCreatePostForm(title, body)}
+                <h2 className="mt-5 mb-5">Edit {title}</h2>
+                <br /> <br />
+                <img
+                    style={{ height: "200px", width: "auto" }}
+                    className="image-thumbnail"
+                    src={postPictureURL}
+                    onError={(index) => (index.target.src = defaultPostIcon)}
+                    alt={title}
+                />{" "}
+                {this.loadEditPostForm(title, body)}
                 <div
                     style={{ display: error ? "" : "none" }}
                     className="alert alert-danger mt-3"
                 >
                     {error}
                 </div>
-                {loading && !error ? (
-                    <Spinner
-                        className="mt-3"
-                        animation="border"
-                        role="status"
-                        variant="primary"
-                    >
-                        <span className="visually-hidden">Loading...</span>
-                    </Spinner>
+                {loading ? (
+                    <div className="lead mt-3">
+                        <p>Loading...</p>
+                    </div>
                 ) : (
                     ""
                 )}
@@ -196,5 +217,4 @@ class CreatePost extends Component {
         );
     }
 }
-
-export default CreatePost;
+export default PostEditor;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { followUser, unfollowUser } from "../controllers/users";
+import { followUser, unfollowUser } from "../../controllers/users";
 
 class FollowUserButton extends Component {
     followClicked = () => {

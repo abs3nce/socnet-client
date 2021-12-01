@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { registerUser } from "../controllers/auth";
+import { registerUser } from "../../controllers/auth";
 
 import Spinner from "react-bootstrap/Spinner";
 

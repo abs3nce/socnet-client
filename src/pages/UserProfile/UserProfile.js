@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 
-import { isUserAuthenticated } from "../controllers/auth";
-import { getUser } from "../controllers/users";
-import { getPostsByUser } from "../controllers/posts";
+import { isUserAuthenticated } from "../../controllers/auth";
+import { getUser } from "../../controllers/users";
+import { getPostsByUser } from "../../controllers/posts";
 
-import defaultProfilePicture from "../images/defaultUserIcon.png";
-import defaultPostIcon from "../images/defaultPostIcon.png";
+import defaultProfilePicture from "../../images/defaultUserIcon.png";
+import defaultPostIcon from "../../images/defaultPostIcon.png";
 // import DefaultProfileBanner from "../images/defaultUserBanner.jpeg";
 
-import DeleteUserButton from "../components/DeleteUserButton";
-import FollowUserButton from "../components/FollowUserButton";
-import ProfileLists from "../components/ProfileLists";
+import DeleteUserButton from "../../components/DeleteUserButton/DeleteUserButton";
+import FollowUserButton from "../../components/FollowUserButton/FollowUserButton";
+import ProfileLists from "../../components/ProfileLists/ProfileLists";
 
 import Spinner from "react-bootstrap/Spinner";
 

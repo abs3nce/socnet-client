@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Comments from "./Comments";
+import Comments from "../../components/Comments/Comments";
 
 import {
     getPost,
     deletePost,
     likePost,
     unlikePost,
-} from "../controllers/posts";
-import { isUserAuthenticated } from "../controllers/auth";
+} from "../../controllers/posts";
+import { isUserAuthenticated } from "../../controllers/auth";
 
 //images
-import defaultPostIcon from "../images/defaultPostIcon.png";
-import defaultUserIcon from "../images/defaultUserIcon.png";
-import cameraIcon from "../images/camera2.svg";
-import lensIcon from "../images/lens3.svg";
-import settingsIcon from "../images/settings.svg";
+import defaultPostIcon from "../../images/defaultPostIcon.png";
+import defaultUserIcon from "../../images/defaultUserIcon.png";
+import cameraIcon from "../../images/camera2.svg";
+import lensIcon from "../../images/lens3.svg";
+import settingsIcon from "../../images/settings.svg";
 
 //css
-import "../styles/single-post.scss";
+import "./post-viewer.scss";
 
 //bootstrap
 import Spinner from "react-bootstrap/Spinner";

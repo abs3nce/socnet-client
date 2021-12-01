@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-import { deleteUser } from "../controllers/users";
-import { isUserAuthenticated, logoutUser } from "../controllers/auth";
+import { deleteUser } from "../../controllers/users";
+import { isUserAuthenticated, logoutUser } from "../../controllers/auth";
 
 class DeleteUser extends Component {
   state = {

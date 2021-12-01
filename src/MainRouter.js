@@ -3,19 +3,19 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
 
-import Navbar from "./core/Navbar";
-import Home from "./core/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import UserProfile from "./pages/UserProfile";
-import Discover from "./pages/Discover";
-import ProfileEditor from "./pages/ProfileEditor";
-import Suggested from "./pages/Suggested";
-import CreatePost from "./pages/CreatePost";
-import SinglePost from "./components/SinglePost";
-import PostEditor from "./components/PostEditor";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
+import Navbar from "./core/Navbar/Navbar";
+import Home from "./core/Home/Home";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import Discover from "./pages/Discover/Discover";
+import ProfileEditor from "./pages/ProfileEditor/ProfileEditor";
+import Suggested from "./pages/Suggested/Suggested";
+import CreatePost from "./pages/CreatePost/CreatePost";
+import SinglePost from "./pages/PostViewer/PostViewer";
+import PostEditor from "./pages/PostEditor/PostEditor";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 const MainRouter = () => (
     <div>
@@ -46,7 +46,7 @@ const MainRouter = () => (
             />
             <Route exact path="/users/:userID" component={UserProfile} />
             {/* redirect if 404 */}
-            <Redirect to="/"/>
+            <Redirect to="/" />
         </Switch>
     </div>
 );

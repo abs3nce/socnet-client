@@ -13,7 +13,7 @@
 // export default ForgotPassword
 
 import React, { Component } from "react";
-import { forgotPassword } from "../controllers/auth";
+import { forgotPassword } from "../../controllers/auth";
 
 class ForgotPassword extends Component {
     state = {

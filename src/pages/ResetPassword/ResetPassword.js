@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { resetPassword } from "../controllers/auth";
+import { resetPassword } from "../../controllers/auth";
 import {Link} from 'react-router-dom'
 
 class ResetPassword extends Component {

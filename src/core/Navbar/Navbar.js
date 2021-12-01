@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { logoutUser, isUserAuthenticated } from "../controllers/auth";
+import { logoutUser, isUserAuthenticated } from "../../controllers/auth";
 
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";

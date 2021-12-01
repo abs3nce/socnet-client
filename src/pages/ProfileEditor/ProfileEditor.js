@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-import { isUserAuthenticated } from "../controllers/auth";
+import { isUserAuthenticated } from "../../controllers/auth";
 import {
     getUser,
     updateUser,
     updateUserCredentials,
-} from "../controllers/users";
+} from "../../controllers/users";
 
-import defaultProfilePicture from "../images/defaultUserIcon.png";
+import defaultProfilePicture from "../../images/defaultUserIcon.png";
 
 class EditUserProfile extends Component {
     constructor() {

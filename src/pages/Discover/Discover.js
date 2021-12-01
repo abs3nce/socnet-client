@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { getUsers } from "../controllers/users";
-import DefaultProfilePicture from "../images/defaultUserIcon.png";
 import { Link } from "react-router-dom";
+
+import { getUsers } from "../../controllers/users";
+import DefaultProfilePicture from "../../images/defaultUserIcon.png";
 
 import Spinner from "react-bootstrap/Spinner";
 
@@ -9,7 +10,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { FaUsers } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa";
 
-import "../styles/discover.scss";
+import "./discover.scss";
 
 class Discover extends Component {
     constructor() {

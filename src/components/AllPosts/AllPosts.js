@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { getPosts } from "../controllers/posts";
+import { getPosts } from "../../controllers/posts";
 // import DefaultProfilePicture from "../images/defaultUserIcon.png";
 import { Link } from "react-router-dom";
 
-import defaultPostIcon from "../images/defaultPostIcon.png";
-import cameraIcon from "../images/camera2.svg";
-import lensIcon from "../images/lens3.svg";
-import settingsIcon from "../images/settings.svg";
+import defaultPostIcon from "../../images/defaultPostIcon.png";
+import cameraIcon from "../../images/camera2.svg";
+import lensIcon from "../../images/lens3.svg";
+import settingsIcon from "../../images/settings.svg";
+
 
 import Spinner from "react-bootstrap/Spinner";
 
-import "../styles/allposts.scss";
+import "./allposts.scss";
 
 class AllPosts extends Component {
     constructor() {

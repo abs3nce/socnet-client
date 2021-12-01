@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 
-import { loginUser, authenticateUser } from "../controllers/auth";
+import { loginUser, authenticateUser } from "../../controllers/auth";
 // import SocialLogin from "../components/SocialLogin";
 
 import Spinner from "react-bootstrap/Spinner";

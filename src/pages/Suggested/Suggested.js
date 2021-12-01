@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { isUserAuthenticated } from "../controllers/auth";
-import { followUser, suggestedUsers } from "../controllers/users";
+import { isUserAuthenticated } from "../../controllers/auth";
+import { followUser, suggestedUsers } from "../../controllers/users";
 
-import "../styles/suggested.scss";
+import "./suggested.scss";
 
-import DefaultProfilePicture from "../images/defaultUserIcon.png";
+import DefaultProfilePicture from "../../images/defaultUserIcon.png";
 
 // import { FaImages } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
