@@ -28,8 +28,9 @@ class FollowedFeed extends Component {
             this.setState({ redirectToLogin: true });
         } else {
             const token = isUserAuthenticated().token;
-            const id = isUserAuthenticated().user._id;
-            getFollowedFeed(id, token).then((data) => {
+            const _id = isUserAuthenticated().user._id;
+
+            getFollowedFeed(_id, token).then((data) => {
                 if (data.error) {
                     console.log(data.error);
                 } else {

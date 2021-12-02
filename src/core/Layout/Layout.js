@@ -3,11 +3,13 @@ import Header from "../Header/Header";
 
 import classes from "./Layout.module.scss";
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
     return (
         <>
             <Header />
-            <div className={classes.container}>{children}</div>
+            <div className={`${classes.LAYOUT} ${classes.container}`}>
+                {children}
+            </div>
         </>
     );
 };

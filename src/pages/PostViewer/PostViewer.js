@@ -150,7 +150,7 @@ class SinglePost extends Component {
                     </div>
 
                     <div className="col-sm-12 col-xl-4 p-3 p-xl-5">
-                        {isUserAuthenticated().user &&
+                        {isUserAuthenticated().user && post.postedBy &&
                         isUserAuthenticated().user._id === post.postedBy._id ? (
                             <div className="row">
                                 <div className="col-12 col-lg-4 d-flex justify-content-center">
