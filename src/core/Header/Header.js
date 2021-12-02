@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, withRouter } from "react-router-dom";
 
+import {
+    BsPeople,
+    BsPerson,
+    BsPersonPlus,
+    BsGlobe,
+    BsBoxArrowInRight,
+    BsHeart,
+    BsPlusLg,
+    BsBoxArrowRight,
+    BsPersonLinesFill,
+} from "react-icons/bs";
+
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
-import { BiGlobe } from "react-icons/bi";
-import { BiHeart } from "react-icons/bi";
-import { FiUsers } from "react-icons/fi";
-import { FiUserPlus } from "react-icons/fi";
-import { BsPlusLg } from "react-icons/bs";
-import { BsPerson } from "react-icons/bs";
-import { IoMdExit } from "react-icons/io";
-import { MdNewLabel } from "react-icons/md";
-import { FiLogIn } from "react-icons/fi";
 
 import classes from "./Header.module.scss";
 
@@ -65,7 +68,7 @@ const Header = (props) => {
                     <ul>
                         <li>
                             <Link to="/" onClick={menuToggleHandler}>
-                                <BiGlobe className="m-2" />
+                                <BsGlobe className="m-2" />
                                 Global Feed
                             </Link>
                         </li>
@@ -76,7 +79,7 @@ const Header = (props) => {
                                     to="/posts/followed"
                                     onClick={menuToggleHandler}
                                 >
-                                    <BiHeart className="m-2" />
+                                    <BsHeart className="m-2" />
                                     Your Feed
                                 </Link>
                             </li>
@@ -86,7 +89,7 @@ const Header = (props) => {
                                 to="/users/discover"
                                 onClick={menuToggleHandler}
                             >
-                                <FiUsers className="m-2" />
+                                <BsPeople className="m-2" />
                                 All Users
                             </Link>
                         </li>
@@ -98,7 +101,7 @@ const Header = (props) => {
                                         to="/Login"
                                         onClick={menuToggleHandler}
                                     >
-                                        <FiLogIn className="m-2" />
+                                        <BsBoxArrowInRight className="m-2" />
                                         Login
                                     </Link>
                                 </li>
@@ -107,7 +110,7 @@ const Header = (props) => {
                                         to="/Register"
                                         onClick={menuToggleHandler}
                                     >
-                                        <MdNewLabel className="m-2" />
+                                        <BsPersonPlus className="m-2" />
                                         Register
                                     </Link>
                                 </li>
@@ -120,7 +123,7 @@ const Header = (props) => {
                                         to="/users/suggested"
                                         onClick={menuToggleHandler}
                                     >
-                                        <FiUserPlus className="m-1" />
+                                        <BsPersonLinesFill className="m-1" />
                                         Suggested
                                     </Link>
                                 </li>
@@ -156,7 +159,7 @@ const Header = (props) => {
                                             )
                                         }
                                     >
-                                        <IoMdExit className="m-2" />
+                                        <BsBoxArrowRight className="m-2" />
                                         Logout
                                     </Link>
                                 </li>
