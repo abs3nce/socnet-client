@@ -18,12 +18,17 @@ class CreatePost extends Component {
 
             loading: false,
             redirectToProfile: false,
+            redirectToLogin: false,
             fileSize: 0,
         };
         this.handleSubmit = this.handleSubmit.bind(this); //zistit ako toto funguje
     }
 
     componentDidMount() {
+        if (!isUserAuthenticated()) {
+            this.setState({ redirectToLogin: true });
+        }
+
         this.postData = new FormData();
         this.setState({ user: isUserAuthenticated().user });
     }
@@ -164,11 +169,22 @@ class CreatePost extends Component {
     );
 
     render() {
-        const { title, body, user, error, loading, redirectToProfile } =
-            this.state;
+        const {
+            title,
+            body,
+            user,
+            error,
+            loading,
+            redirectToProfile,
+            redirectToLogin,
+        } = this.state;
 
         if (redirectToProfile) {
             return <Redirect to={`/users/${user._id}`} />;
+        }
+
+        if (redirectToLogin) {
+            return <Redirect to={`/login`} />;
         }
 
         return (

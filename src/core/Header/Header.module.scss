@@ -46,7 +46,7 @@
             transform: translate(0);
             transition: 0.3s ease transform;
 
-            @include breakpoint(md) {
+            @include breakpoint(lg) {
                 transform: none;
                 flex-direction: row;
                 background: transparent;
@@ -60,7 +60,7 @@
                 display: flex;
                 flex-direction: column;
                 margin-bottom: $spacing-lg;
-                @include breakpoint(md) {
+                @include breakpoint(lg) {
                     flex-direction: row;
                     align-items: center;
                     margin-bottom: 0;
@@ -69,7 +69,7 @@
                 li {
                     &:not(:last-child) {
                         margin-bottom: $spacing-lg;
-                        @include breakpoint(md) {
+                        @include breakpoint(lg) {
                             margin-bottom: 0;
                             margin-right: $spacing-md;
                         }
@@ -80,6 +80,10 @@
                         padding: 0.75rem 1.25rem;
                         border-radius: $borderRadius;
                         transition: 0.3s ease all;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
 
                         &:hover {
                             background: rgba($light, 0.1);
@@ -138,9 +142,10 @@
                 color: $primary;
             }
 
-            @include breakpoint(md) {
+            @include breakpoint(lg) {
                 display: none;
             }
         }
     }
 }
+

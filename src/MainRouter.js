@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 import Navbar from "./core/Navbar/Navbar";
 import Home from "./core/Home/Home";
+import FollowedFeed from "./pages/FollowedFeed/FollowedFeed";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import UserProfile from "./pages/UserProfile/UserProfile";
@@ -25,39 +26,55 @@ const MainRouter = () => (
                 <Route exact path="/">
                     <Home />
                 </Route>
+
+                <PrivateRoute exact path="/posts/followed">
+                    <FollowedFeed />
+                </PrivateRoute>
+
                 <PrivateRoute exact path="/posts/create">
                     <CreatePost></CreatePost>
                 </PrivateRoute>
+
                 <PrivateRoute
                     exact
                     path="/posts/edit/:postID"
                     component={PostEditor}
                 />
+
                 <Route exact path="/posts/:postID" component={SinglePost} />
+
                 <Route exact path="/register" component={Register} />
+
                 <Route exact path="/login" component={Login} />
+
                 <Route
                     exact
                     path="/forgot-password"
                     component={ForgotPassword}
                 />
+
                 <Route
                     exact
                     path="/reset-password/:resetPasswordToken"
                     component={ResetPassword}
                 />
+
                 <Route exact path="/users/discover" component={Discover} />
+
                 <PrivateRoute
                     exact
                     path="/users/suggested"
                     component={Suggested}
                 />
+
                 <PrivateRoute
                     exact
                     path="/users/edit/:userID"
                     component={ProfileEditor}
                 />
+
                 <Route exact path="/users/:userID" component={UserProfile} />
+
                 <Redirect to="/" />
             </Switch>
         </Layout>

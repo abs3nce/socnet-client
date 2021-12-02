@@ -29,4 +29,11 @@ $headerHeight: 70px;
             @content;
         }
     }
+    @if $point == lg {
+        @media (min-width: 100em) {
+            @content;
+        }
+    }
 }
+
+

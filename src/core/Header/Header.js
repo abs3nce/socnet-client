@@ -3,6 +3,15 @@ import { Link, useHistory, withRouter } from "react-router-dom";
 
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
+import { BiGlobe } from "react-icons/bi";
+import { BiHeart } from "react-icons/bi";
+import { FiUsers } from "react-icons/fi";
+import { FiUserPlus } from "react-icons/fi";
+import { BsPlusLg } from "react-icons/bs";
+import { BsPerson } from "react-icons/bs";
+import { IoMdExit } from "react-icons/io";
+import { MdNewLabel } from "react-icons/md";
+import { FiLogIn } from "react-icons/fi";
 
 import classes from "./Header.module.scss";
 
@@ -29,7 +38,7 @@ const Header = (props) => {
     }, []);
 
     useEffect(() => {
-        if (size.width > 768 && menuOpen) {
+        if (size.width > 1600 && menuOpen) {
             setMenuOpen(false);
         }
     }, [size.width, menuOpen]);
@@ -50,20 +59,34 @@ const Header = (props) => {
                 </Link>
                 <nav
                     className={`${classes.header__content__nav} ${
-                        menuOpen && size.width < 768 ? classes.isMenu : ""
+                        menuOpen && size.width < 1600 ? classes.isMenu : ""
                     }`}
                 >
                     <ul>
                         <li>
                             <Link to="/" onClick={menuToggleHandler}>
-                                Home
+                                <BiGlobe className="m-2" />
+                                Global Feed
                             </Link>
                         </li>
+
+                        {isUserAuthenticated() && (
+                            <li>
+                                <Link
+                                    to="/posts/followed"
+                                    onClick={menuToggleHandler}
+                                >
+                                    <BiHeart className="m-2" />
+                                    Your Feed
+                                </Link>
+                            </li>
+                        )}
                         <li>
                             <Link
                                 to="/users/discover"
                                 onClick={menuToggleHandler}
                             >
+                                <FiUsers className="m-2" />
                                 All Users
                             </Link>
                         </li>
@@ -75,6 +98,7 @@ const Header = (props) => {
                                         to="/Login"
                                         onClick={menuToggleHandler}
                                     >
+                                        <FiLogIn className="m-2" />
                                         Login
                                     </Link>
                                 </li>
@@ -83,6 +107,7 @@ const Header = (props) => {
                                         to="/Register"
                                         onClick={menuToggleHandler}
                                     >
+                                        <MdNewLabel className="m-2" />
                                         Register
                                     </Link>
                                 </li>
@@ -95,6 +120,7 @@ const Header = (props) => {
                                         to="/users/suggested"
                                         onClick={menuToggleHandler}
                                     >
+                                        <FiUserPlus className="m-1" />
                                         Suggested
                                     </Link>
                                 </li>
@@ -103,6 +129,7 @@ const Header = (props) => {
                                         to="/posts/create"
                                         onClick={menuToggleHandler}
                                     >
+                                        <BsPlusLg className="m-1" />
                                         New Post
                                     </Link>
                                 </li>
@@ -113,6 +140,7 @@ const Header = (props) => {
                                         }`}
                                         onClick={menuToggleHandler}
                                     >
+                                        <BsPerson className="m-2" />
                                         {`${
                                             isUserAuthenticated().user.username
                                         }'s profile`}
@@ -128,6 +156,7 @@ const Header = (props) => {
                                             )
                                         }
                                     >
+                                        <IoMdExit className="m-2" />
                                         Logout
                                     </Link>
                                 </li>

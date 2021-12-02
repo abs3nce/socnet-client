@@ -11,10 +11,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         render={(props) =>
             isUserAuthenticated() ? (
                 <Component {...props} />
-            ) : (
+            ) : (<>
+                {console.log("Unauthorized acces... redirecting to login")}
                 <Redirect
                     to={{ pathname: "/login", state: { from: props.location } }}
                 />
+                </>
             )
         }
     />

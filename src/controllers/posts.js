@@ -33,6 +33,22 @@ export const getPosts = () => {
         });
 };
 
+export const getFollowedFeed = (id, token) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/followed/${id}`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
 export const getPost = (postID) => {
     return fetch(`${process.env.REACT_APP_API_URL}/posts/${postID}`, {
         method: "GET",
