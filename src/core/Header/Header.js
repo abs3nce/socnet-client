@@ -23,9 +23,13 @@ import { logoutUser, isUserAuthenticated } from "../../controllers/auth";
 const Header = (props) => {
     const history = useHistory();
     const [menuOpen, setMenuOpen] = useState(false);
+    // const [size, setSize] = useState({
+    //     width: undefined,
+    //     height: undefined,
+    // });
     const [size, setSize] = useState({
-        width: undefined,
-        height: undefined,
+        width: window.innerWidth,
+        height: window.innerHeight,
     });
 
     useEffect(() => {
