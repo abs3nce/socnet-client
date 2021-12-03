@@ -85,7 +85,16 @@ class FollowedFeed extends Component {
                                     <p>{post.body.substring(0, 150)}...</p>
                                 </div>
                                 <div className="exif">
-                                    {!exifData ? (
+                                    {!exifData ||
+                                    !exifData.exif ||
+                                    !exifData.image ||
+                                    !exifData.image ||
+                                    !exifData.image.Model ||
+                                    !exifData.exif.LensModel ||
+                                    !exifData.exif.FNumber ||
+                                    !exifData.exif.FocalLength ||
+                                    !exifData.exif.ExposureTime ||
+                                    !exifData.exif.ISO ? (
                                         <div className="exif-error">
                                             No EXIF data available
                                             <br />

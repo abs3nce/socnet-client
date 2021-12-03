@@ -8,7 +8,6 @@ import cameraIcon from "../../images/camera2.svg";
 import lensIcon from "../../images/lens3.svg";
 import settingsIcon from "../../images/settings.svg";
 
-
 import Spinner from "react-bootstrap/Spinner";
 
 import "./allposts.scss";
@@ -76,8 +75,18 @@ class AllPosts extends Component {
                                     </p>
                                     <p>{post.body.substring(0, 150)}...</p>
                                 </div>
+
                                 <div className="exif">
-                                    {!exifData ? (
+                                    {!exifData ||
+                                    !exifData.exif ||
+                                    !exifData.image ||
+                                    !exifData.image ||
+                                    !exifData.image.Model ||
+                                    !exifData.exif.LensModel ||
+                                    !exifData.exif.FNumber ||
+                                    !exifData.exif.FocalLength ||
+                                    !exifData.exif.ExposureTime ||
+                                    !exifData.exif.ISO ? (
                                         <div className="exif-error">
                                             No EXIF data available
                                             <br />
@@ -99,6 +108,7 @@ class AllPosts extends Component {
                                                     {exifData.image.Model}
                                                 </span>
                                             </div>
+
                                             <div className="exif-lens">
                                                 <span>
                                                     <img
@@ -110,10 +120,12 @@ class AllPosts extends Component {
                                                         }}
                                                     />
                                                 </span>
+
                                                 <span>
                                                     {exifData.exif.LensModel}
                                                 </span>
                                             </div>
+
                                             <div className="exif-settings">
                                                 <span>
                                                     <img

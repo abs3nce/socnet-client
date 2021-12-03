@@ -150,7 +150,8 @@ class SinglePost extends Component {
                     </div>
 
                     <div className="col-sm-12 col-xl-4 p-3 p-xl-5">
-                        {isUserAuthenticated().user && post.postedBy &&
+                        {isUserAuthenticated().user &&
+                        post.postedBy &&
                         isUserAuthenticated().user._id === post.postedBy._id ? (
                             <div className="row">
                                 <div className="col-12 col-lg-4 d-flex justify-content-center">
@@ -286,7 +287,16 @@ class SinglePost extends Component {
                         <hr />
                         <div className="post-info-scroll mt-3">
                             <div className="row justify-content-left align-items-center exif">
-                                {!exifData ? (
+                                {!exifData ||
+                                !exifData.exif ||
+                                !exifData.image ||
+                                !exifData.image ||
+                                !exifData.image.Model ||
+                                !exifData.exif.LensModel ||
+                                !exifData.exif.FNumber ||
+                                !exifData.exif.FocalLength ||
+                                !exifData.exif.ExposureTime ||
+                                !exifData.exif.ISO ? (
                                     <div className="exif-error">
                                         No EXIF data available
                                     </div>
@@ -350,8 +360,12 @@ class SinglePost extends Component {
                             </div>
                             <hr />
                             <div className="row">
-                                <h1 className="post-title text-break">{post.title}</h1>
-                                <p className="post-body text-break">{post.body}</p>
+                                <h1 className="post-title text-break">
+                                    {post.title}
+                                </h1>
+                                <p className="post-body text-break">
+                                    {post.body}
+                                </p>
                                 <h6 className="post-created">
                                     {new Date(post.created).toDateString()}
                                 </h6>
