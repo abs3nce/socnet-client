@@ -1,18 +1,5 @@
-// import React, { Component } from 'react'
-
-// class ForgotPassword extends Component {
-//     render() {
-//         return (
-//             <div>
-
-//             </div>
-//         )
-//     }
-// }
-
-// export default ForgotPassword
-
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { forgotPassword } from "../../controllers/auth";
 
 class ForgotPassword extends Component {
@@ -62,10 +49,16 @@ class ForgotPassword extends Component {
                     </div>
                     <button
                         onClick={this.forgotPassword}
-                        className="btn btn-raised btn-primary mt-3"
+                        className="btn btn-raised btn-primary mt-3 w-100"
                     >
                         Send Password Rest Link
                     </button>
+
+                    <div className="row justify-content-center">
+                        <div className="col-12 text-start mt-3">
+                            <Link to="/login">Back to login</Link>
+                        </div>
+                    </div>
                 </form>
                 {message ? (
                     <div

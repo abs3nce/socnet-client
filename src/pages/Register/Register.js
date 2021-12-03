@@ -16,7 +16,6 @@ class Register extends Component {
             error: null,
             success: false,
             loading: false,
-            recaptcha: false,
         };
 
         //binding
@@ -43,62 +42,23 @@ class Register extends Component {
             password,
         };
 
-        if (this.state.recaptcha) {
-            console.log(`> REGISTER FORM data: `, user);
+        console.log(`> REGISTER FORM data: `, user);
 
-            registerUser(user).then((data) => {
-                //nastavenie erroru v state pokial nejaky existuje, pokial nie tak premazanie registracneho formu
-                if (data.error)
-                    this.setState({ error: data.error, loading: false });
-                else {
-                    this.setState({
-                        username: "",
-                        email: "",
-                        password: "",
-                        success: true,
-                        loading: false,
-                    });
-                }
-            });
-        } else {
-            this.setState({
-                loading: false,
-                error: "What day is it today? Please write the correct answer.",
-            });
-        }
+        registerUser(user).then((data) => {
+            //nastavenie erroru v state pokial nejaky existuje, pokial nie tak premazanie registracneho formu
+            if (data.error)
+                this.setState({ error: data.error, loading: false });
+            else {
+                this.setState({
+                    username: "",
+                    email: "",
+                    password: "",
+                    success: true,
+                    loading: false,
+                });
+            }
+        });
     }
-
-    recaptchaHandler = (event) => {
-        this.setState({ error: "" });
-        let userDay = event.target.value.toLowerCase();
-        let dayCount;
-
-        if (userDay === "sunday") {
-            dayCount = 0;
-        } else if (userDay === "monday") {
-            dayCount = 1;
-        } else if (userDay === "tuesday") {
-            dayCount = 2;
-        } else if (userDay === "wednesday") {
-            dayCount = 3;
-        } else if (userDay === "thursday") {
-            dayCount = 4;
-        } else if (userDay === "friday") {
-            dayCount = 5;
-        } else if (userDay === "saturday") {
-            dayCount = 6;
-        }
-
-        if (dayCount === new Date().getDay()) {
-            this.setState({ recaptcha: true });
-            return true;
-        } else {
-            this.setState({
-                recaptcha: false,
-            });
-            return false;
-        }
-    };
 
     loadRegisterForm = (username, email, password) => (
         <form>
@@ -132,46 +92,30 @@ class Register extends Component {
                 />
             </div>
 
-            {/* recaptcha */}
-            <div className="form-group">
-                <label className="text-muted">
-                    {this.state.recaptcha
-                        ? "Thanks. Now you can register"
-                        : "What day is it today?"}
-                </label>
-
-                <input
-                    onChange={this.recaptchaHandler}
-                    type="text"
-                    className="form-control"
-                />
-            </div>
-
             <button
                 onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary mt-3"
+                className="btn btn-raised btn-primary mt-3 w-100"
             >
                 Register
             </button>
+
+            <div className="row justify-content-center">
+                <div className="col-12 text-start mt-3">
+                    <Link to="/login">Login here</Link>
+                </div>
+            </div>
         </form>
     );
 
     render() {
-        const {
-            username,
-            email,
-            password,
-            error,
-            success,
-            loading,
-            recaptcha,
-        } = this.state;
+        const { username, email, password, error, success, loading } =
+            this.state;
 
         return (
             <div className="container">
                 <h2 className="mt-5 mb-5">Register Page</h2>
 
-                {this.loadRegisterForm(username, email, password, recaptcha)}
+                {this.loadRegisterForm(username, email, password)}
 
                 {/* alert o nesplnenej registracii s errorom*/}
                 <div

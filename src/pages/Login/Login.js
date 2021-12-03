@@ -81,21 +81,24 @@ class Login extends Component {
                 />
             </div>
 
-            <div className="row justify-content-between">
-                <div className="col-6 text-start">
+            <div className="row justify-content-center">
+                <div className="col-12 text-center">
                     <button
                         onClick={this.handleSubmit}
-                        className="btn btn-raised btn-primary mt-3"
+                        className="btn btn-raised btn-primary mt-3 w-100"
                     >
                         Login
                     </button>
                 </div>
-                <div className="col-6 text-end">
-                    <Link to="/forgot-password">
-                        <div className="btn btn-raised btn-info mt-3">
-                            Forgot password
-                        </div>
-                    </Link>
+            </div>
+            <div className="row justify-content-center">
+                <div className="col-12 text-start mt-3">
+                    <Link to="/forgot-password">Forgot password</Link>
+                </div>
+            </div>
+            <div className="row justify-content-center">
+                <div className="col-12 text-start mt-3">
+                    <Link to="/register">Register here</Link>
                 </div>
             </div>
         </form>

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { resetPassword } from "../../controllers/auth";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+
+import '../../core/Layout/Layout.module.scss'
 
 class ResetPassword extends Component {
     constructor(props) {
@@ -55,10 +57,15 @@ class ResetPassword extends Component {
                     </div>
                     <button
                         onClick={this.resetPassword}
-                        className="btn btn-raised btn-primary mt-3"
+                        className="btn btn-raised btn-primary mt-3 w-100"
                     >
                         Reset Password
                     </button>
+                    <div className="row justify-content-center">
+                        <div className="col-12 text-start mt-3">
+                            <Link to="/login">Login here</Link>
+                        </div>
+                    </div>
                 </form>
                 {message ? (
                     <div
@@ -75,7 +82,9 @@ class ResetPassword extends Component {
                         >
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
-                        <div className="m-2">{message} <Link to="/login">here</Link></div>
+                        <div className="m-2">
+                            {message} <Link to="/login">here</Link>
+                        </div>
                     </div>
                 ) : (
                     ""
