@@ -82,12 +82,11 @@ class FollowedFeed extends Component {
                                             </Link>
                                         </strong>
                                     </p>
-                                    <p>{post.body.substring(0, 150)}...</p>
+                                    <p className="text-break">{post.body.substring(0, 150)}...</p>
                                 </div>
                                 <div className="exif">
                                     {!exifData ||
                                     !exifData.exif ||
-                                    !exifData.image ||
                                     !exifData.image ||
                                     !exifData.image.Model ||
                                     !exifData.exif.LensModel ||

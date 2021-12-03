@@ -290,7 +290,6 @@ class SinglePost extends Component {
                                 {!exifData ||
                                 !exifData.exif ||
                                 !exifData.image ||
-                                !exifData.image ||
                                 !exifData.image.Model ||
                                 !exifData.exif.LensModel ||
                                 !exifData.exif.FNumber ||

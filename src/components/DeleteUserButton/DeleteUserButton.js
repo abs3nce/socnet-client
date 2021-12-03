@@ -29,13 +29,13 @@ class DeleteUser extends Component {
         logoutUser(() => {
           console.log(`> USER PROFILE DELETED`);
         });
-        this.setState({ redirect: true });
+        this.setState({ redirectToHome: true });
       }
     });
   };
 
   render() {
-    if (this.state.redirect === true) {
+    if (this.state.redirectToHome === true) {
       return <Redirect to="/" />;
     }
 

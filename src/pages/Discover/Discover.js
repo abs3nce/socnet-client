@@ -37,6 +37,7 @@ class Discover extends Component {
     renderUsers = (users) =>
         users.map((user, index) => (
             <div
+                key={user._id}
                 id="card-row"
                 className="DISCOVER row shadow-lg p-2 mb-3 bg-body rounded"
             >
