@@ -6,7 +6,8 @@ import { isUserAuthenticated, logoutUser } from "../../controllers/auth";
 
 class DeleteUser extends Component {
     state = {
-        redirect: false,
+        redirectToHome: false,
+        redirectToAdminUsers: false,
         error: "",
     };
 
@@ -32,8 +33,10 @@ class DeleteUser extends Component {
                     logoutUser(() => {
                         console.log(`> USER PROFILE DELETED`);
                     });
+                    this.setState({ redirectToHome: true });
+                } else {
+                    this.setState({ redirectToAdminUsers: true });
                 }
-                this.setState({ redirectToHome: true });
             }
         });
     };
@@ -41,6 +44,9 @@ class DeleteUser extends Component {
     render() {
         if (this.state.redirectToHome === true) {
             return <Redirect to="/" />;
+        }
+        if (this.state.redirectToAdminUsers === true) {
+            return <Redirect to="/administrationdashboard/users" />;
         }
 
         return (

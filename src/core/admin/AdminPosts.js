@@ -7,6 +7,9 @@ import defaultPostIcon from "../../images/defaultPostIcon.png";
 
 import Spinner from "react-bootstrap/Spinner";
 
+import { isUserAuthenticated } from "../../controllers/auth";
+import { deletePost } from "../../controllers/posts";
+
 import "./allposts.scss";
 
 class AdminAllPosts extends Component {
@@ -15,6 +18,7 @@ class AdminAllPosts extends Component {
         this.state = {
             posts: [],
             noPosts: false,
+            error: "",
         };
     }
 
@@ -30,6 +34,35 @@ class AdminAllPosts extends Component {
             }
         });
     }
+
+    handleDelete = (targetPostID) => {
+        const postID = targetPostID;
+        const token = isUserAuthenticated().token;
+
+        let userInput = window.confirm(
+            "Are you sure you want to delete your account?"
+        );
+        if (userInput) {
+            deletePost(postID, token).then((data) => {
+                if (data.error) {
+                    this.setState({ error: data.error });
+                } else {
+                    console.log(`> POST (${postID}) SUCCESSFULLY DELETED`);
+
+                    getPosts().then((data) => {
+                        if (data.error) {
+                            console.log(data.error);
+                        } else {
+                            this.setState({ posts: data });
+                            if (!data.length) {
+                                this.setState({ noPosts: true });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    };
 
     renderPosts = (posts) => {
         return posts.map((post, index) => {
@@ -71,13 +104,31 @@ class AdminAllPosts extends Component {
                                             <Link to={`${postedByID}`}>
                                                 {postedByUsername}
                                             </Link>{" "}
-                                            on{" "}
-                                            {new Date(
-                                                post.created
-                                            ).toDateString()}
                                         </p>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="text-center">
+                                <Link
+                                    className="btn btn-raised btn-warning btn-sm mb-2"
+                                    to={`/posts/edit/${post._id}`}
+                                >
+                                    {!this.state.error
+                                        ? "UPDATE POST"
+                                        : this.state.error}
+                                </Link>
+                                <br />
+                                <button
+                                    onClick={this.handleDelete.bind(
+                                        null,
+                                        post._id
+                                    )}
+                                    className="btn btn-raised btn-danger btn-sm mb-3"
+                                >
+                                    {!this.state.error
+                                        ? "DELETE POST"
+                                        : this.state.error}
+                                </button>
                             </div>
                         </div>
                     </div>

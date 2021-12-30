@@ -6,6 +6,8 @@ import { isUserAuthenticated } from "../../controllers/auth";
 
 import defaultPostIcon from "../../images/defaultPostIcon.png";
 
+import Spinner from "react-bootstrap/Spinner";
+
 class PostEditor extends Component {
     constructor() {
         super();
@@ -185,7 +187,9 @@ class PostEditor extends Component {
         }
 
         const postPictureURL = id
-            ? `${process.env.REACT_APP_API_URL}/posts/pfp/thumb/${id}?${new Date().getTime()}`
+            ? `${
+                  process.env.REACT_APP_API_URL
+              }/posts/pfp/thumb/${id}?${new Date().getTime()}`
             : defaultPostIcon;
 
         return (
@@ -207,9 +211,14 @@ class PostEditor extends Component {
                     {error}
                 </div>
                 {loading ? (
-                    <div className="lead mt-3">
-                        <p>Loading...</p>
-                    </div>
+                    <Spinner
+                        className="mt-3"
+                        animation="border"
+                        role="status"
+                        variant="primary"
+                    >
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
                 ) : (
                     ""
                 )}

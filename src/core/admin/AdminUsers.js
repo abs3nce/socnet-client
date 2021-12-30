@@ -32,6 +32,19 @@ class Discover extends Component {
         });
     }
 
+    rerenderUsers = () => {
+        getUsers().then((data) => {
+            if (data.error) {
+                console.log(data.error);
+            } else {
+                this.setState({ users: data });
+                if (!data.length) {
+                    this.setState({ noUsers: true });
+                }
+            }
+        });
+    };
+
     renderUsers = (users) =>
         users.map((user, index) => (
             <div
@@ -74,7 +87,10 @@ class Discover extends Component {
                             Edit Profile
                         </Link>
 
-                        <DeleteUserButton userID={user._id} />
+                        <DeleteUserButton
+                            userID={user._id}
+                            onClick={this.rerenderUsers()}
+                        />
                     </div>
                 </div>
             </div>
