@@ -1,0 +1,70 @@
+.ALLPOSTS {
+    &#card:nth-child(1) {
+        margin-top: 1rem * 2;
+    }
+    .exif {
+        .exif-error {
+        }
+        .exif-camera {
+            span {
+                padding: 0 8px;
+            }
+            span:nth-child(1) {
+                padding: 0 8px 0 0;
+            }
+        }
+        .exif-lens {
+            span {
+                padding: 0 8px;
+            }
+            span:nth-child(1) {
+                padding: 0 8px 0 0;
+            }
+        }
+        .exif-settings {
+            span {
+                padding: 0 8px;
+            }
+            span:nth-child(1) {
+                padding: 0 8px 0 0;
+            }
+        }
+    }
+
+    .post-image {
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .post-card-info-title {
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 1.5rem;
+        }
+    }
+
+    // @media (min-width: 768px) {
+    //     #post-card {
+    //         min-height: 100%;
+    //         max-height: calc(100vh/3);
+    //     }
+    //     #post-card-image {
+    //         // max-height: calc(100vh / 3);
+    //         // min-height: calc(100vh / 3);
+    //         width: 100%;
+    //         height: 100%;
+    //         object-fit: cover;
+    //     }
+    // }
+
+    // @media (max-width: 768px) {
+    //     #post-card {
+    //         min-height: 100%;
+    //     }
+    //     #post-card-image {
+    //         width: 100%;
+    //         object-fit: cover;
+    //     }
+    // }
+}

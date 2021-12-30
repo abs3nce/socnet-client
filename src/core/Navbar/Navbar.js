@@ -93,6 +93,9 @@ const NavbarComponent = (props) => (
     <div className="bg-light">
         <ul className="nav nav-tabs">
             <li className="nav-item">
+
+
+                
                 <Link className="nav-link" style={isActive(props, "/")} to="/">
                     Home
                 </Link>

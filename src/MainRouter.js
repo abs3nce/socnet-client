@@ -2,8 +2,12 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
 
-import Navbar from "./core/Navbar/Navbar";
+import AdminDashboard from "./core/admin/AdminDashboard";
+import AdminPosts from "./core/admin/AdminPosts";
+import AdminUsers from "./core/admin/AdminUsers";
+// import Navbar from "./core/Navbar/Navbar";
 import Home from "./core/Home/Home";
 import FollowedFeed from "./pages/FollowedFeed/FollowedFeed";
 import Register from "./pages/Register/Register";
@@ -26,6 +30,22 @@ const MainRouter = () => (
                 <Route exact path="/">
                     <Home />
                 </Route>
+
+                <AdminRoute
+                    exact
+                    path="/administrationdashboard"
+                    component={AdminDashboard}
+                />
+                <AdminRoute
+                    exact
+                    path="/administrationdashboard/posts"
+                    component={AdminPosts}
+                />
+                <AdminRoute
+                    exact
+                    path="/administrationdashboard/users"
+                    component={AdminUsers}
+                />
 
                 <PrivateRoute exact path="/posts/followed">
                     <FollowedFeed />

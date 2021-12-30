@@ -4,19 +4,19 @@ import { Route, Redirect } from "react-router-dom";
 
 import { isUserAuthenticated } from "../controllers/auth";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const AdminRoute = ({ component: Component, ...rest }) => (
     //props je komponent, ktory sa passuje do tejto funkcie
     <Route
         {...rest}
         render={(props) =>
-            isUserAuthenticated() ? (
+            isUserAuthenticated().user.role === "administrator" ? (
                 <Component {...props} />
             ) : (
                 <>
-                    {console.log("Unauthorized acces... redirecting to login")}
+                    {console.log("Unauthorized acces... redirecting to home")}
                     <Redirect
                         to={{
-                            pathname: "/login",
+                            pathname: "/",
                             state: { from: props.location },
                         }}
                     />
@@ -26,7 +26,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     />
 );
 
-export default PrivateRoute;
+export default AdminRoute;
 
 /*
 funguje ako dalsia uroven ochrany,

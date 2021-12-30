@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, withRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
     BsPeople,
-    BsPerson,
+    BsPersonFill,
     BsPersonPlus,
     BsGlobe,
+    BsShieldFill,
     BsBoxArrowInRight,
-    BsHeart,
+    BsHeartFill,
     BsPlusLg,
     BsBoxArrowRight,
     BsPersonLinesFill,
@@ -70,6 +72,20 @@ const Header = (props) => {
                     }`}
                 >
                     <ul>
+                        {isUserAuthenticated() &&
+                            isUserAuthenticated().user.role ===
+                                "administrator" && (
+                                <li>
+                                    <Link
+                                        to={`/administrationdashboard`}
+                                        onClick={menuToggleHandler}
+                                    >
+                                        <BsShieldFill className="m-2" />
+                                        Admin
+                                    </Link>
+                                </li>
+                            )}
+
                         <li>
                             <Link to="/" onClick={menuToggleHandler}>
                                 <BsGlobe className="m-2" />
@@ -83,7 +99,7 @@ const Header = (props) => {
                                     to="/posts/followed"
                                     onClick={menuToggleHandler}
                                 >
-                                    <BsHeart className="m-2" />
+                                    <BsHeartFill className="m-2" />
                                     Your Feed
                                 </Link>
                             </li>
@@ -147,7 +163,7 @@ const Header = (props) => {
                                         }`}
                                         onClick={menuToggleHandler}
                                     >
-                                        <BsPerson className="m-2" />
+                                        <BsPersonFill className="m-2" />
                                         {`${
                                             isUserAuthenticated().user.username
                                         }'s profile`}
