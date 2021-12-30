@@ -10,6 +10,8 @@ import {
 
 import defaultProfilePicture from "../../images/defaultUserIcon.png";
 
+import Spinner from "react-bootstrap/Spinner";
+
 class EditUserProfile extends Component {
     constructor() {
         super();
@@ -206,7 +208,7 @@ class EditUserProfile extends Component {
                 onClick={this.handleSubmit}
                 className="btn btn-raised btn-primary mt-3"
             >
-                Update credentials
+                {!this.state.error ? "Update credentials" : this.state.error}
             </button>
         </form>
     );
@@ -219,7 +221,6 @@ class EditUserProfile extends Component {
             password,
             description,
             redirectToProfile,
-            error,
             loading,
         } = this.state;
 
@@ -253,16 +254,15 @@ class EditUserProfile extends Component {
                     password,
                     description
                 )}
-                <div
-                    style={{ display: error ? "" : "none" }}
-                    className="alert alert-danger mt-3"
-                >
-                    {error}
-                </div>
                 {loading ? (
-                    <div className="lead mt-3">
-                        <p>Loading...</p>
-                    </div>
+                    <Spinner
+                        className="mt-3"
+                        animation="border"
+                        role="status"
+                        variant="primary"
+                    >
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
                 ) : (
                     ""
                 )}

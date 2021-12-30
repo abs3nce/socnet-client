@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, withRouter } from "react-router-dom";
+import { Link, /*useHistory,*/ withRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
@@ -23,7 +23,7 @@ import classes from "./Header.module.scss";
 import { logoutUser, isUserAuthenticated } from "../../controllers/auth";
 
 const Header = (props) => {
-    const history = useHistory();
+    // const history = useHistory();
     const [menuOpen, setMenuOpen] = useState(false);
     // const [size, setSize] = useState({
     //     width: undefined,
@@ -56,10 +56,10 @@ const Header = (props) => {
         setMenuOpen((p) => !p);
     };
 
-    const ctaClickHandler = () => {
-        menuToggleHandler();
-        history.push("/page-cta");
-    };
+    // const ctaClickHandler = () => {
+    //     menuToggleHandler();
+    //     history.push("/page-cta");
+    // };
     return (
         <header className={classes.header}>
             <div className={classes.header__content}>

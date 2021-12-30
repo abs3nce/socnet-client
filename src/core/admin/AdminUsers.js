@@ -8,10 +8,6 @@ import Spinner from "react-bootstrap/Spinner";
 
 import DeleteUserButton from "../../components/DeleteUserButton/DeleteUserButton";
 
-// import { FaImages } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { FaUserPlus } from "react-icons/fa";
-
 import "./discover.scss";
 
 class Discover extends Component {
@@ -68,7 +64,7 @@ class Discover extends Component {
 
                     <div className="col-12 col-md-8 d-flex align-items-center justify-content-center justify-content-md-end">
                         <div className="btn btn-raised btn-primary">
-                            View Profile
+                            <Link to={`/users/${user._id}`}>View Profile</Link>
                         </div>
 
                         <Link

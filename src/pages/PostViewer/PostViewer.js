@@ -132,31 +132,7 @@ class SinglePost extends Component {
 
         return (
             <div className="SINGLEPOST container-fluid">
-                <div className="row justify-content-center align-content-center align-items-center">
-                    {isUserAuthenticated().user &&
-                        isUserAuthenticated().user.role === "administrator" && (
-                            <div className="card mb-4 text-center bg-light">
-                                <div className="card-body">
-                                    <h5 className="card-title">Admin</h5>
-                                    <p className="text-danger">
-                                        Edit/Delete as an Admin
-                                    </p>
-                                    <Link
-                                        className="btn btn-raised btn-warning btn-sm"
-                                        to={`/posts/edit/${post._id}`}
-                                    >
-                                        UPDATE POST
-                                    </Link>
-                                    <button
-                                        onClick={this.handleDelete}
-                                        className="btn btn-raised btn-danger btn-sm"
-                                    >
-                                        DELETE POST
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-                </div>
+                {/* <div className="row justify-content-center align-content-center align-items-center"></div> */}
                 <div className="row d-flex justify-content-between align-content-center align-items-center">
                     <div className="col-sm-12 col-xl-8 m-0 p-0 w100">
                         <Image
@@ -175,6 +151,32 @@ class SinglePost extends Component {
                     </div>
 
                     <div className="col-sm-12 col-xl-4 p-3 p-xl-5">
+                        {isUserAuthenticated().user &&
+                            isUserAuthenticated().user.role ===
+                                "administrator" && (
+                                <div className="card mb-3 text-center bg-light">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Admin</h5>
+                                        <p className="text-danger">
+                                            Edit/Delete as an Admin
+                                        </p>
+                                        <Link
+                                            className="btn btn-raised btn-warning btn-sm mb-2"
+                                            to={`/posts/edit/${post._id}`}
+                                        >
+                                            UPDATE POST
+                                        </Link>
+                                        <br />
+                                        <button
+                                            onClick={this.handleDelete}
+                                            className="btn btn-raised btn-danger btn-sm"
+                                        >
+                                            DELETE POST
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+
                         {isUserAuthenticated().user &&
                         post.postedBy &&
                         isUserAuthenticated().user._id === post.postedBy._id ? (

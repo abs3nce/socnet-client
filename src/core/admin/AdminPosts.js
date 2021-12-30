@@ -41,8 +41,11 @@ class AdminAllPosts extends Component {
                 : "Unknown";
 
             return (
-                <div className="mx-3 col-10 col-sm-5 col-md-3 col-lg-2">
-                    <div key={post._id}>
+                <div
+                    className="mx-3 col-10 col-sm-5 col-md-3 col-lg-2"
+                    key={post._id}
+                >
+                    <div>
                         <div
                             id="card"
                             className="ALLPOSTS row shadow-lg mt-4 bg-body rounded"

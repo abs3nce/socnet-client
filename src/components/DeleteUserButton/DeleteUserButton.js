@@ -49,14 +49,15 @@ class DeleteUser extends Component {
                     onClick={this.confirmDeletion}
                     className="btn btn-raised btn-danger"
                 >
-                    DELETE PROFILE
+                    {!this.state.error ? "DELETE PROFILE" : this.state.error}
+
+                    {/* <div
+                        style={{ display: this.state.error ? "" : "none" }}
+                        className="alert alert-danger mt-3"
+                    >
+                        
+                    </div> */}
                 </button>
-                <div
-                    style={{ display: this.state.error ? "" : "none" }}
-                    className="alert alert-danger mt-3"
-                >
-                    {this.state.error}
-                </div>
             </div>
         );
     }
