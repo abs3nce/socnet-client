@@ -43,7 +43,7 @@ class Discover extends Component {
                 id="card-row"
                 className="DISCOVER row shadow-lg p-2 mb-3 bg-body rounded mx-3"
             >
-                <Link className="d-md-flex" to={`/users/${user._id}`}>
+                <div className="d-md-flex" to={`/users/${user._id}`}>
                     <div className="text-center col-12 col-md-1 d-flex align-items-center justify-content-center">
                         <img
                             style={{
@@ -80,7 +80,7 @@ class Discover extends Component {
 
                         <DeleteUserButton userID={user._id} />
                     </div>
-                </Link>
+                </div>
             </div>
         ));
 

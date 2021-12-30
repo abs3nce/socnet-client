@@ -115,7 +115,7 @@ class Profile extends Component {
                             {isUserAuthenticated().user &&
                                 isUserAuthenticated().user.role ===
                                     "administrator" && (
-                                    <div class="card mb-4 text-center bg-light">
+                                    <div className="card mb-4 text-center bg-light">
                                         <div className="card-body">
                                             <h5 className="card-title">
                                                 Admin

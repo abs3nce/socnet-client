@@ -65,11 +65,15 @@ export const deleteUser = (userID, token) => {
 export const updateUserCredentials = (user, next) => {
     if (typeof window !== "undefined") {
         if (localStorage.getItem("token")) {
-            let auth = JSON.parse(localStorage.getItem("token"));
-            auth.user = user;
-            localStorage.setItem("token", JSON.stringify(auth));
-            next();
+            let userObject = JSON.parse(localStorage.getItem("token"));
+            if (userObject.user.role !== "administrator") {
+                let auth = JSON.parse(localStorage.getItem("token"));
+                auth.user = user;
+                localStorage.setItem("token", JSON.stringify(auth));
+                next();
+            }
         }
+        next();
     }
 };
 
