@@ -132,6 +132,31 @@ class SinglePost extends Component {
 
         return (
             <div className="SINGLEPOST container-fluid">
+                <div className="row justify-content-center align-content-center align-items-center">
+                    {isUserAuthenticated().user &&
+                        isUserAuthenticated().user.role === "administrator" && (
+                            <div className="card mb-4 text-center bg-light">
+                                <div className="card-body">
+                                    <h5 className="card-title">Admin</h5>
+                                    <p className="text-danger">
+                                        Edit/Delete as an Admin
+                                    </p>
+                                    <Link
+                                        className="btn btn-raised btn-warning btn-sm"
+                                        to={`/posts/edit/${post._id}`}
+                                    >
+                                        UPDATE POST
+                                    </Link>
+                                    <button
+                                        onClick={this.handleDelete}
+                                        className="btn btn-raised btn-danger btn-sm"
+                                    >
+                                        DELETE POST
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                </div>
                 <div className="row d-flex justify-content-between align-content-center align-items-center">
                     <div className="col-sm-12 col-xl-8 m-0 p-0 w100">
                         <Image
