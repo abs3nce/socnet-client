@@ -63,7 +63,7 @@ class AdminAllPosts extends Component {
                             <div className="col-12 col-sm-12 col-md-12 col-lg-12">
                                 <div className="d-flex flex-column justify-content-between">
                                     <div className="mt-3">
-                                        <p className="post-card-info-created">
+                                        <p className="post-card-info-created text-center">
                                             Posted by:{" "}
                                             <Link to={`${postedByID}`}>
                                                 {postedByUsername}
@@ -73,12 +73,6 @@ class AdminAllPosts extends Component {
                                                 post.created
                                             ).toDateString()}
                                         </p>
-                                        <Link
-                                            to={`/posts/${post._id}`}
-                                            className="btn btn-raised btn-primary btn-sm w-100 mb-3"
-                                        >
-                                            View more
-                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +104,9 @@ class AdminAllPosts extends Component {
                         </div>
                     ) : (
                         <div className="container">
-                            <div className="row justify-content-center">{this.renderPosts(posts)}</div>
+                            <div className="row justify-content-center">
+                                {this.renderPosts(posts)}
+                            </div>
                         </div>
                     )
                 ) : (

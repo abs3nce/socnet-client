@@ -111,6 +111,31 @@ class Profile extends Component {
             <>
                 <div className="container">
                     <div className="row mt-3">
+                        <div>
+                            {isUserAuthenticated().user &&
+                                isUserAuthenticated().user.role ===
+                                    "administrator" && (
+                                    <div class="card mb-4 text-center bg-light">
+                                        <div className="card-body">
+                                            <h5 className="card-title">
+                                                Admin
+                                            </h5>
+                                            <p className="text-danger">
+                                                Edit/Delete as an Admin
+                                            </p>
+                                            <Link
+                                                className="btn btn-raised btn-success mb-2"
+                                                to={`/users/edit/${user._id}`}
+                                            >
+                                                Edit Profile
+                                            </Link>
+                                            <DeleteUserButton
+                                                userID={user._id}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                        </div>
                         <div className="col-sm-12 text-center">
                             <img
                                 style={{
@@ -136,7 +161,6 @@ class Profile extends Component {
                             <h2 className="">{user.username}</h2>
                         </div>
                     </div>
-
                     <hr />
 
                     <div className="row">

@@ -133,6 +133,7 @@ class EditUserProfile extends Component {
             updateUser(userID, token, this.userData).then((data) => {
                 if (data.error) {
                     this.setState({ error: data.error });
+                    this.setState({ loading: false });
                 } else {
                     updateUserCredentials(data, () => {
                         this.setState({

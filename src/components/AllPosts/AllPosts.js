@@ -47,7 +47,7 @@ class AllPosts extends Component {
                 <div key={post._id}>
                     <div
                         id="card"
-                        className="ALLPOSTS row shadow-lg pt-3 mb-5 bg-body rounded"
+                        className="ALLPOSTS row shadow-lg mb-5 bg-body rounded"
                     >
                         <Link to={`/posts/${post._id}`} className="m-0 p-0">
                             <div className="col-12 col-sm-12 col-md-12 col-lg-12 p-0">

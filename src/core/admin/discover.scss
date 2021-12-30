@@ -1,0 +1,14 @@
+.DISCOVER {
+    &#card-row {
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+    &#card-row:nth-child(1) {
+        margin-top: 1rem * 2;
+    }
+    .social-status-icon {
+        margin-left: 8px;
+    }
+}
