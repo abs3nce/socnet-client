@@ -15,6 +15,7 @@ class PostEditor extends Component {
             id: "",
             title: "",
             body: "",
+            postedById: null,
 
             redirectToProfile: false,
             error: "",
@@ -56,6 +57,7 @@ class PostEditor extends Component {
                     title: data.title,
                     body: data.body,
                     error: "",
+                    posterId: data.postedBy._id,
                 });
             }
         });
@@ -179,7 +181,7 @@ class PostEditor extends Component {
     );
 
     render() {
-        const { title, body, id, redirectToProfile, loading, error } =
+        const { title, body, id, redirectToProfile, loading, error, posterId } =
             this.state;
 
         if (redirectToProfile) {
@@ -187,10 +189,12 @@ class PostEditor extends Component {
         }
 
         if (
-            isUserAuthenticated().user.role !== "administrator" ||
-            isUserAuthenticated().user._id !== id
+            !(
+                isUserAuthenticated().user.role === "administrator" ||
+                isUserAuthenticated().user._id === posterId
+            )
         ) {
-            return <Redirect to={`/users/${isUserAuthenticated().user._id}`} />;
+            return <Redirect to={`/`} />;
         }
 
         const postPictureURL = id
@@ -210,6 +214,10 @@ class PostEditor extends Component {
                     onError={(index) => (index.target.src = defaultPostIcon)}
                     alt={title}
                 />{" "}
+                {/* {isUserAuthenticated().user.role === "administrator" ||
+                isUserAuthenticated().user._id === posterId
+                    ? this.loadEditPostForm(title, body)
+                    : ""} */}
                 {this.loadEditPostForm(title, body)}
                 <div
                     style={{ display: error ? "" : "none" }}

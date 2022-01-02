@@ -21,9 +21,11 @@ class EditUserProfile extends Component {
             email: "",
             password: "",
             description: "",
+            role: "",
 
             fileSize: 0,
             redirectToProfile: false,
+
             error: "",
             loading: false,
         };
@@ -67,6 +69,14 @@ class EditUserProfile extends Component {
                     error: "",
                     description: data.description,
                 });
+                if (
+                    !(
+                        isUserAuthenticated().user._id === this.state.id ||
+                        isUserAuthenticated().user.role === "administrator"
+                    )
+                ) {
+                    this.setState({ redirectToProfile: true });
+                }
             }
         });
     };
@@ -222,17 +232,11 @@ class EditUserProfile extends Component {
             description,
             redirectToProfile,
             loading,
+            role,
         } = this.state;
 
         if (redirectToProfile) {
             return <Redirect to={`/users/${id}`} />;
-        }
-
-        if (
-            isUserAuthenticated().user.role !== "administrator" ||
-            isUserAuthenticated().user._id !== id
-        ) {
-            return <Redirect to={`/users/${isUserAuthenticated().user._id}`} />;
         }
 
         const profilePictureURL = id
@@ -243,6 +247,9 @@ class EditUserProfile extends Component {
 
         return (
             <div className="container">
+                {this.state.id}
+                <br />
+                {isUserAuthenticated().user._id}
                 <h2 className="mt-5 mb-5">Edit {username}'s Profile</h2>
                 <img
                     style={{ height: "200px", width: "auto" }}
