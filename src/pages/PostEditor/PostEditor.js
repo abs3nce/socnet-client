@@ -186,6 +186,13 @@ class PostEditor extends Component {
             return <Redirect to={`/posts/${id}`} />;
         }
 
+        if (
+            isUserAuthenticated().user.role !== "administrator" ||
+            isUserAuthenticated().user._id !== id
+        ) {
+            return <Redirect to={`/users/${isUserAuthenticated().user._id}`} />;
+        }
+
         const postPictureURL = id
             ? `${
                   process.env.REACT_APP_API_URL

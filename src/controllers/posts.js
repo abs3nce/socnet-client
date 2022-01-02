@@ -17,8 +17,8 @@ export const createPost = (userID, token, post) => {
         });
 };
 
-export const getPosts = () => {
-    return fetch(`${process.env.REACT_APP_API_URL}/posts/`, {
+export const getPosts = (pageNumber) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/?pageNumber=${pageNumber}`, {
         method: "GET",
         headers: {
             Accept: "application/json",

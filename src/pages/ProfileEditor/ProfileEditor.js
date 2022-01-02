@@ -228,6 +228,13 @@ class EditUserProfile extends Component {
             return <Redirect to={`/users/${id}`} />;
         }
 
+        if (
+            isUserAuthenticated().user.role !== "administrator" ||
+            isUserAuthenticated().user._id !== id
+        ) {
+            return <Redirect to={`/users/${isUserAuthenticated().user._id}`} />;
+        }
+
         const profilePictureURL = id
             ? `${
                   process.env.REACT_APP_API_URL

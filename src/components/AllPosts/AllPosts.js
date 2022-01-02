@@ -18,11 +18,17 @@ class AllPosts extends Component {
         this.state = {
             posts: [],
             noPosts: false,
+            pageNumber: 1,
+            noMorePosts: false,
         };
     }
 
     componentDidMount() {
-        getPosts().then((data) => {
+        this.loadPosts(this.state.pageNumber);
+    }
+
+    loadPosts = (pageNumber) => {
+        getPosts(pageNumber).then((data) => {
             if (data.error) {
                 console.log(data.error);
             } else {
@@ -32,7 +38,17 @@ class AllPosts extends Component {
                 }
             }
         });
-    }
+    };
+
+    loadNext = (number) => {
+        this.setState({ pageNumber: this.state.pageNumber + number });
+        this.loadPosts(this.state.pageNumber + number);
+    };
+
+    loadPrevious = (number) => {
+        this.setState({ pageNumber: this.state.pageNumber - number });
+        this.loadPosts(this.state.pageNumber - number);
+    };
 
     renderPosts = (posts) => {
         return posts.map((post, index) => {
@@ -73,7 +89,9 @@ class AllPosts extends Component {
                                             </Link>
                                         </strong>
                                     </p>
-                                    <p className="text-break">{post.body.substring(0, 150)}...</p>
+                                    <p className="text-break">
+                                        {post.body.substring(0, 150)}...
+                                    </p>
                                 </div>
 
                                 <div className="exif">
@@ -183,7 +201,7 @@ class AllPosts extends Component {
     };
 
     render() {
-        const { posts, noPosts } = this.state;
+        const { posts, noPosts, pageNumber } = this.state;
 
         return (
             <>
@@ -206,11 +224,38 @@ class AllPosts extends Component {
                             <div className="col-12 col-lg-4">
                                 {this.renderPosts(posts)}
                             </div>
+                            {pageNumber > 1 ? (
+                                <button
+                                    className="btn btn-raised btn-warning mb-3"
+                                    onClick={() => this.loadPrevious(1)}
+                                >
+                                    Previous
+                                </button>
+                            ) : (
+                                ""
+                            )}
+
+                            {posts.length ? (
+                                <button
+                                    className="btn btn-raised btn-success mb-3"
+                                    onClick={() => this.loadNext(1)}
+                                >
+                                    Next
+                                </button>
+                            ) : (
+                                ""
+                            )}
                         </div>
                     )
                 ) : (
                     <div className="container d-flex justify-content-center">
                         <div className="col-12 text-center">
+                            <button
+                                className="btn btn-raised btn-warning mb-3"
+                                onClick={() => this.loadPrevious(1)}
+                            >
+                                Previous
+                            </button>
                             <p className="pt-3">No posts yet</p>
                         </div>
                     </div>
