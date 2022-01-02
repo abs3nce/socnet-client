@@ -22,7 +22,6 @@ export const getPosts = (pageNumber) => {
         method: "GET",
         headers: {
             Accept: "application/json",
-            // Authorization: `Bearer ${token}`,
         },
     })
         .then((res) => {
@@ -54,7 +53,6 @@ export const getPost = (postID) => {
         method: "GET",
         headers: {
             Accept: "application/json",
-            // Authorization: `Bearer ${token}`,
         },
     })
         .then((res) => {
@@ -71,7 +69,6 @@ export const getPostsByUser = (userID) => {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
         },
     })
         .then((res) => {

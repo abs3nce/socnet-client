@@ -50,6 +50,14 @@ class AllPosts extends Component {
         this.loadPosts(this.state.pageNumber - number);
     };
 
+    loadLast = (number) => {
+        this.setState({
+            pageNumber: this.state.pageNumber - number,
+            noPosts: false,
+        });
+        this.loadPosts(this.state.pageNumber - number);
+    };
+
     renderPosts = (posts) => {
         return posts.map((post, index) => {
             const postedByID = post.postedBy
@@ -252,7 +260,7 @@ class AllPosts extends Component {
                         <div className="col-12 text-center">
                             <button
                                 className="btn btn-raised btn-warning mb-3"
-                                onClick={() => this.loadPrevious(1)}
+                                onClick={() => this.loadLast(1)}
                             >
                                 Previous
                             </button>
