@@ -19,7 +19,6 @@ class AllPosts extends Component {
             posts: [],
             noPosts: false,
             pageNumber: 1,
-            noMorePosts: false,
         };
     }
 
@@ -258,13 +257,13 @@ class AllPosts extends Component {
                 ) : (
                     <div className="container d-flex justify-content-center">
                         <div className="col-12 text-center">
+                            <p className="pt-3">No posts yet</p>
                             <button
                                 className="btn btn-raised btn-warning mb-3"
                                 onClick={() => this.loadLast(1)}
                             >
                                 Previous
                             </button>
-                            <p className="pt-3">No posts yet</p>
                         </div>
                     </div>
                 )}

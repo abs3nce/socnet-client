@@ -20,17 +20,22 @@ class FollowedFeed extends Component {
             posts: [],
             noPosts: false,
             redirectToLogin: false,
+            pageNumber: 1,
         };
     }
 
     componentDidMount() {
+        this.loadFollowedFeed(this.state.pageNumber);
+    }
+
+    loadFollowedFeed = (pageNumber) => {
         if (!isUserAuthenticated()) {
             this.setState({ redirectToLogin: true });
         } else {
             const token = isUserAuthenticated().token;
             const _id = isUserAuthenticated().user._id;
 
-            getFollowedFeed(_id, token).then((data) => {
+            getFollowedFeed(_id, token, pageNumber).then((data) => {
                 if (data.error) {
                     console.log(data.error);
                 } else {
@@ -41,7 +46,25 @@ class FollowedFeed extends Component {
                 }
             });
         }
-    }
+    };
+
+    loadNextPage = (number) => {
+        this.setState({ pageNumber: this.state.pageNumber + number });
+        this.loadFollowedFeed(this.state.pageNumber + number);
+    };
+
+    loadPreviousPage = (number) => {
+        this.setState({ pageNumber: this.state.pageNumber - number });
+        this.loadFollowedFeed(this.state.pageNumber - number);
+    };
+
+    loadLastPage = (number) => {
+        this.setState({
+            pageNumber: this.state.pageNumber - number,
+            noPosts: false,
+        });
+        this.loadFollowedFeed(this.state.pageNumber - number);
+    };
 
     renderPosts = (posts) => {
         return posts.map((post, index) => {
@@ -82,7 +105,9 @@ class FollowedFeed extends Component {
                                             </Link>
                                         </strong>
                                     </p>
-                                    <p className="text-break">{post.body.substring(0, 150)}...</p>
+                                    <p className="text-break">
+                                        {post.body.substring(0, 150)}...
+                                    </p>
                                 </div>
                                 <div className="exif">
                                     {!exifData ||
@@ -188,7 +213,7 @@ class FollowedFeed extends Component {
     };
 
     render() {
-        const { posts, noPosts, redirectToLogin } = this.state;
+        const { posts, noPosts, redirectToLogin, pageNumber } = this.state;
 
         if (redirectToLogin) {
             return <Redirect to="/login"></Redirect>;
@@ -214,12 +239,39 @@ class FollowedFeed extends Component {
                             <div className="col-12 col-lg-4">
                                 {this.renderPosts(posts)}
                             </div>
+                            {pageNumber > 1 ? (
+                                <button
+                                    className="btn btn-raised btn-warning mb-3"
+                                    onClick={() => this.loadPreviousPage(1)}
+                                >
+                                    Previous
+                                </button>
+                            ) : (
+                                ""
+                            )}
+
+                            {posts.length ? (
+                                <button
+                                    className="btn btn-raised btn-success mb-3"
+                                    onClick={() => this.loadNextPage(1)}
+                                >
+                                    Next
+                                </button>
+                            ) : (
+                                ""
+                            )}
                         </div>
                     )
                 ) : (
                     <div className="container d-flex justify-content-center">
                         <div className="col-12 text-center">
                             <p className="pt-3">No posts yet</p>
+                        <button
+                            className="btn btn-raised btn-warning mb-3"
+                            onClick={() => this.loadLastPage(1)}
+                        >
+                            Previous Page
+                        </button>
                         </div>
                     </div>
                 )}

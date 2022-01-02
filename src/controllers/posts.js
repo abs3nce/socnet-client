@@ -18,12 +18,15 @@ export const createPost = (userID, token, post) => {
 };
 
 export const getPosts = (pageNumber) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/posts/?pageNumber=${pageNumber}`, {
-        method: "GET",
-        headers: {
-            Accept: "application/json",
-        },
-    })
+    return fetch(
+        `${process.env.REACT_APP_API_URL}/posts/?pageNumber=${pageNumber}`,
+        {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+            },
+        }
+    )
         .then((res) => {
             return res.json();
         })
@@ -32,14 +35,17 @@ export const getPosts = (pageNumber) => {
         });
 };
 
-export const getFollowedFeed = (id, token) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/posts/followed/${id}`, {
-        method: "GET",
-        headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-    })
+export const getFollowedFeed = (id, token, pageNumber) => {
+    return fetch(
+        `${process.env.REACT_APP_API_URL}/posts/followed/${id}/?pageNumber=${pageNumber}`,
+        {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    )
         .then((res) => {
             return res.json();
         })
