@@ -247,9 +247,6 @@ class EditUserProfile extends Component {
 
         return (
             <div className="container">
-                {this.state.id}
-                <br />
-                {isUserAuthenticated().user._id}
                 <h2 className="mt-5 mb-5">Edit {username}'s Profile</h2>
                 <img
                     style={{ height: "200px", width: "auto" }}
