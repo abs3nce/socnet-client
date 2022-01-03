@@ -13,6 +13,8 @@ import DeleteUserButton from "../../components/DeleteUserButton/DeleteUserButton
 import FollowUserButton from "../../components/FollowUserButton/FollowUserButton";
 import ProfileLists from "../../components/ProfileLists/ProfileLists";
 
+import { BsEnvelope, BsFacebook, BsInstagram, BsLink } from "react-icons/bs";
+
 import Spinner from "react-bootstrap/Spinner";
 
 import "./user-profile.scss";
@@ -130,7 +132,7 @@ class Profile extends Component {
                             alt={user.username}
                         />
                     </div>
-                    <div className="col-12 text-center col-md-5 text-md-start d-flex flex-column justify-content-center">
+                    <div className="col-12 text-center col-md-4 text-md-start d-flex flex-column justify-content-center">
                         <div className="row user-basic-info">
                             <p>
                                 <span className="user-username">
@@ -138,30 +140,66 @@ class Profile extends Component {
                                 </span>
                             </p>
                         </div>
-                        <div className="row user-social-status">
-                            <p>
-                                <span className="pr-1">Following</span>
-                                <span className="p-1">Follows</span>
-                                <span className="p-1">Posts</span>
-                            </p>
+                        <div className="row user-social-status d-flex flex-column justify-content-center mb-2">
+                            <div className="col-12">
+                                {user.followers.length} Followers
+                            </div>
+                            <div className="col-12">
+                                {user.following.length} Following
+                            </div>
+                            <div className="col-12">??? Posts</div>
                         </div>
-                        <div className="row">
-                            <p>" {user.description} "</p>
-                        </div>
+
+                        {user.description && (
+                            <div className="row">
+                                <p>
+                                    <i> " {user.description} "</i>
+                                </p>
+                            </div>
+                        )}
                     </div>
-                    <div className="col-12 text-center col-md-2 text-md-start d-flex flex-column justify-content-center">
+                    <div className="col-12 text-center col-md-3 text-md-start d-flex flex-column justify-content-center">
                         <div className="row">
-                            <p className="my-1">@email</p>
+                            <span>
+                                <BsEnvelope className="px-1 w-auto" />
+                                {user.email}
+                            </span>
                         </div>
-                        <div className="row">
-                            <p className="my-1">@instagram</p>
-                        </div>
-                        <div className="row">
-                            <p className="my-1">@facebook</p>
-                        </div>
-                        <div className="row">
-                            <p className="my-1">@url</p>
-                        </div>
+                        {user.facebookLink && (
+                            <div className="row">
+                                <Link
+                                    to={user.facebookLink}
+                                    className="social-media-link"
+                                >
+                                    <BsFacebook className="px-1 w-auto"></BsFacebook>
+                                    {user.username}
+                                </Link>
+                            </div>
+                        )}
+
+                        {user.instagramLink && (
+                            <div className="row">
+                                <Link
+                                    to={user.instagramLink}
+                                    className="social-media-link"
+                                >
+                                    <BsInstagram className="px-1 w-auto"></BsInstagram>
+                                    {user.username}
+                                </Link>
+                            </div>
+                        )}
+
+                        {user.customLink && (
+                            <div className="row">
+                                <Link
+                                    to={user.customLink}
+                                    className="social-media-link"
+                                >
+                                    <BsLink className="px-1 w-auto"></BsLink>
+                                    {user.username}
+                                </Link>
+                            </div>
+                        )}
                     </div>
                     <div className="col-12 text-center col-md-3 text-md-start d-flex flex-column justify-content-center">
                         {isUserAuthenticated().user &&
