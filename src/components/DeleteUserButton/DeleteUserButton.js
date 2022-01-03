@@ -50,10 +50,10 @@ class DeleteUser extends Component {
         }
 
         return (
-            <div>
+            <div className="p-0">
                 <button
                     onClick={this.confirmDeletion}
-                    className="btn btn-raised btn-danger"
+                    className="btn btn-raised btn-danger w-100"
                 >
                     {!this.state.error ? "DELETE PROFILE" : this.state.error}
 

@@ -12,28 +12,20 @@ class FollowUserButton extends Component {
     };
 
     render() {
-        return (
-            <div className="row justify-content-center">
-                {!this.props.following ? (
-                    <div className="col-md-1">
-                        <button
-                            onClick={this.followClicked}
-                            className="btn btn-success button-raised "
-                        >
-                            Follow
-                        </button>
-                    </div>
-                ) : (
-                    <div className="col-md-1">
-                        <button
-                            onClick={this.unfollowClicked}
-                            className="btn btn-danger button-raised "
-                        >
-                            Unfollow
-                        </button>
-                    </div>
-                )}
-            </div>
+        return !this.props.following ? (
+            <button
+                onClick={this.followClicked}
+                className="btn btn-success button-raised w-100"
+            >
+                Follow
+            </button>
+        ) : (
+            <button
+                onClick={this.unfollowClicked}
+                className="btn btn-danger button-raised w-100"
+            >
+                Unfollow
+            </button>
         );
     }
 }
