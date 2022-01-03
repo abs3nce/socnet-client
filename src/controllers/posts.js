@@ -35,6 +35,22 @@ export const getPosts = (pageNumber) => {
         });
 };
 
+export const getAllPosts = () => {
+    return fetch(`${process.env.REACT_APP_API_URL}/posts/all`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
 export const getFollowedFeed = (id, token, pageNumber) => {
     return fetch(
         `${process.env.REACT_APP_API_URL}/posts/followed/${id}/?pageNumber=${pageNumber}`,

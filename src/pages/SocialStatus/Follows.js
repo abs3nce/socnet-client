@@ -33,7 +33,7 @@ class Follows extends Component {
         return (
             <div className="container">
                 <div className="row justify-content-center my-3">
-                    {targetUser} is followed by:
+                    {targetUser} follows:
                 </div>
                 {users.length ? (
                     users.map((user, index) => (

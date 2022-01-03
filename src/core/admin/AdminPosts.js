@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getPosts } from "../../controllers/posts";
+import { getAllPosts } from "../../controllers/posts";
 // import DefaultProfilePicture from "../images/defaultUserIcon.png";
 import { Link } from "react-router-dom";
 
@@ -23,7 +23,7 @@ class AdminAllPosts extends Component {
     }
 
     componentDidMount() {
-        getPosts().then((data) => {
+        getAllPosts().then((data) => {
             if (data.error) {
                 console.log(data.error);
             } else {
@@ -49,7 +49,7 @@ class AdminAllPosts extends Component {
                 } else {
                     console.log(`> POST (${postID}) SUCCESSFULLY DELETED`);
 
-                    getPosts().then((data) => {
+                    getAllPosts().then((data) => {
                         if (data.error) {
                             console.log(data.error);
                         } else {
