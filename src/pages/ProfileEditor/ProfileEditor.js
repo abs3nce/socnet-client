@@ -21,6 +21,9 @@ class EditUserProfile extends Component {
             email: "",
             password: "",
             description: "",
+            facebookLink: "",
+            instagramLink: "",
+            customLink: "",
             role: "",
 
             fileSize: 0,
@@ -68,6 +71,9 @@ class EditUserProfile extends Component {
                     email: data.email,
                     error: "",
                     description: data.description,
+                    facebookLink: data.facebookLink,
+                    instagramLink: data.instagramLink,
+                    customLink: data.customLink,
                 });
                 if (
                     !(
@@ -157,7 +163,15 @@ class EditUserProfile extends Component {
         }
     }
 
-    loadEditProfileForm = (username, email, password, description) => (
+    loadEditProfileForm = (
+        username,
+        email,
+        password,
+        description,
+        facebookLink,
+        instagramLink,
+        customLink
+    ) => (
         <form>
             <div className="form-group">
                 <label className="text-muted">Profile Photo</label>
@@ -204,6 +218,42 @@ class EditUserProfile extends Component {
             <br />
 
             <div className="form-group">
+                <label className="text-muted">Facebook Profile URL</label>
+                <input
+                    onChange={this.handleChange("facebookLink")}
+                    type="text"
+                    className="form-control"
+                    value={facebookLink}
+                    placeholder="e.g. https://www.facebook.com/profile.php?id=54321848321898"
+                />
+            </div>
+            <br />
+
+            <div className="form-group">
+                <label className="text-muted">Instragram Profile URL</label>
+                <input
+                    onChange={this.handleChange("instagramLink")}
+                    type="text"
+                    className="form-control"
+                    value={instagramLink}
+                    placeholder="e.g. https://www.instagram.com/bob.harvey/"
+                />
+            </div>
+            <br />
+
+            <div className="form-group">
+                <label className="text-muted">Custom URL</label>
+                <input
+                    onChange={this.handleChange("customLink")}
+                    type="text"
+                    className="form-control"
+                    value={customLink}
+                    placeholder="e.g. https://www.bobandmartin.com"
+                />
+            </div>
+            <br />
+
+            <div className="form-group">
                 <label className="text-muted">Password</label>
                 <input
                     onChange={this.handleChange("password")}
@@ -233,6 +283,9 @@ class EditUserProfile extends Component {
             redirectToProfile,
             loading,
             role,
+            facebookLink,
+            instagramLink,
+            customLink,
         } = this.state;
 
         if (redirectToProfile) {
@@ -246,25 +299,36 @@ class EditUserProfile extends Component {
             : defaultProfilePicture;
 
         return (
-            <div className="container">
-                <h2 className="mt-5 mb-5">Edit {username}'s Profile</h2>
-                <img
-                    style={{ height: "200px", width: "auto" }}
-                    className="image-thumbnail"
-                    src={profilePictureURL}
-                    onError={(index) =>
-                        (index.target.src = defaultProfilePicture)
-                    }
-                    alt={username}
-                />{" "}
-                <br />
-                <br />
-                {this.loadEditProfileForm(
-                    username,
-                    email,
-                    password,
-                    description
-                )}
+            <div className="container mt-5">
+                {/* <h2 className="mt-5 mb-5">Edit {username}'s Profile</h2> */}
+                <div className="row">
+                    <div className="col-12 col-md-3 d-flex justify-content-center flex-column">
+                        <img
+                            style={{
+                                height: "200px",
+                                width: "auto",
+                                objectFit: "contain",
+                            }}
+                            className="image-thumbnail mb-3"
+                            src={profilePictureURL}
+                            onError={(index) =>
+                                (index.target.src = defaultProfilePicture)
+                            }
+                            alt={username}
+                        />
+                    </div>
+                    <div className="col-12 col-md-9">
+                        {this.loadEditProfileForm(
+                            username,
+                            email,
+                            password,
+                            description,
+                            facebookLink,
+                            instagramLink,
+                            customLink
+                        )}
+                    </div>
+                </div>{" "}
                 {loading ? (
                     <Spinner
                         className="mt-3"

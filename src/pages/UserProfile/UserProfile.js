@@ -167,37 +167,37 @@ class Profile extends Component {
                         </div>
                         {user.facebookLink && (
                             <div className="row">
-                                <Link
-                                    to={user.facebookLink}
+                                <a
+                                    href={user.facebookLink}
                                     className="social-media-link"
                                 >
                                     <BsFacebook className="px-1 w-auto"></BsFacebook>
-                                    {user.username}
-                                </Link>
+                                    FACEBOOK
+                                </a>
                             </div>
                         )}
 
                         {user.instagramLink && (
                             <div className="row">
-                                <Link
-                                    to={user.instagramLink}
+                                <a
+                                    href={user.instagramLink}
                                     className="social-media-link"
                                 >
                                     <BsInstagram className="px-1 w-auto"></BsInstagram>
-                                    {user.username}
-                                </Link>
+                                    INSTAGRAM
+                                </a>
                             </div>
                         )}
 
                         {user.customLink && (
                             <div className="row">
-                                <Link
-                                    to={user.customLink}
+                                <a
+                                    href={user.customLink}
                                     className="social-media-link"
                                 >
                                     <BsLink className="px-1 w-auto"></BsLink>
-                                    {user.username}
-                                </Link>
+                                    WEBSITE
+                                </a>
                             </div>
                         )}
                     </div>
