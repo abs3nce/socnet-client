@@ -137,19 +137,31 @@ class Profile extends Component {
                         <div className="row user-basic-info">
                             <p>
                                 <span className="user-username">
-                                    {user.username}
+                                    <strong>{user.username}</strong>
                                 </span>
                             </p>
                         </div>
                         <div className="row user-social-status d-flex flex-column justify-content-center mb-2">
                             <div className="col-12">
-                                {user.followers.length} Followers
+                                <Link
+                                    className="social-media-link"
+                                    to={`/users/followedby/${user._id}`}
+                                >
+                                    <strong>{user.followers.length}</strong>{" "}
+                                    Followers
+                                </Link>
                             </div>
                             <div className="col-12">
-                                {user.following.length} Following
+                                <Link
+                                    className="social-media-link"
+                                    to={`/users/follows/${user._id}`}
+                                >
+                                    <strong>{user.following.length}</strong>{" "}
+                                    Following
+                                </Link>
                             </div>
                             <div className="col-12">
-                                {posts.length} Posts
+                                <strong>{posts.length}</strong> Posts
                             </div>
                         </div>
 

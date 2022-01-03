@@ -22,6 +22,8 @@ import PostEditor from "./pages/PostEditor/PostEditor";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Layout from "./core/Layout/Layout";
+import FollowedBy from "./pages/SocialStatus/FollowedBy";
+import Follows from "./pages/SocialStatus/Follows";
 
 const MainRouter = () => (
     <div>
@@ -85,6 +87,17 @@ const MainRouter = () => (
                     exact
                     path="/users/suggested"
                     component={Suggested}
+                />
+
+                <Route
+                    exact
+                    path="/users/followedby/:userid"
+                    component={FollowedBy}
+                />
+                <Route
+                    exact
+                    path="/users/follows/:userid"
+                    component={Follows}
                 />
 
                 <PrivateRoute
