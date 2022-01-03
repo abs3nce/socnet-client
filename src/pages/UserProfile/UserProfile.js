@@ -3,7 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 
 import { isUserAuthenticated } from "../../controllers/auth";
 import { getUser } from "../../controllers/users";
-import { getPostsByUser } from "../../controllers/posts";
+import { getPostsByUser, getNumOfPostsOfUser } from "../../controllers/posts";
 
 import defaultProfilePicture from "../../images/defaultUserIcon.png";
 import defaultPostIcon from "../../images/defaultPostIcon.png";
@@ -29,6 +29,7 @@ class Profile extends Component {
             error: "",
             posts: [],
             noPosts: false,
+            numOfPosts: [],
         };
     }
 
@@ -147,7 +148,9 @@ class Profile extends Component {
                             <div className="col-12">
                                 {user.following.length} Following
                             </div>
-                            <div className="col-12">??? Posts</div>
+                            <div className="col-12">
+                                {posts.length} Posts
+                            </div>
                         </div>
 
                         {user.description && (
