@@ -110,7 +110,8 @@ class AllPosts extends Component {
                                     !exifData.exif.FNumber ||
                                     !exifData.exif.FocalLength ||
                                     !exifData.exif.ExposureTime ||
-                                    !exifData.exif.ISO ? (
+                                    !exifData.exif.ISO ||
+                                    !exifData.exif.ExposureCompensation ? (
                                         <div className="exif-error">
                                             No EXIF data available
                                             <br />
@@ -179,6 +180,13 @@ class AllPosts extends Component {
                                                 <span>
                                                     ISO {exifData.exif.ISO}
                                                 </span>
+                                                <span>
+                                                    EVC{" "}
+                                                    {exifData.exif.ExposureCompensation.toString().slice(
+                                                        0,
+                                                        4
+                                                    )}
+                                                </span>
                                             </div>
                                         </>
                                     )}
@@ -228,7 +236,7 @@ class AllPosts extends Component {
                         </div>
                     ) : (
                         <div className="container d-flex flex-column align-items-center">
-                            <div className="col-12 col-lg-4">
+                            <div className="col-12 col-lg-5">
                                 {this.renderPosts(posts)}
                             </div>
                             {pageNumber > 1 ? (
