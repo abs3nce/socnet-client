@@ -182,7 +182,7 @@ class SinglePost extends Component {
                         <div className="row text-start text-break">
                             <h1>{post.title}</h1>
                         </div>
-                        <div className="row text-start text-break">
+                        <div className="row text-center text-md-start text-break">
                             <p>{post.body}</p>
                             <p>{new Date(post.created).toDateString()}</p>
                         </div>
@@ -210,7 +210,62 @@ class SinglePost extends Component {
                         )}
                     </div>
 
-                    <div className="col-12 col-md-6 text-center text-md-right">
+                    <div className="col-12 col-md-6 text-center text-md-start">
+                        <div className="row">
+                            {isUserAuthenticated().user &&
+                                isUserAuthenticated().user.role ===
+                                    "administrator" &&
+                                isUserAuthenticated().user._id !==
+                                    post.postedBy._id && (
+                                    <div className="card mb-3 text-center bg-light">
+                                        <div className="card-body">
+                                            <h5 className="card-title">
+                                                Admin
+                                            </h5>
+                                            <p className="text-danger">
+                                                Edit/Delete as an Admin
+                                            </p>
+                                            <Link
+                                                className="btn btn-raised btn-warning btn-sm mb-2"
+                                                to={`/posts/edit/${post._id}`}
+                                            >
+                                                UPDATE POST
+                                            </Link>
+                                            <br />
+                                            <button
+                                                onClick={this.handleDelete}
+                                                className="btn btn-raised btn-danger btn-sm"
+                                            >
+                                                DELETE POST
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                        </div>
+
+                        {isUserAuthenticated().user &&
+                            isUserAuthenticated().user._id === post.postedBy._id && (
+                                <>
+                                    <div className="row justify-content-center py-3 py-md-0">
+                                        <div className="col-12 col-lg-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 mt-md-3 mt-xl-0">
+                                            <Link
+                                                className="btn btn-raised btn-warning btn-sm"
+                                                to={`/posts/edit/${post._id}`}
+                                            >
+                                                UPDATE POST
+                                            </Link>
+                                        </div>
+                                        <div className="col-12 col-lg-4 d-flex align-items-center justify-content-center mt-md-3 mt-xl-0">
+                                            <button
+                                                onClick={this.handleDelete}
+                                                className="btn btn-raised btn-danger btn-sm"
+                                            >
+                                                DELETE POST
+                                            </button>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                         <div className="row">
                             <div className="likes mt-3">
                                 {likedByUser ? (
