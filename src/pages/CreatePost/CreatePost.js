@@ -52,7 +52,7 @@ class CreatePost extends Component {
 
         if (fileSize > 10000000) {
             this.setState({
-                error: "Maximal size of an image is 10 MB",
+                error: "Maximálna veľkosť fotografie je 10 MB",
                 loading: false,
             });
             return false;
@@ -60,36 +60,22 @@ class CreatePost extends Component {
 
         if (title.length === 0) {
             this.setState({
-                error: "Title must not be empty",
+                error: "Názov nesmie ostať prázdny",
                 loading: false,
             });
             return false;
         }
-        if (title.length < 8) {
+        if (title.length < 8 && title.length > 150) {
             this.setState({
-                error: "Title must be atlease 8 characters long",
-                loading: false,
-            });
-            return false;
-        }
-        if (title.length > 150) {
-            this.setState({
-                error: "Title must be maximum 150 characters long",
+                error: "Názov musí mať aspoň 8 znakov a maximálne 150 znakov",
                 loading: false,
             });
             return false;
         }
 
-        if (body.length < 8) {
-            this.setState({
-                error: "The minimum length of body is 8 characters",
-                loading: false,
-            });
-            return false;
-        }
         if (body.length > 1500) {
             this.setState({
-                error: "The maximum length of body is 1500 characters",
+                error: "Maximálna dĺžka tela fotografie je 1500 znakov",
                 loading: false,
             });
             return false;
