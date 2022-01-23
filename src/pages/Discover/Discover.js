@@ -78,7 +78,7 @@ class Discover extends Component {
 
                     <div className="col-12 col-md-3 d-flex align-items-center justify-content-center">
                         <div className="btn btn-raised btn-primary btn-sm">
-                            View Profile
+                        Prejsť na profil
                         </div>
                     </div>
                 </Link>
@@ -113,7 +113,7 @@ class Discover extends Component {
                 ) : (
                     <div className="container d-flex flex-column">
                         <div className="col-12 text-center">
-                            <p className="pt-3">No users yet</p>
+                            <p className="pt-3">Žiadni uživatelia</p>
                         </div>
                     </div>
                 )}

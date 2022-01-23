@@ -66,7 +66,7 @@ class SinglePost extends Component {
         const token = isUserAuthenticated().token;
 
         let userInput = window.confirm(
-            "Are you sure you want to delete your account?"
+            "Ste si istý, že chcete vymazať tento príspevok?"
         );
         if (userInput) {
             deletePost(postID, token).then((data) => {
@@ -156,13 +156,12 @@ class SinglePost extends Component {
                         <div className="row">
                             <div className="col-12 col-md-2 text-center text-md-end d-md-flex flex-md-column justify-md-content-center align-md-items-start">
                                 <img
+                                    
                                     style={{
                                         height: "50px",
-                                        width: "auto",
-                                        aspectRatio: "1/1",
-                                        objectFit: "contain",
+                                        width:"50px",
+                                        objectFit: "fill",
                                         borderRadius: "128px",
-                                        border: "0px solid black",
                                     }}
                                     className="image-thumbnail"
                                     src={profilePictureURL}
@@ -170,6 +169,7 @@ class SinglePost extends Component {
                                         (index.target.src = defaultUserIcon)
                                     }
                                     alt={postedByUsername}
+                                    
                                 />
                             </div>
                             <div className="col-12 col-md-10 text-center text-md-start d-md-flex flex-md-column justify-md-content-center">
@@ -179,7 +179,7 @@ class SinglePost extends Component {
                             </div>
                         </div>
 
-                        <div className="row text-start text-break">
+                        <div className="row text-center text-md-start text-break">
                             <h1>{post.title}</h1>
                         </div>
                         <div className="row text-center text-md-start text-break">
@@ -198,7 +198,7 @@ class SinglePost extends Component {
                         !exifData.exif.ISO ||
                         !exifData.exif.ExposureCompensation ? (
                             <div className="exif-error">
-                                No EXIF data available
+                                Dáta EXIF nie sú k dispozícií
                                 <br />
                             </div>
                         ) : (
@@ -244,7 +244,8 @@ class SinglePost extends Component {
                         </div>
 
                         {isUserAuthenticated().user &&
-                            isUserAuthenticated().user._id === post.postedBy._id && (
+                            isUserAuthenticated().user._id ===
+                                post.postedBy._id && (
                                 <>
                                     <div className="row justify-content-center py-3 py-md-0">
                                         <div className="col-12 col-lg-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 mt-md-3 mt-xl-0">
@@ -252,7 +253,7 @@ class SinglePost extends Component {
                                                 className="btn btn-raised btn-warning btn-sm"
                                                 to={`/posts/edit/${post._id}`}
                                             >
-                                                UPDATE POST
+                                                Upraviť príspevok
                                             </Link>
                                         </div>
                                         <div className="col-12 col-lg-4 d-flex align-items-center justify-content-center mt-md-3 mt-xl-0">
@@ -260,69 +261,71 @@ class SinglePost extends Component {
                                                 onClick={this.handleDelete}
                                                 className="btn btn-raised btn-danger btn-sm"
                                             >
-                                                DELETE POST
+                                                Vymazať príspevok
                                             </button>
                                         </div>
                                     </div>
                                 </>
                             )}
-                        <div className="row">
-                            <div className="likes mt-3">
-                                {likedByUser ? (
-                                    <button
-                                        className="btn btn-raised btn-sm btn-dark like-button"
-                                        onClick={this.likeToggle}
-                                    >
-                                        {likeLoading ? (
-                                            <div>
-                                                <Spinner
-                                                    className="mt-3"
-                                                    animation="border"
-                                                    role="status"
-                                                    size="sm"
-                                                >
-                                                    <span className="visually-hidden">
-                                                        Loading...
-                                                    </span>
-                                                </Spinner>
-                                            </div>
-                                        ) : (
-                                            <div>
-                                                <FaHeart />
-                                                <span>{likes}</span>
-                                            </div>
-                                        )}
-                                    </button>
-                                ) : (
-                                    <button
-                                        className="btn btn-raised btn-sm btn-dark like-button"
-                                        onClick={this.likeToggle}
-                                    >
-                                        {likeLoading ? (
-                                            <div>
-                                                <Spinner
-                                                    className="mt-3"
-                                                    animation="border"
-                                                    role="status"
-                                                    size="sm"
-                                                >
-                                                    <span className="visually-hidden">
-                                                        Loading...
-                                                    </span>
-                                                </Spinner>
-                                            </div>
-                                        ) : (
-                                            <div className="status-wrapper">
-                                                <span>
+                        {isUserAuthenticated().user && (
+                            <div className="row">
+                                <div className="likes mt-3">
+                                    {likedByUser ? (
+                                        <button
+                                            className="btn btn-raised btn-sm btn-dark like-button"
+                                            onClick={this.likeToggle}
+                                        >
+                                            {likeLoading ? (
+                                                <div>
+                                                    <Spinner
+                                                        className="mt-3"
+                                                        animation="border"
+                                                        role="status"
+                                                        size="sm"
+                                                    >
+                                                        <span className="visually-hidden">
+                                                            Loading...
+                                                        </span>
+                                                    </Spinner>
+                                                </div>
+                                            ) : (
+                                                <div>
                                                     <FaHeart />
-                                                </span>
-                                                <span>{likes}</span>
-                                            </div>
-                                        )}
-                                    </button>
-                                )}
+                                                    <span>{likes}</span>
+                                                </div>
+                                            )}
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className="btn btn-raised btn-sm btn-dark like-button"
+                                            onClick={this.likeToggle}
+                                        >
+                                            {likeLoading ? (
+                                                <div>
+                                                    <Spinner
+                                                        className="mt-3"
+                                                        animation="border"
+                                                        role="status"
+                                                        size="sm"
+                                                    >
+                                                        <span className="visually-hidden">
+                                                            Loading...
+                                                        </span>
+                                                    </Spinner>
+                                                </div>
+                                            ) : (
+                                                <div className="status-wrapper">
+                                                    <span>
+                                                        <FaHeart />
+                                                    </span>
+                                                    <span>{likes}</span>
+                                                </div>
+                                            )}
+                                        </button>
+                                    )}
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div className="row">
                             <Comments
                                 className=""

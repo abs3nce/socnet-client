@@ -22,12 +22,12 @@ class AdminDashboard extends Component {
                 </div> */}
                 <div className="row ">
                     <div className="col-12">
-                        <Link to="/administrationdashboard/posts" style={{fontSize:"32px",textDecoration:"none",color:"black"}}>Manage Posts</Link>
+                        <Link to="/administrationdashboard/posts" style={{fontSize:"32px",textDecoration:"none",color:"black"}}>Spravovať Príspevky</Link>
                     </div>
                 </div>
                 <div className="row ">
                     <div className="col-12">
-                        <Link to="/administrationdashboard/users" style={{fontSize:"32px",textDecoration:"none",color:"black"}}>Manage Users</Link>
+                        <Link to="/administrationdashboard/users" style={{fontSize:"32px",textDecoration:"none",color:"black"}}>Spravovať Užívateľov</Link>
                     </div>
                 </div>
             </div>

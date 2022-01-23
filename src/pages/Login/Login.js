@@ -62,22 +62,24 @@ class Login extends Component {
     loadLoginForm = (username, password) => (
         <form>
             <div className="form-group">
-                <label className="text-muted">Username</label>
+                <label className="text-muted">Meno</label>
                 <input
                     onChange={this.handleChange("username")}
                     type="text"
                     className="form-control"
                     value={username}
+                    placeholder="Zadajte užívateľské meno"
                 />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Password</label>
+                <label className="text-muted">Heslo</label>
                 <input
                     onChange={this.handleChange("password")}
                     type="password"
                     className="form-control"
                     value={password}
+                    placeholder="Zadajte užívateľské heslo"
                 />
             </div>
 
@@ -87,18 +89,18 @@ class Login extends Component {
                         onClick={this.handleSubmit}
                         className="btn btn-raised btn-primary mt-3 w-100"
                     >
-                        Login
+                        Prihlásiť sa
                     </button>
                 </div>
             </div>
             <div className="row justify-content-center">
                 <div className="col-12 text-start mt-3">
-                    <Link to="/forgot-password">Forgot password</Link>
+                    <Link to="/forgot-password">Zabudol som heslo</Link>
                 </div>
             </div>
             <div className="row justify-content-center">
                 <div className="col-12 text-start mt-3">
-                    <Link to="/register">Register here</Link>
+                    <Link to="/register">Ešte nemám konto</Link>
                 </div>
             </div>
         </form>
@@ -112,9 +114,7 @@ class Login extends Component {
         }
 
         return (
-            <div className="container">
-                <h2 className="mt-5 mb-5">Login Page</h2>
-
+            <div className="container mt-5">
                 {this.loadLoginForm(username, password)}
 
                 {/* <SocialLogin /> */}

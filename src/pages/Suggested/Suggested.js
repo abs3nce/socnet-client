@@ -52,7 +52,7 @@ class Suggested extends Component {
                 this.setState({
                     users: toFollow,
                     open: true,
-                    followMessage: `Following ${user.username}`,
+                    followMessage: `Sledujete ${user.username}`,
                 });
             }
         });
@@ -108,7 +108,7 @@ class Suggested extends Component {
                                 to={`/users/${user._id}`}
                                 className="btn btn-raised btn-primary btn-sm"
                             >
-                                View profile
+                                Prejsť na profil
                             </Link>
                         </span>
 
@@ -119,7 +119,7 @@ class Suggested extends Component {
                                 }}
                                 className="btn btn-raised btn-success btn-sm float-right"
                             >
-                                Follow
+                               Sledovať
                             </button>
                         </span>
                     </div>
@@ -165,8 +165,8 @@ class Suggested extends Component {
                     <div className="container d-flex flex-column">
                         <div className="col-12 text-center">
                             <p className="pt-3">
-                                No suggested users. Try following someone from{" "}
-                                <Link to="/users/discover">here</Link>
+                                Žiadni odporucení uživatelia. Skúste začať sledovať niekoho{" "}
+                                <Link to="/users/discover">odtiaľto</Link>
                             </p>
                         </div>
                     </div>

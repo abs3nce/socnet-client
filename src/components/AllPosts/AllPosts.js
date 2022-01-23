@@ -113,7 +113,7 @@ class AllPosts extends Component {
                                     !exifData.exif.ISO ||
                                     !exifData.exif.ExposureCompensation ? (
                                         <div className="exif-error">
-                                            No EXIF data available
+                                            Dáta EXIF nie sú k dispozícií
                                             <br />
                                         </div>
                                     ) : (
@@ -193,18 +193,17 @@ class AllPosts extends Component {
                                 </div>
                                 <div className="">
                                     <p className="post-card-info-created">
-                                        Posted by:{" "}
+                                        Autor:{" "}
                                         <Link to={`${postedByID}`}>
                                             {postedByUsername}
                                         </Link>{" "}
-                                        on{" "}
                                         {new Date(post.created).toDateString()}
                                     </p>
                                     <Link
                                         to={`/posts/${post._id}`}
                                         className="btn btn-raised btn-primary btn-sm w-100 mb-3"
                                     >
-                                        View more
+                                        Vidieť viac
                                     </Link>
                                 </div>
                             </div>
@@ -244,7 +243,7 @@ class AllPosts extends Component {
                                     className="btn btn-raised btn-warning mb-3"
                                     onClick={() => this.loadPrevious(1)}
                                 >
-                                    Previous
+                                    Predošlá strana
                                 </button>
                             ) : (
                                 ""
@@ -255,7 +254,7 @@ class AllPosts extends Component {
                                     className="btn btn-raised btn-success mb-3"
                                     onClick={() => this.loadNext(1)}
                                 >
-                                    Next
+                                    Následujúca strana
                                 </button>
                             ) : (
                                 ""
@@ -265,12 +264,12 @@ class AllPosts extends Component {
                 ) : (
                     <div className="container d-flex justify-content-center">
                         <div className="col-12 text-center">
-                            <p className="pt-3">No posts yet</p>
+                            <p className="pt-3">Žiadne príspevky</p>
                             <button
                                 className="btn btn-raised btn-warning mb-3"
                                 onClick={() => this.loadLast(1)}
                             >
-                                Previous
+                                Predošlá strana
                             </button>
                         </div>
                     </div>

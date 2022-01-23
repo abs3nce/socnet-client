@@ -79,7 +79,7 @@ class FollowedFeed extends Component {
                 <div key={post._id}>
                     <div
                         id="card"
-                        className="ALLPOSTS row shadow-lg pt-3 mb-5 bg-body rounded"
+                        className="ALLPOSTS row shadow-lg mb-5 bg-body rounded"
                     >
                         <Link to={`/posts/${post._id}`} className="m-0 p-0">
                             <div className="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
@@ -120,7 +120,7 @@ class FollowedFeed extends Component {
                                     !exifData.exif.ExposureTime ||
                                     !exifData.exif.ISO ? (
                                         <div className="exif-error">
-                                            No EXIF data available
+                                            Dáta EXIF nie sú k dispozícií
                                             <br />
                                         </div>
                                     ) : (
@@ -190,7 +190,7 @@ class FollowedFeed extends Component {
                                 </div>
                                 <div className="">
                                     <p className="post-card-info-created">
-                                        Posted by:{" "}
+                                        Autor:{" "}
                                         <Link to={`${postedByID}`}>
                                             {postedByUsername}
                                         </Link>{" "}
@@ -201,7 +201,7 @@ class FollowedFeed extends Component {
                                         to={`/posts/${post._id}`}
                                         className="btn btn-raised btn-primary btn-sm w-100 mb-3"
                                     >
-                                        View more
+                                        Vidieť viac
                                     </Link>
                                 </div>
                             </div>
@@ -236,7 +236,7 @@ class FollowedFeed extends Component {
                         </div>
                     ) : (
                         <div className="container d-flex flex-column align-items-center">
-                            <div className="col-12 col-lg-4">
+                            <div className="col-12 col-lg-5">
                                 {this.renderPosts(posts)}
                             </div>
                             {pageNumber > 1 ? (
@@ -244,7 +244,7 @@ class FollowedFeed extends Component {
                                     className="btn btn-raised btn-warning mb-3"
                                     onClick={() => this.loadPreviousPage(1)}
                                 >
-                                    Previous
+                                    Predošlá strana
                                 </button>
                             ) : (
                                 ""
@@ -255,7 +255,7 @@ class FollowedFeed extends Component {
                                     className="btn btn-raised btn-success mb-3"
                                     onClick={() => this.loadNextPage(1)}
                                 >
-                                    Next
+                                    Následujúca strana
                                 </button>
                             ) : (
                                 ""
@@ -265,13 +265,13 @@ class FollowedFeed extends Component {
                 ) : (
                     <div className="container d-flex justify-content-center">
                         <div className="col-12 text-center">
-                            <p className="pt-3">No posts yet</p>
-                        <button
-                            className="btn btn-raised btn-warning mb-3"
-                            onClick={() => this.loadLastPage(1)}
-                        >
-                            Previous Page
-                        </button>
+                            <p className="pt-3">Žiadne príspevky</p>
+                            <button
+                                className="btn btn-raised btn-warning mb-3"
+                                onClick={() => this.loadLastPage(1)}
+                            >
+                                Predošlá strana
+                            </button>
                         </div>
                     </div>
                 )}

@@ -24,13 +24,13 @@ class CommentBox extends Component {
         const { text } = this.state;
         if (!text.length > 0) {
             this.setState({
-                error: "Comment must not be empty",
+                error: "Komentár nemôže byť prázdny",
             });
             return false;
         }
         if (text.length > 300) {
             this.setState({
-                error: "Comment can not be longer than 150 characters",
+                error: "Komentár nemôže byť dlhši ako 150 znakov",
             });
             return false;
         }
@@ -40,7 +40,9 @@ class CommentBox extends Component {
     createComment = (event) => {
         event.preventDefault();
         if (!isUserAuthenticated()) {
-            this.setState({ error: "Please sign in to leave a comment" });
+            this.setState({
+                error: "Prosím prihláste sa ak chcete pridať komentár",
+            });
             return false;
         }
         if (this.isCommentValid()) {
@@ -71,7 +73,7 @@ class CommentBox extends Component {
             if (data.error) {
                 console.log(data.error);
             } else {
-                this.setState({ message: "Comment deleted successfully" });
+                this.setState({ message: "Komentár bol úspešne vymazaný" });
                 this.props.updatedList(data.comments);
             }
         });
@@ -79,7 +81,7 @@ class CommentBox extends Component {
 
     commentDelConfirmation = (comment) => {
         let answer = window.confirm(
-            "Are you sure you want to delete your comment?"
+            "Ste si istý, že chcete vymazať svoj komentár?"
         );
 
         if (answer) {
@@ -92,22 +94,24 @@ class CommentBox extends Component {
         const { error, message } = this.state;
         return (
             <div className="mt-3">
-                <div className="row">
-                    <form onSubmit={this.createComment}>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                onChange={this.handleChange}
-                                className="form-control"
-                                value={this.state.text}
-                                placeholder="Leave a comment"
-                            />
-                        </div>
-                        <button className="btn btn-raised btn-sm btn-primary w-100 mt-2">
-                            Submit
-                        </button>
-                    </form>
-                </div>
+                {isUserAuthenticated().user && (
+                    <div className="row">
+                        <form onSubmit={this.createComment}>
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    onChange={this.handleChange}
+                                    className="form-control"
+                                    value={this.state.text}
+                                    placeholder="Napíšte komentár"
+                                />
+                            </div>
+                            <button className="btn btn-raised btn-sm btn-primary w-100 mt-2">
+                                Pridať
+                            </button>
+                        </form>
+                    </div>
+                )}
                 {error ? (
                     <div
                         class="alert alert-warning d-flex align-items-center mt-2"
@@ -118,7 +122,7 @@ class CommentBox extends Component {
                             width="24"
                             height="24"
                             fill="currentColor"
-                            class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
+                            className="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
                             viewBox="0 0 16 16"
                             role="img"
                             aria-label="Warning:"
@@ -140,7 +144,7 @@ class CommentBox extends Component {
                             width="16"
                             height="16"
                             fill="currentColor"
-                            class="bi bi-check-circle-fill"
+                            className="bi bi-check-circle-fill me-2"
                             viewBox="0 0 16 16"
                         >
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
@@ -150,25 +154,25 @@ class CommentBox extends Component {
                 ) : (
                     ""
                 )}
-                <hr />
+                {isUserAuthenticated().user && <hr />}
                 <div>
                     {!comments.length ? (
                         <div className="d-flex justify-content-center">
-                            <p>No comments yet</p>
+                            <p>Žiadne komentáre</p>
                         </div>
                     ) : (
                         <div className="d-flex justify-content-center">
                             {comments.length === 1 ? (
-                                <p>{comments.length} comment</p>
+                                <p>{comments.length} komentár</p>
                             ) : (
-                                <p>{comments.length} comments</p>
+                                <p>{comments.length} komentáre</p>
                             )}
                         </div>
                     )}
                     {comments.map((comment, index) => {
                         return (
-                            <div className="row" key={index}>
-                                <div className="row">
+                            <div className="row text-start" key={index}>
+                                <div className="row ">
                                     <Link
                                         to={`/users/${comment.postedBy._id}`}
                                         style={{
@@ -220,7 +224,11 @@ class CommentBox extends Component {
                                                 <>
                                                     <button
                                                         className="btn btn-raised btn-sm btn-danger d-flex align-items-center"
-                                                        style={{height:"80%", aspectRatio:"1/1", width:"auto"}}
+                                                        style={{
+                                                            height: "80%",
+                                                            aspectRatio: "1/1",
+                                                            width: "auto",
+                                                        }}
                                                         onClick={() => {
                                                             this.commentDelConfirmation(
                                                                 comment

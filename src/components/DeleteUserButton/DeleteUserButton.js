@@ -13,7 +13,7 @@ class DeleteUser extends Component {
 
     confirmDeletion = () => {
         let userInput = window.confirm(
-            "Are you sure you want to delete your account?"
+            "Ste si istý, že chcete vymazať tento profil?"
         );
         if (userInput) {
             this.deletionConfirmed();
@@ -55,7 +55,7 @@ class DeleteUser extends Component {
                     onClick={this.confirmDeletion}
                     className="btn btn-raised btn-danger w-100"
                 >
-                    {!this.state.error ? "DELETE PROFILE" : this.state.error}
+                    {!this.state.error ? "Vymazať profil" : this.state.error}
 
                     {/* <div
                         style={{ display: this.state.error ? "" : "none" }}

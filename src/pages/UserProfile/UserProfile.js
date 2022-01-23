@@ -119,11 +119,10 @@ class Profile extends Component {
                         <img
                             style={{
                                 height: "150px",
-                                width: "auto",
-                                aspectRatio: "1/1",
+                                width: "150px",
                                 objectFit: "contain",
                                 borderRadius: "128px",
-                                border: "0px solid black",
+                                margin: "auto",
                             }}
                             className="user-pfp"
                             src={profilePictureURL}
@@ -148,7 +147,7 @@ class Profile extends Component {
                                     to={`/users/followedby/${user._id}`}
                                 >
                                     <strong>{user.followers.length}</strong>{" "}
-                                    Followers
+                                    Sledovatelia
                                 </Link>
                             </div>
                             <div className="col-12">
@@ -157,11 +156,11 @@ class Profile extends Component {
                                     to={`/users/follows/${user._id}`}
                                 >
                                     <strong>{user.following.length}</strong>{" "}
-                                    Following
+                                    Sledovaní
                                 </Link>
                             </div>
                             <div className="col-12">
-                                <strong>{posts.length}</strong> Posts
+                                <strong>{posts.length}</strong> Príspevkov
                             </div>
                         </div>
 
@@ -225,7 +224,7 @@ class Profile extends Component {
                                             className="btn btn-raised btn-success w-100"
                                             to={`/users/edit/${user._id}`}
                                         >
-                                            EDIT PROFILE
+                                            Upraviť profil
                                         </Link>
                                     </div>
                                     <div className="col-12 py-1">
@@ -236,10 +235,10 @@ class Profile extends Component {
                                     </div>
                                     <div className="col-12 py-1">
                                         <Link
-                                            className="btn btn-raised btn-info w-100"
+                                            className="btn btn-raised btn-info w-100 text-light"
                                             to={`/posts/create`}
                                         >
-                                            CREATE POST
+                                            Pridať fotku
                                         </Link>
                                     </div>
                                 </div>
@@ -249,17 +248,17 @@ class Profile extends Component {
                             isUserAuthenticated().user.role ===
                                 "administrator" &&
                             isUserAuthenticated().user._id !== user._id && (
-                                <div className="card text-center bg-light">
+                                <div className="card text-center bg-light my-2">
                                     <div className="card-body">
-                                        <h5 className="card-title">Admin</h5>
                                         <p className="text-danger">
-                                            Edit/Delete as an Admin
+                                            UPRAVIŤ/VYMAZAŤ ako{" "}
+                                            <strong>ADMIN</strong>
                                         </p>
                                         <Link
                                             className="btn btn-raised btn-success mb-2 w-100"
                                             to={`/users/edit/${user._id}`}
                                         >
-                                            Edit Profile
+                                            Upraviť profil
                                         </Link>
                                         <DeleteUserButton userID={user._id} />
                                     </div>
@@ -271,7 +270,7 @@ class Profile extends Component {
                 <div className="row justify-content-center pb-4">
                     {isUserAuthenticated().user &&
                         isUserAuthenticated().user._id !== user._id && (
-                            <div className="col-6 p-0">
+                            <div className="col-10 p-0">
                                 <FollowUserButton
                                     following={this.state.following}
                                     onButtonClick={this.clickedFollowButton}
@@ -290,7 +289,7 @@ class Profile extends Component {
                                     variant="primary"
                                 >
                                     <span className="visually-hidden">
-                                        Loading...
+                                        Načítavam...
                                     </span>
                                 </Spinner>
                             </div>
@@ -327,7 +326,9 @@ class Profile extends Component {
                             })
                         )
                     ) : (
-                        "No posts yet"
+                        <div className="row justify-content-center p-0 m-0">
+                            Žiadne Príspevky
+                        </div>
                     )}
                 </div>
             </div>

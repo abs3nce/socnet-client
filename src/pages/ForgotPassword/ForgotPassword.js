@@ -28,13 +28,13 @@ class ForgotPassword extends Component {
 
         return (
             <div className="container">
-                <h2 className="mt-5 mb-5">Ask for Password Reset</h2>
+                <h2 className="mt-5 mb-5">Požíadať o zmenu hesla</h2>
                 <form>
                     <div className="form-group mt-5">
                         <input
                             type="email"
                             className="form-control"
-                            placeholder="Your email address"
+                            placeholder="Vaša emailová adresa"
                             value={this.state.email}
                             name="email"
                             onChange={(e) =>
@@ -51,12 +51,12 @@ class ForgotPassword extends Component {
                         onClick={this.forgotPassword}
                         className="btn btn-raised btn-primary mt-3 w-100"
                     >
-                        Send Password Rest Link
+                        Zaslať odkaz na zmenu hesla
                     </button>
 
                     <div className="row justify-content-center">
                         <div className="col-12 text-start mt-3">
-                            <Link to="/login">Back to login</Link>
+                            <Link to="/login">Naspäť na prihasovanie</Link>
                         </div>
                     </div>
                 </form>

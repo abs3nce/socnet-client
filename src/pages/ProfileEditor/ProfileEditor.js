@@ -90,9 +90,9 @@ class EditUserProfile extends Component {
     isInputValid = () => {
         const { username, email, password, fileSize } = this.state;
 
-        if (fileSize > 100000) {
+        if (fileSize > 5000000) {
             this.setState({
-                error: "Maximum file size is 100kB",
+                error: "Maximálna veľkosť fotografie je 5MB",
                 loading: false,
             });
             return false;
@@ -100,39 +100,42 @@ class EditUserProfile extends Component {
 
         if (username.length === 0) {
             this.setState({
-                error: "Username must not be empty",
+                error: "Meno nemôže byť prázdne",
                 loading: false,
             });
             return false;
         }
         if (username.length > 0 && username.length <= 2) {
             this.setState({
-                error: "Username must be atlease 3 characters long",
+                error: "Meno musí byť aspoň 3 písmená dlhé",
                 loading: false,
             });
             return false;
         }
-        if (username.length > 25) {
+        if (username.length > 32) {
             this.setState({
-                error: "Username must be maximum 25 characters long",
+                error: "Meno môže byť maximálne32 písmen dlhé",
                 loading: false,
             });
             return false;
         }
 
         if (email.length === 0) {
-            this.setState({ error: "Email must not be empty", loading: false });
+            this.setState({
+                error: "Email nemôže byť prázdny",
+                loading: false,
+            });
             return false;
         }
         if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             //https://stackoverflow.com/questions/15017052/understanding-email-validation-using-javascript validacia mailu pomocou regex
-            this.setState({ error: "Email must be valid", loading: false });
+            this.setState({ error: "Email musí mať validný tvar", loading: false });
             return false;
         }
 
         if (password.length > 0 && password.length <= 7) {
             this.setState({
-                error: "Password must be at least 8 characters long",
+                error: "Heslo musí byť aspoň 8 znakov dlhé",
                 loading: false,
             });
             return false;
@@ -174,7 +177,7 @@ class EditUserProfile extends Component {
     ) => (
         <form>
             <div className="form-group">
-                <label className="text-muted">Profile Photo</label>
+                <label className="text-muted">Profilová fotografia</label>
                 <input
                     onChange={this.handleChange("profilePicture")}
                     type="file"
@@ -185,7 +188,7 @@ class EditUserProfile extends Component {
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Username</label>
+                <label className="text-muted">Meno</label>
                 <input
                     onChange={this.handleChange("username")}
                     type="text"
@@ -207,54 +210,55 @@ class EditUserProfile extends Component {
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Description</label>
+                <label className="text-muted">Popisok</label>
                 <textarea
                     onChange={this.handleChange("description")}
                     type="text"
                     className="form-control"
                     value={description}
+                    placeholder="Napíšte niečo o sebe"
                 />
             </div>
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Facebook Profile URL</label>
+                <label className="text-muted">URL na Facebook profil</label>
                 <input
                     onChange={this.handleChange("facebookLink")}
                     type="text"
                     className="form-control"
                     value={facebookLink}
-                    placeholder="e.g. https://www.facebook.com/profile.php?id=54321848321898"
+                    placeholder="napr.: https://www.facebook.com/profile.php?id=54321848321898"
                 />
             </div>
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Instragram Profile URL</label>
+                <label className="text-muted">URL na Instagram profil</label>
                 <input
                     onChange={this.handleChange("instagramLink")}
                     type="text"
                     className="form-control"
                     value={instagramLink}
-                    placeholder="e.g. https://www.instagram.com/bob.harvey/"
+                    placeholder="napr.: https://www.instagram.com/bob.harvey/"
                 />
             </div>
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Custom URL</label>
+                <label className="text-muted">Vlastná URL</label>
                 <input
                     onChange={this.handleChange("customLink")}
                     type="text"
                     className="form-control"
                     value={customLink}
-                    placeholder="e.g. https://www.bobandmartin.com"
+                    placeholder="napr.: https://www.bobandmartin.com"
                 />
             </div>
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Password</label>
+                <label className="text-muted">Heslo</label>
                 <input
                     onChange={this.handleChange("password")}
                     type="password"
@@ -266,9 +270,9 @@ class EditUserProfile extends Component {
 
             <button
                 onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary mt-3"
+                className="btn btn-raised btn-primary mt-3 mb-3"
             >
-                {!this.state.error ? "Update credentials" : this.state.error}
+                {!this.state.error ? "Aktualizovať údaje" : this.state.error}
             </button>
         </form>
     );

@@ -32,9 +32,9 @@ class Follows extends Component {
         const { users, targetUser } = this.state;
         return (
             <div className="container">
-                <div className="row justify-content-center my-3">
-                    {targetUser} follows:
-                </div>
+                {users.length ? <div className="row justify-content-center my-3">
+                   {targetUser} sleduje:
+                </div> : ""}
                 {users.length ? (
                     users.map((user, index) => (
                         <div
@@ -72,7 +72,7 @@ class Follows extends Component {
                                 <div className="col-12 col-md-8 d-flex align-items-center justify-content-center justify-content-md-end">
                                     <div className="btn btn-raised btn-primary">
                                         <Link to={`/users/${user._id}`}>
-                                            View Profile
+                                            Prejsť na profil
                                         </Link>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@ class Follows extends Component {
                 ) : (
                     <div className="container">
                         <div className="row justify-content-center mt-3">
-                            User not following anybody
+                            {targetUser} nikoho nesleduje
                         </div>
                     </div>
                 )}

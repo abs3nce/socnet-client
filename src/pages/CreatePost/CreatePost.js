@@ -125,7 +125,7 @@ class CreatePost extends Component {
     loadCreatePostForm = (title, body) => (
         <form className="mt-3">
             <div className="form-group">
-                <label className="text-muted">Profile Photo</label>
+                <label className="text-muted">Fotografia príspevku</label>
                 <input
                     onChange={this.handleChange("image")}
                     type="file"
@@ -136,25 +136,25 @@ class CreatePost extends Component {
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Title</label>
+                <label className="text-muted">Názov</label>
                 <input
                     onChange={this.handleChange("title")}
                     type="text"
                     className="form-control"
                     value={title}
-                    placeholder="What is the name of the image?"
+                    placeholder="Ako sa táto fotografia volá?"
                 />
             </div>
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Body</label>
+                <label className="text-muted">Popis</label>
                 <textarea
                     onChange={this.handleChange("body")}
                     type="text"
                     className="form-control"
                     value={body}
-                    placeholder="Say something about the image"
+                    placeholder="Niečo o fotografií"
                 />
             </div>
             <br />
@@ -163,7 +163,7 @@ class CreatePost extends Component {
                 onClick={this.handleSubmit}
                 className="btn btn-raised btn-primary"
             >
-                Upload Image
+                Nahrať
             </button>
         </form>
     );

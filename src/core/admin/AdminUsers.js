@@ -64,14 +64,14 @@ class Discover extends Component {
 
                     <div className="col-12 col-md-8 d-flex align-items-center justify-content-center justify-content-md-end">
                         <div className="btn btn-raised btn-primary">
-                            <Link to={`/users/${user._id}`}>View Profile</Link>
+                            <Link to={`/users/${user._id}`} className="text-light">Prejsť na profil</Link>
                         </div>
 
                         <Link
-                            className="btn btn-raised btn-success mx-2"
+                            className="btn btn-raised btn-success mx-2 text-light"
                             to={`/users/edit/${user._id}`}
                         >
-                            Edit Profile
+                           Upraviť
                         </Link>
 
                         <DeleteUserButton

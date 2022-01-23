@@ -100,7 +100,6 @@ class AdminAllPosts extends Component {
                                 <div className="d-flex flex-column justify-content-between">
                                     <div className="mt-3">
                                         <p className="post-card-info-created text-center">
-                                            Posted by:{" "}
                                             <Link to={`${postedByID}`}>
                                                 {postedByUsername}
                                             </Link>{" "}
@@ -110,11 +109,11 @@ class AdminAllPosts extends Component {
                             </div>
                             <div className="text-center">
                                 <Link
-                                    className="btn btn-raised btn-warning btn-sm mb-2"
+                                    className="btn btn-raised btn-warning btn-sm mb-2 w-100"
                                     to={`/posts/edit/${post._id}`}
                                 >
                                     {!this.state.error
-                                        ? "UPDATE POST"
+                                        ? "Upraviť"
                                         : this.state.error}
                                 </Link>
                                 <br />
@@ -123,10 +122,10 @@ class AdminAllPosts extends Component {
                                         null,
                                         post._id
                                     )}
-                                    className="btn btn-raised btn-danger btn-sm mb-3"
+                                    className="btn btn-raised btn-danger btn-sm mb-3 w-100"
                                 >
                                     {!this.state.error
-                                        ? "DELETE POST"
+                                        ? "Vymazať"
                                         : this.state.error}
                                 </button>
                             </div>
@@ -166,7 +165,7 @@ class AdminAllPosts extends Component {
                 ) : (
                     <div className="container d-flex justify-content-center">
                         <div className="col-12 text-center">
-                            <p className="pt-3">No posts yet</p>
+                            <p className="pt-3">Žiadne príspevky</p>
                         </div>
                     </div>
                 )}

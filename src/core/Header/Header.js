@@ -89,7 +89,7 @@ const Header = (props) => {
                         <li>
                             <Link to="/" onClick={menuToggleHandler}>
                                 <BsGlobe className="m-2" />
-                                Global Feed
+                                Domov
                             </Link>
                         </li>
 
@@ -100,7 +100,7 @@ const Header = (props) => {
                                     onClick={menuToggleHandler}
                                 >
                                     <BsHeartFill className="m-2" />
-                                    Your Feed
+                                    Sledované
                                 </Link>
                             </li>
                         )}
@@ -110,7 +110,7 @@ const Header = (props) => {
                                 onClick={menuToggleHandler}
                             >
                                 <BsPeople className="m-2" />
-                                All Users
+                                Uživatelia
                             </Link>
                         </li>
 
@@ -122,7 +122,7 @@ const Header = (props) => {
                                         onClick={menuToggleHandler}
                                     >
                                         <BsBoxArrowInRight className="m-2" />
-                                        Login
+                                        Prihlásenie
                                     </Link>
                                 </li>
                                 <li>
@@ -131,7 +131,7 @@ const Header = (props) => {
                                         onClick={menuToggleHandler}
                                     >
                                         <BsPersonPlus className="m-2" />
-                                        Register
+                                        Registrácia
                                     </Link>
                                 </li>
                             </>
@@ -144,7 +144,7 @@ const Header = (props) => {
                                         onClick={menuToggleHandler}
                                     >
                                         <BsPersonLinesFill className="m-1" />
-                                        Suggested
+                                        Odporúčaní
                                     </Link>
                                 </li>
                                 <li>
@@ -153,7 +153,7 @@ const Header = (props) => {
                                         onClick={menuToggleHandler}
                                     >
                                         <BsPlusLg className="m-1" />
-                                        New Post
+                                        Pridať
                                     </Link>
                                 </li>
                                 <li>
@@ -166,7 +166,7 @@ const Header = (props) => {
                                         <BsPersonFill className="m-2" />
                                         {`${
                                             isUserAuthenticated().user.username
-                                        }'s profile`}
+                                        }`}
                                     </Link>
                                 </li>
                                 <li>
@@ -180,7 +180,7 @@ const Header = (props) => {
                                         }
                                     >
                                         <BsBoxArrowRight className="m-2" />
-                                        Logout
+                                        Odhlásiť
                                     </Link>
                                 </li>
                             </>

@@ -17,14 +17,14 @@ class FollowUserButton extends Component {
                 onClick={this.followClicked}
                 className="btn btn-success button-raised w-100"
             >
-                Follow
+                Sledovať
             </button>
         ) : (
             <button
                 onClick={this.unfollowClicked}
                 className="btn btn-danger button-raised w-100"
             >
-                Unfollow
+                Prestať sledovať
             </button>
         );
     }

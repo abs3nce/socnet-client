@@ -32,9 +32,9 @@ class FollowedBy extends Component {
         const { users, targetUser } = this.state;
         return (
             <div className="container">
-                <div className="row justify-content-center my-3">
-                    {targetUser} is followed by:
-                </div>
+                {users.length ? <div className="row justify-content-center my-3">
+                    {targetUser} je sledovaný uživateľmi:
+                </div> : ""}
                 {users.length ? (
                     users.map((user, index) => (
                         <div
