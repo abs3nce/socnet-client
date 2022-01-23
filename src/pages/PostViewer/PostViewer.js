@@ -156,10 +156,9 @@ class SinglePost extends Component {
                         <div className="row">
                             <div className="col-12 col-md-2 text-center text-md-end d-md-flex flex-md-column justify-md-content-center align-md-items-start">
                                 <img
-                                    
                                     style={{
                                         height: "50px",
-                                        width:"50px",
+                                        width: "50px",
                                         objectFit: "fill",
                                         borderRadius: "128px",
                                     }}
@@ -169,7 +168,6 @@ class SinglePost extends Component {
                                         (index.target.src = defaultUserIcon)
                                     }
                                     alt={postedByUsername}
-                                    
                                 />
                             </div>
                             <div className="col-12 col-md-10 text-center text-md-start d-md-flex flex-md-column justify-md-content-center">
@@ -272,13 +270,13 @@ class SinglePost extends Component {
                                 <div className="likes mt-3">
                                     {likedByUser ? (
                                         <button
-                                            className="btn btn-raised btn-sm btn-dark like-button"
+                                            className="btn btn-raised btn-sm like-button like-button-liked"
                                             onClick={this.likeToggle}
                                         >
                                             {likeLoading ? (
                                                 <div>
                                                     <Spinner
-                                                        className="mt-3"
+                                                        className=""
                                                         animation="border"
                                                         role="status"
                                                         size="sm"
@@ -290,20 +288,20 @@ class SinglePost extends Component {
                                                 </div>
                                             ) : (
                                                 <div>
-                                                    <FaHeart />
+                                                    <FaHeart className="mx-1" />
                                                     <span>{likes}</span>
                                                 </div>
                                             )}
                                         </button>
                                     ) : (
                                         <button
-                                            className="btn btn-raised btn-sm btn-dark like-button"
+                                            className="btn btn-raised btn-sm like-button like-button-notliked"
                                             onClick={this.likeToggle}
                                         >
                                             {likeLoading ? (
                                                 <div>
                                                     <Spinner
-                                                        className="mt-3"
+                                                        className=""
                                                         animation="border"
                                                         role="status"
                                                         size="sm"
@@ -314,9 +312,9 @@ class SinglePost extends Component {
                                                     </Spinner>
                                                 </div>
                                             ) : (
-                                                <div className="status-wrapper">
+                                                <div className="">
                                                     <span>
-                                                        <FaHeart />
+                                                        <FaHeart className="mx-1" />
                                                     </span>
                                                     <span>{likes}</span>
                                                 </div>

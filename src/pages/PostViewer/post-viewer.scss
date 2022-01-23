@@ -39,8 +39,23 @@
             justify-content: center;
             align-content: center;
             border-radius: 128px;
+            outline: none;
         }
-        .status-wrapper {
+        .like-button:hover {
+            background-color: rgb(251, 233, 235);
+            transition: 0.5s ease-in-out;
+        }
+        .like-button-liked {
+            background-color: rgb(251, 233, 235);
+            transition: 0.5s ease-in-out;
+            color: rgb(255, 73, 94);
+
+        }
+        .like-button-notliked {
+            background-color: rgb(241, 241, 241);
+            transition: 0.5s ease-in-out;
+            color: rgb(126, 126, 126);
+
         }
     }
 }

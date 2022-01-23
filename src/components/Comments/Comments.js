@@ -217,7 +217,7 @@ class CommentBox extends Component {
                                             ).toLocaleTimeString()}
                                         </span>
                                     </div>
-                                    <div className="col-2 text-end ">
+                                    <div className="col-2 d-flex justify-content-end">
                                         {isUserAuthenticated().user &&
                                             isUserAuthenticated().user._id ===
                                                 comment.postedBy._id && (

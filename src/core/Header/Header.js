@@ -110,7 +110,7 @@ const Header = (props) => {
                                 onClick={menuToggleHandler}
                             >
                                 <BsPeople className="m-2" />
-                                Uživatelia
+                                Užívatelia
                             </Link>
                         </li>
 
