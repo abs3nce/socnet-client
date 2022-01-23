@@ -73,6 +73,22 @@ class CreatePost extends Component {
             return false;
         }
 
+        if (!body.length) {
+            this.setState({
+                error: "Telo fotografie nesmie ostať prázdne",
+                loading: false,
+            });
+            return false;
+        }
+
+        if (body.length < 8) {
+            this.setState({
+                error: "Minimálna dĺžka tela fotografie je 8 znakov",
+                loading: false,
+            });
+            return false;
+        }
+
         if (body.length > 1500) {
             this.setState({
                 error: "Maximálna dĺžka tela fotografie je 1500 znakov",
