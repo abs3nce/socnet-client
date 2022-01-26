@@ -1,5 +1,7 @@
 .SINGLEPOST {
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+
     .exif {
         .exif-camera {
             span {
@@ -40,7 +42,10 @@
             justify-content: center;
             align-content: center;
             border-radius: 128px;
-            outline: none;
+
+            &:focus {
+                box-shadow: none;
+            }
         }
         .like-button:hover {
             background-color: rgb(251, 233, 235);
