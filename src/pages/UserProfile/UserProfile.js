@@ -270,7 +270,7 @@ class Profile extends Component {
                 <div className="row justify-content-center pb-4">
                     {isUserAuthenticated().user &&
                         isUserAuthenticated().user._id !== user._id && (
-                            <div className="col-10 p-0">
+                            <div className="col-11 col-md-12 p-0">
                                 <FollowUserButton
                                     following={this.state.following}
                                     onButtonClick={this.clickedFollowButton}
