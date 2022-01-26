@@ -111,7 +111,8 @@ class AllPosts extends Component {
                                     !exifData.exif.FocalLength ||
                                     !exifData.exif.ExposureTime ||
                                     !exifData.exif.ISO ||
-                                    !exifData.exif.ExposureCompensation ? (
+                                    exifData.exif.ExposureCompensation ===
+                                        undefined ? (
                                         <div className="exif-error">
                                             Dáta EXIF nie sú k dispozícií
                                             <br />

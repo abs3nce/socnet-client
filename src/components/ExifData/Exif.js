@@ -44,7 +44,7 @@ class Exif extends Component {
                     exifData.exif.FNumber &&
                     exifData.exif.ExposureTime &&
                     exifData.exif.ISO &&
-                    exifData.exif.ExposureCompensation && (
+                    exifData.exif.ExposureCompensation !== undefined && (
                         <div className="exif-settings">
                             <span>
                                 <img

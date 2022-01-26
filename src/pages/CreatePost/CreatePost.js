@@ -163,7 +163,7 @@ class CreatePost extends Component {
 
             <button
                 onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary"
+                className="btn btn-raised btn-primary w-100"
             >
                 Nahrať
             </button>

@@ -278,10 +278,10 @@ class Profile extends Component {
                             </div>
                         )}
                 </div>
-                <div className="row pb-3">
+                <div className="row pb-3 d-flex">
                     {!noPosts ? (
                         !posts.length ? (
-                            <div className="row justify-content-center">
+                            <div className="row d-flex justify-content-center">
                                 <Spinner
                                     className="mt-3"
                                     animation="border"
@@ -326,7 +326,7 @@ class Profile extends Component {
                             })
                         )
                     ) : (
-                        <div className="row justify-content-center p-0 m-0">
+                        <div className="row f-flex justify-content-center p-0 m-0">
                             Žiadne Príspevky
                         </div>
                     )}

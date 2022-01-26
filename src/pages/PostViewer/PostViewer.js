@@ -194,8 +194,8 @@ class SinglePost extends Component {
                         !exifData.exif.FocalLength ||
                         !exifData.exif.ExposureTime ||
                         !exifData.exif.ISO ||
-                        !exifData.exif.ExposureCompensation ? (
-                            <div className="exif-error">
+                        exifData.exif.ExposureCompensation === undefined ? (
+                            <div className="exif-">
                                 Dáta EXIF nie sú k dispozícií
                                 <br />
                             </div>
@@ -221,20 +221,20 @@ class SinglePost extends Component {
                                                 Admin
                                             </h5>
                                             <p className="text-danger">
-                                                Edit/Delete as an Admin
+                                                Upraviť/Vymazať ako Admin
                                             </p>
                                             <Link
-                                                className="btn btn-raised btn-warning btn-sm mb-2"
+                                                className="btn btn-raised btn-warning btn-sm mb-2 w-100"
                                                 to={`/posts/edit/${post._id}`}
                                             >
-                                                UPDATE POST
+                                                Upraviť príspevok
                                             </Link>
                                             <br />
                                             <button
                                                 onClick={this.handleDelete}
-                                                className="btn btn-raised btn-danger btn-sm"
+                                                className="btn btn-raised btn-danger btn-sm w-100"
                                             >
-                                                DELETE POST
+                                                Vymazať príspevok
                                             </button>
                                         </div>
                                     </div>
@@ -246,18 +246,18 @@ class SinglePost extends Component {
                                 post.postedBy._id && (
                                 <>
                                     <div className="row justify-content-center py-3 py-md-0">
-                                        <div className="col-12 col-lg-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 mt-md-3 mt-xl-0">
+                                        <div className="col-12 col-lg-6 d-flex align-items-center justify-content-center mb-3 mb-md-0 mt-md-3 mt-xl-0">
                                             <Link
-                                                className="btn btn-raised btn-warning btn-sm"
+                                                className="btn btn-raised btn-warning btn-sm w-100"
                                                 to={`/posts/edit/${post._id}`}
                                             >
                                                 Upraviť príspevok
                                             </Link>
                                         </div>
-                                        <div className="col-12 col-lg-4 d-flex align-items-center justify-content-center mt-md-3 mt-xl-0">
+                                        <div className="col-12 col-lg-6 d-flex align-items-center justify-content-center mt-md-3 mt-xl-0">
                                             <button
                                                 onClick={this.handleDelete}
-                                                className="btn btn-raised btn-danger btn-sm"
+                                                className="btn btn-raised btn-danger btn-sm w-100"
                                             >
                                                 Vymazať príspevok
                                             </button>

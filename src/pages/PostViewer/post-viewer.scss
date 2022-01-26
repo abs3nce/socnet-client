@@ -1,4 +1,5 @@
 .SINGLEPOST {
+    overflow-x: hidden;
     .exif {
         .exif-camera {
             span {
@@ -49,13 +50,11 @@
             background-color: rgb(251, 233, 235);
             transition: 0.5s ease-in-out;
             color: rgb(255, 73, 94);
-
         }
         .like-button-notliked {
             background-color: rgb(241, 241, 241);
             transition: 0.5s ease-in-out;
             color: rgb(126, 126, 126);
-
         }
     }
 }
