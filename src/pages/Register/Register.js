@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-import { registerUser } from "../../controllers/auth";
+import { isUserAuthenticated, registerUser } from "../../controllers/auth";
 
 import Spinner from "react-bootstrap/Spinner";
 
@@ -16,11 +16,14 @@ class Register extends Component {
             error: null,
             success: false,
             loading: false,
+            isLoggedIn: false,
         };
 
         //binding
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    
 
     handleChange = (name) => (event) => {
         //pri hociakej zmene udajov predchadzajuci error zmizne
@@ -109,6 +112,17 @@ class Register extends Component {
                     </div>
                 </div>
             )}
+            <br />
+            <br />
+            <br />
+            <p style={{ fontSize: "12px" }} className="text-center">
+                <em>
+                    Zaregistrovaním užívateľ súhlasí s uložením svojich údajov
+                    do databázý spravovanej autorom projektu a následnou možnou
+                    manipuláciou, vymazaním alebo upravením daných dát. Tak isto
+                    užívateľ súhlasí s podmienkami a pravidlami tejto siete.
+                </em>
+            </p>
         </form>
     );
 
@@ -116,6 +130,10 @@ class Register extends Component {
         const { username, email, password, error, success, loading } =
             this.state;
 
+        if (isUserAuthenticated()) {
+
+            return (<Redirect to="/"></Redirect>)
+        }
         return (
             <div className="container mt-5">
                 {this.loadRegisterForm(username, email, password, success)}

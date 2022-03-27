@@ -28,7 +28,7 @@ class ForgotPassword extends Component {
 
         return (
             <div className="container">
-                <h2 className="mt-5 mb-5">Požíadať o zmenu hesla</h2>
+                <h2 className="mt-5 mb-5">Požiadať o zmenu hesla</h2>
                 <form>
                     <div className="form-group mt-5">
                         <input

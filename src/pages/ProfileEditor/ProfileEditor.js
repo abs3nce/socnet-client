@@ -194,6 +194,7 @@ class EditUserProfile extends Component {
                     type="text"
                     className="form-control"
                     value={username}
+                    placeholder="Napíšte vaše meno"
                 />
             </div>
             <br />
@@ -205,6 +206,7 @@ class EditUserProfile extends Component {
                     type="email"
                     className="form-control"
                     value={email}
+                    placeholder="Napíšte váš email"
                 />
             </div>
             <br />
@@ -228,7 +230,7 @@ class EditUserProfile extends Component {
                     type="text"
                     className="form-control"
                     value={facebookLink}
-                    placeholder="napr.: https://www.facebook.com/profile.php?id=54321848321898"
+                    placeholder="napr.: https://www.facebook.com/profile.php?id=21381823798"
                 />
             </div>
             <br />

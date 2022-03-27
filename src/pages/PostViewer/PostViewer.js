@@ -324,6 +324,17 @@ class SinglePost extends Component {
                                 </div>
                             </div>
                         )}
+
+                        {!isUserAuthenticated().user && (
+                            <div className="row text-center">
+                                {likes == 1 ? (
+                                    <p>{likes} človeku sa to páči</p>
+                                ) : (
+                                    <p>{likes} ľudom sa to páči</p>
+                                )}
+                            </div>
+                        )}
+
                         <div className="row">
                             <Comments
                                 className=""

@@ -137,7 +137,7 @@ class PostEditor extends Component {
     loadEditPostForm = (title, body) => (
         <form>
             <div className="form-group">
-                <label className="text-muted">Post Photo</label>
+                <label className="text-muted">Fotografia príspevku</label>
                 <input
                     onChange={this.handleChange("image")}
                     type="file"
@@ -148,34 +148,34 @@ class PostEditor extends Component {
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Title</label>
+                <label className="text-muted">Názov</label>
                 <input
                     onChange={this.handleChange("title")}
                     type="text"
                     className="form-control"
                     value={title}
-                    placeholder="What is the name of the image?"
+                    placeholder="Aký je názov tohto príspevku?"
                 />
             </div>
             <br />
 
             <div className="form-group">
-                <label className="text-muted">Body</label>
+                <label className="text-muted">Popisok</label>
                 <textarea
                     onChange={this.handleChange("body")}
                     type="text"
                     className="form-control"
                     value={body}
-                    placeholder="Say something about the image"
+                    placeholder="Napíš niečo o príspevku"
                 />
             </div>
             <br />
 
             <button
                 onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary mt-3"
+                className="btn btn-raised btn-primary mt-3 mb-3"
             >
-                Update Post
+                Aktualizovať príspevok
             </button>
         </form>
     );
@@ -206,10 +206,9 @@ class PostEditor extends Component {
         return (
             <div className="container">
                 <h2 className="mt-5 mb-5">Edit {title}</h2>
-                <br /> <br />
                 <img
                     style={{ height: "200px", width: "auto" }}
-                    className="image-thumbnail"
+                    className="image-thumbnail mb-5"
                     src={postPictureURL}
                     onError={(index) => (index.target.src = defaultPostIcon)}
                     alt={title}

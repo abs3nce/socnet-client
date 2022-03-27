@@ -186,6 +186,13 @@ class FollowedFeed extends Component {
                                                 <span>
                                                     ISO {exifData.exif.ISO}
                                                 </span>
+                                                <span>
+                                                    EVC{" "}
+                                                    {exifData.exif.ExposureCompensation.toString().slice(
+                                                        0,
+                                                        4
+                                                    )}
+                                                </span>
                                             </div>
                                         </>
                                     )}

@@ -42,11 +42,13 @@ class AllPosts extends Component {
     loadNext = (number) => {
         this.setState({ pageNumber: this.state.pageNumber + number });
         this.loadPosts(this.state.pageNumber + number);
+        window.scrollTo(0,0)
     };
 
     loadPrevious = (number) => {
         this.setState({ pageNumber: this.state.pageNumber - number });
         this.loadPosts(this.state.pageNumber - number);
+        window.scrollTo(0,0)
     };
 
     loadLast = (number) => {
@@ -241,7 +243,7 @@ class AllPosts extends Component {
                             </div>
                             {pageNumber > 1 ? (
                                 <button
-                                    className="btn btn-raised btn-warning mb-3"
+                                    className="btn btn-raised btn-warning mb-3 w-50"
                                     onClick={() => this.loadPrevious(1)}
                                 >
                                     Predošlá strana
@@ -252,7 +254,7 @@ class AllPosts extends Component {
 
                             {posts.length ? (
                                 <button
-                                    className="btn btn-raised btn-success mb-3"
+                                    className="btn btn-raised btn-success mb-3 w-50"
                                     onClick={() => this.loadNext(1)}
                                 >
                                     Následujúca strana
@@ -267,7 +269,7 @@ class AllPosts extends Component {
                         <div className="col-12 text-center">
                             <p className="pt-3">Žiadne príspevky</p>
                             <button
-                                className="btn btn-raised btn-warning mb-3"
+                                className="btn btn-raised btn-warning mb-3 w-50"
                                 onClick={() => this.loadLast(1)}
                             >
                                 Predošlá strana

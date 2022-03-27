@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 
-import { loginUser, authenticateUser } from "../../controllers/auth";
+import { loginUser, authenticateUser, isUserAuthenticated } from "../../controllers/auth";
 // import SocialLogin from "../components/SocialLogin";
 
 import Spinner from "react-bootstrap/Spinner";
@@ -108,6 +108,11 @@ class Login extends Component {
 
     render() {
         const { username, password, error, redirectUser, loading } = this.state;
+
+        if (isUserAuthenticated()) {
+
+            return (<Redirect to="/"></Redirect>)
+        }
 
         if (redirectUser) {
             return <Redirect to="/" />;
