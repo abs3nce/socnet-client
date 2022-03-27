@@ -14,9 +14,9 @@ import { isUserAuthenticated } from "../../controllers/auth";
 //images
 import defaultPostIcon from "../../images/defaultPostIcon.png";
 import defaultUserIcon from "../../images/defaultUserIcon.png";
-import cameraIcon from "../../images/camera2.svg";
-import lensIcon from "../../images/lens3.svg";
-import settingsIcon from "../../images/settings.svg";
+// import cameraIcon from "../../images/camera2.svg";
+// import lensIcon from "../../images/lens3.svg";
+// import settingsIcon from "../../images/settings.svg";
 
 //css
 import "./post-viewer.scss";
@@ -50,7 +50,7 @@ class SinglePost extends Component {
                     likedByUser: this.isLikedByUser(data.likes),
                     comments: data.comments,
                 });
-                console.log(`POST LOADED: `, data);
+                console.log(`POST LOADED (VIEWER): `, data);
             }
         });
     };
@@ -327,7 +327,7 @@ class SinglePost extends Component {
 
                         {!isUserAuthenticated().user && (
                             <div className="row text-center">
-                                {likes == 1 ? (
+                                {likes === 1 ? (
                                     <p>{likes} človeku sa to páči</p>
                                 ) : (
                                     <p>{likes} ľudom sa to páči</p>

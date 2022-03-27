@@ -3,7 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 
 import { isUserAuthenticated } from "../../controllers/auth";
 import { getUser } from "../../controllers/users";
-import { getPostsByUser, getNumOfPostsOfUser } from "../../controllers/posts";
+import { getPostsByUser } from "../../controllers/posts";
 
 import defaultProfilePicture from "../../images/defaultUserIcon.png";
 import defaultPostIcon from "../../images/defaultPostIcon.png";
@@ -11,7 +11,7 @@ import defaultPostIcon from "../../images/defaultPostIcon.png";
 
 import DeleteUserButton from "../../components/DeleteUserButton/DeleteUserButton";
 import FollowUserButton from "../../components/FollowUserButton/FollowUserButton";
-import ProfileLists from "../../components/ProfileLists/ProfileLists";
+// import ProfileLists from "../../components/ProfileLists/ProfileLists";
 
 import { BsEnvelope, BsFacebook, BsInstagram, BsLink } from "react-icons/bs";
 

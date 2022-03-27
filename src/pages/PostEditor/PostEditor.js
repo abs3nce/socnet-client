@@ -18,6 +18,7 @@ class PostEditor extends Component {
             postedById: null,
 
             redirectToProfile: false,
+            redirectToHome: false,
             error: "",
             fileSize: 0,
             loading: false,
@@ -51,7 +52,7 @@ class PostEditor extends Component {
                 this.setState({ redirectToProfile: true });
                 console.log(data.error);
             } else {
-                console.log(`> POST LOADED (EDITOR): `, data);
+                console.log(`POST LOADED (EDITOR): `, data);
                 this.setState({
                     id: data._id,
                     title: data.title,
@@ -59,6 +60,14 @@ class PostEditor extends Component {
                     error: "",
                     posterId: data.postedBy._id,
                 });
+            }
+            if (
+                !(
+                    isUserAuthenticated().user.role === "administrator" ||
+                    isUserAuthenticated().user._id === this.state.posterId
+                )
+            ) {
+                this.setState({ redirectToHome: true });
             }
         });
     };
@@ -181,27 +190,29 @@ class PostEditor extends Component {
     );
 
     render() {
-        const { title, body, id, redirectToProfile, loading, error, posterId } =
-            this.state;
-
-        if (redirectToProfile) {
-            return <Redirect to={`/posts/${id}`} />;
-        }
-
-        if (
-            !(
-                isUserAuthenticated().user.role === "administrator" ||
-                isUserAuthenticated().user._id === posterId
-            )
-        ) {
-            return <Redirect to={`/`} />;
-        }
+        let {
+            title,
+            body,
+            id,
+            redirectToProfile,
+            loading,
+            error,
+            redirectToHome,
+        } = this.state;
 
         const postPictureURL = id
             ? `${
                   process.env.REACT_APP_API_URL
               }/posts/pfp/thumb/${id}?${new Date().getTime()}`
             : defaultPostIcon;
+
+        if (redirectToProfile) {
+            return <Redirect to={`/posts/${id}`} />;
+        }
+
+        if (redirectToHome) {
+            return <Redirect to={`/`} />;
+        }
 
         return (
             <div className="container">

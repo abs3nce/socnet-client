@@ -36,6 +36,7 @@ class AllPosts extends Component {
                     this.setState({ noPosts: true });
                 }
             }
+            console.log(`POSTS LOADED (ALL POSTS): `, data);
         });
     };
 

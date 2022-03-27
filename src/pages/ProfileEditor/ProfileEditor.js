@@ -127,7 +127,8 @@ class EditUserProfile extends Component {
             });
             return false;
         }
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        // if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             //https://stackoverflow.com/questions/15017052/understanding-email-validation-using-javascript validacia mailu pomocou regex
             this.setState({
                 error: "Email musí mať validný tvar",
@@ -291,7 +292,6 @@ class EditUserProfile extends Component {
             description,
             redirectToProfile,
             loading,
-            role,
             facebookLink,
             instagramLink,
             customLink,
