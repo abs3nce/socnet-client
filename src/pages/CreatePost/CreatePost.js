@@ -198,9 +198,12 @@ class CreatePost extends Component {
                 >
                     {error}
                 </div>
+
+                <div className="row d-flex justify-content-center text-center">
+
                 {loading && !error ? (
                     <Spinner
-                        className="mt-3"
+                        className="mt-3 mb-3"
                         animation="border"
                         role="status"
                         variant="primary"
@@ -210,6 +213,7 @@ class CreatePost extends Component {
                 ) : (
                     ""
                 )}
+                </div>
             </div>
         );
     }
