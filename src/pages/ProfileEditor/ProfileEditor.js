@@ -129,7 +129,10 @@ class EditUserProfile extends Component {
         }
         if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             //https://stackoverflow.com/questions/15017052/understanding-email-validation-using-javascript validacia mailu pomocou regex
-            this.setState({ error: "Email musí mať validný tvar", loading: false });
+            this.setState({
+                error: "Email musí mať validný tvar",
+                loading: false,
+            });
             return false;
         }
 
@@ -272,7 +275,7 @@ class EditUserProfile extends Component {
 
             <button
                 onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary mt-3 mb-3"
+                className="btn btn-raised btn-primary mt-3 mb-3 w-100"
             >
                 {!this.state.error ? "Aktualizovať údaje" : this.state.error}
             </button>
@@ -335,18 +338,20 @@ class EditUserProfile extends Component {
                         )}
                     </div>
                 </div>{" "}
-                {loading ? (
-                    <Spinner
-                        className="mt-3"
-                        animation="border"
-                        role="status"
-                        variant="primary"
-                    >
-                        <span className="visually-hidden">Loading...</span>
-                    </Spinner>
-                ) : (
-                    ""
-                )}
+                <div className="row d-flex justify-content-center text-center">
+                    {loading ? (
+                        <Spinner
+                            className="mt-3 mb-3"
+                            animation="border"
+                            role="status"
+                            variant="primary"
+                        >
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    ) : (
+                        ""
+                    )}
+                </div>
             </div>
         );
     }

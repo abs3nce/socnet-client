@@ -173,7 +173,7 @@ class PostEditor extends Component {
 
             <button
                 onClick={this.handleSubmit}
-                className="btn btn-raised btn-primary mt-3 mb-3"
+                className="btn btn-raised btn-primary mt-3 mb-3 w-100"
             >
                 Aktualizovať príspevok
             </button>
@@ -224,18 +224,20 @@ class PostEditor extends Component {
                 >
                     {error}
                 </div>
-                {loading ? (
-                    <Spinner
-                        className="mt-3"
-                        animation="border"
-                        role="status"
-                        variant="primary"
-                    >
-                        <span className="visually-hidden">Loading...</span>
-                    </Spinner>
-                ) : (
-                    ""
-                )}
+                <div className="row d-flex justify-content-center text-center">
+                    {loading ? (
+                        <Spinner
+                            className="mt-3 mb-3"
+                            animation="border"
+                            role="status"
+                            variant="primary"
+                        >
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    ) : (
+                        ""
+                    )}
+                </div>
             </div>
         );
     }
